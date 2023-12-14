@@ -36,7 +36,7 @@ epicsEnvSet(MOT_L_COIL_UH,4540)
 #- Max Torque [Nmm]
 epicsEnvSet(MOT_TRQ_MAX_NMM,1700)
 
-#- EMF (EL7041) set to 0 if unknown
+#- EMF [mV/(rad/s)], used for EL7041, set to 0 if unknown
 epicsEnvSet(MOT_EMF,0)
 
 #- Motor steps []
