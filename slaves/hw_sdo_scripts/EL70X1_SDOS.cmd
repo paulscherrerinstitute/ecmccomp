@@ -28,4 +28,4 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,${MOT_STEPS=200},2
 #- epicsEnvUnset(MOT_L_COIL)
 
 #- Motor EMF  mV/(rad/s)
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x5,${MOT_EMF},2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x5,${MOT_EMF=0},2)"
