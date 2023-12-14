@@ -1,6 +1,6 @@
 #==============================================================================
 # applyComponent.cmd
-#- Arguments: HW_DESC, COMPONENT [SLAVE_ID = 0, CHANNEL, MACROS ]
+#- Arguments: HW_DESC, COMPONENT [SLAVE_ID = 0, CH_ID = 1, MACROS='']
 #-d /**
 #-d   \brief Script for adding component configuration to a ethercat slave
 #-d   \author Anders Sandström

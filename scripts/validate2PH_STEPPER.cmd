@@ -35,3 +35,5 @@ epicsEnvSet(U_RUN_MV, ${U_RUN_MV=${MOT_U_MAX_MV}})
 
 #- Ensure U_RUN_MV <= DRV_U_MAX_MV
 ecmcEpicsEnvSetCalcTernary(U_RUN_MV,"${U_RUN_MV}>${DRV_U_MAX_MV}",${DRV_U_MAX_MV},${U_RUN_MV})
+
+epicsEnvUnset(DIE)

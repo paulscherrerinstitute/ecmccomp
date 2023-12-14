@@ -18,7 +18,7 @@ epicsEnvSet(DRV_U_MAX_MV,48000)
 epicsEnvSet(SLAVE_SCRIPT,"EL70X7_SDOS.cmd")
 
 #- Channel count
-epicsEnvSet(DRV_CHANNELS,"1")
+epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Drive type
 epicsEnvSet(SLAVE_TYPE,2PH_STEPPER_DRV)
