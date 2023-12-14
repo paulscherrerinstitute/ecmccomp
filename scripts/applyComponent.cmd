@@ -21,27 +21,26 @@
 
 
 #- Ensure same slave and channel is not added twice in a row
-ecmcEpicsEnvSetCalcTernary(APPLY_COMP_EXIT,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","", "#-")
-${APPLY_COMP_EXIT}exit # Warning: Apply of component to same slave and channel twice in a row is blocked.
+ecmcEpicsEnvSetCalcTernary(BLOCK,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","#-", "")
 epicsEnvSet(COMP_HW_OLD_SLAVE_ID,${SLAVE_ID})
 epicsEnvSet(COMP_HW_OLD_SLAVE_CH,${CH_ID})
 
 #- Set variables for component
-ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
+${BLOCK}ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
+${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 
 #- Set variables for slave
-ecmcFileExist(${ecmccomp_DIR}${HW_DESC}.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
+${BLOCK}ecmcFileExist(${ecmccomp_DIR}${HW_DESC}.cmd,1,1)
+${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
 
 #- Validate and set the variables that should be used if the configs
-ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
+${BLOCK}ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
+${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
 #- Apply configuration
-ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd CH_ID=${CH_ID=1}
+${BLOCK}ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd",1,1)
+${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd CH_ID=${CH_ID=1}
 
 #- Cleanup
-ecmcFileExist("${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd
+${BLOCK}ecmcFileExist("${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd",1,1)
+${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd
