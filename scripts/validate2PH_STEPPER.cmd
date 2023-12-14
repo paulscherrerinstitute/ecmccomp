@@ -11,7 +11,7 @@ ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER_DRV'","", "#-")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
 #-===== Validate CHANNEL ===
-ecmcEpicsEnvSetCalcTernary(DIE,"${CHANNEL=1}>${DRV_CHANNELS}","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"${CH_ID=1}>${SLAVE_CHANNELS}","", "#-")
 ${DIE}ecmcExit Error: CHANNEL out of range (not supported by the slave). 
 
 #-===== Validate currents ===
@@ -28,7 +28,7 @@ ecmcEpicsEnvSetCalcTernary(I_RUN_MA,"${I_RUN_MA}>${DRV_I_MAX_MA}",${DRV_I_MAX_MA
 epicsEnvSet(I_STDBY_MA, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
 
 #- Ensure I_STDBY_MA <= I_RUN_MA
-ecmcEpicsEnvSetCalcTernary(I_STDBY_MA,"${I_STDBY_MA}>${I_RUN_MA}",${I_STDBY_MA},${I_RUN_MA})
+ecmcEpicsEnvSetCalcTernary(I_STDBY_MA,"${I_STDBY_MA}>${I_RUN_MA}",${I_RUN_MA},${I_STDBY_MA})
 
 #-===== Validate voltage ===
 epicsEnvSet(U_RUN_MV, ${U_RUN_MV=${MOT_U_MAX_MV}})

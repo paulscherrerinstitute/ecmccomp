@@ -13,10 +13,10 @@
 epicsEnvSet(MOT_I_MAX_MA,2000)
 
 #- Nominal Current [mA]
-epicsEnvSet(MOT_I_RUN_MA,${I_MAX_MA})
+epicsEnvSet(MOT_I_RUN_MA,${MOT_I_MAX_MA})
 
 #- Standby Current [mA] (30% of max)
-ecmcEpicsEnvSetCalc(MOT_I_STDBY_MA,"${I_RUN_MA}*0.3","%d")
+ecmcEpicsEnvSetCalc(MOT_I_STDBY_MA,"${MOT_I_RUN_MA}*0.3","%d")
 
 #- Max Voltage [mV]
 epicsEnvSet(MOT_U_MAX_MV,48000)
