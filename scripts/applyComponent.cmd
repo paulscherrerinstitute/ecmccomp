@@ -19,6 +19,13 @@
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
 #-d */
 
+
+#- Ensure same slave and channel is not added twice in a row
+ecmcEpicsEnvSetCalcTernary(APPLY_COMP_EXIT,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","", "#-")
+${APPLY_COMP_EXIT}exit # Warning: Apply of component to same slave and channel twice in a row is blocked.
+epicsEnvSet(COMP_HW_OLD_SLAVE_ID,${SLAVE_ID})
+epicsEnvSet(COMP_HW_OLD_SLAVE_CH,${CH_ID})
+
 #- Set variables for component
 ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
