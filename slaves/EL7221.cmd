@@ -1,6 +1,6 @@
 #-d /**
-#-d   \brief SDOS for EL7211 drive
-#-d   \details Parametrization of EL7211
+#-d   \brief SDOS for EL7221 drive
+#-d   \details Parametrization of EL7221 same as EL7211 if no fan
 #-d   \author Anders Sanddtröm
 #-d   \file
 #-d   \note Max current= 9 A

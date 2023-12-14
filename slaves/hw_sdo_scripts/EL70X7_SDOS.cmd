@@ -12,8 +12,8 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,${I_RUN_MA},2)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,${I_STDBY_MA},2)"
 
 #- Nominal voltage [cV]
-ecmcEpicsEnvSetCalc(U_RUN_MV,"${U_RUN_MV}*0.1","%d")
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,${U_RUN_MV},2)"
+ecmcEpicsEnvSetCalc(U_NOM_MV,"${U_NOM_MV}*0.1","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x3,${U_NOM_MV},2)"
 
 #- Coil resistance [cOhm]
 ecmcEpicsEnvSetCalc(MOT_R_COIL,"${MOT_R_COIL_MOHM}*0.1","%d")

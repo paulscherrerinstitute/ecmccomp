@@ -13,12 +13,14 @@
 #-d          2PH_STEPPER:
 #-d              I_RUN_MA    : Run current [mA]
 #-d              I_STDBY_MA  : Standby current [mA]
-#-d              U_RUN_MV    : Supply voltage [mV]
+#-d              U_NOM_MV    : Supply voltage [mV]
+#-d          EL7211_SERVO:
+#-d              I_MAX_MA    : Max current [mA]
+#-d              U_NOM_MV    : Supply voltage [mV] 
 #-d   \note Example calls:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
 #-d */
-
 
 #- Ensure same slave and channel is not added twice in a row
 ecmcEpicsEnvSetCalcTernary(BLOCK,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","#-", "")
@@ -33,7 +35,7 @@ ${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 ${BLOCK}ecmcFileExist(${ecmccomp_DIR}${HW_DESC}.cmd,1,1)
 ${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
 
-#- Validate and set the variables that should be used if the configs
+#- Validate and set the variables that should be used in the configs
 ${BLOCK}ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
 ${BLOCK}${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
