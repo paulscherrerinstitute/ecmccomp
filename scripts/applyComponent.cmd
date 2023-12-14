@@ -29,7 +29,7 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
 
 #- Validate and set the variables that should be used if the configs
 ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd CH_ID=${CH_ID=1},${MACROS=""}
+${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
 #- Apply configuration
 ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd",1,1)
