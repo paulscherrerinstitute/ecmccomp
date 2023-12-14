@@ -1,7 +1,6 @@
-
 #-d /**
-#-d   \brief SDOS for EL7037 drive
-#-d   \details Parametrization of EL7037
+#-d   \brief SDOS for EL7041 drive
+#-d   \details Parametrization of EL7041
 #-d   \author Anders Sanddtröm
 #-d   \file
 #-d   \note Max current= 1.5 A
@@ -12,13 +11,14 @@
 epicsEnvSet(SLAVE_TYPE,2PH_STEPPER)
 
 #- Currents
-epicsEnvSet(DRV_I_MAX_MA,1500)
+epicsEnvSet(DRV_I_MAX_MA,5000)
 
 #- Voltage
-epicsEnvSet(DRV_U_MAX_MV,24000)
+epicsEnvSet(DRV_U_MAX_MV,48000)
 
 #- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"EL70X7_SDOS")
+epicsEnvSet(SLAVE_SCRIPT,"EL70X1_SDOS")
 
 #- Channel count
 epicsEnvSet(SLAVE_CHANNELS,"1")
+

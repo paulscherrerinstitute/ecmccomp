@@ -9,6 +9,9 @@
 #-d   \note Resistance = 2.4 Ohm
 #-d */
 
+#- Component TYPE []
+epicsEnvSet(COMP_TYPE,2PH_STEPPER)
+
 #- Max Current [mA]
 epicsEnvSet(MOT_I_MAX_MA,2000)
 
@@ -33,8 +36,8 @@ epicsEnvSet(MOT_L_COIL_UH,4540)
 #- Max Torque [Nmm]
 epicsEnvSet(MOT_TRQ_MAX_NMM,1700)
 
+#- EMF (EL7041) set to 0 if unknown
+epicsEnvSet(MOT_EMF,0)
+
 #- Motor steps []
 epicsEnvSet(MOT_STEPS,200)
-
-#- Component TYPE []
-epicsEnvSet(COMP_TYPE,2PH_STEPPER)
