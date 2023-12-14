@@ -21,4 +21,4 @@ epicsEnvSet(SLAVE_SCRIPT,"EL70X7_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Drive type
-epicsEnvSet(SLAVE_TYPE,2PH_STEPPER_DRV)
+epicsEnvSet(SLAVE_TYPE,2PH_STEPPER)

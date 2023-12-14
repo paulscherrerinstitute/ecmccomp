@@ -2,91 +2,109 @@
 
 Components library for ecmc
 
-## Getting started
+# Component types
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 2PH_STEPPER
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+The following variables needs to defined for a 2 phase stepper
+Example:
+```
+#-d /**
+#-d   \brief hardware script for Motor-OrientalMotor-PK267JB-Parallel
+#-d   \details Parametrization of motor Oriental Motor PK267JB
+#-d   \author Anders Sanddtröm
+#-d   \file
+#-d   \note Max current= 2 A
+#-d   \note Max voltage= 48 V
+#-d   \note Inductance per phase =3.54mH
+#-d   \note Resistance = 2.4 Ohm
+#-d */
 
-## Add your files
+#- Max Current [mA]
+epicsEnvSet(MOT_I_MAX_MA,2000)
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+#- Nominal Current [mA]
+epicsEnvSet(MOT_I_RUN_MA,${MOT_I_MAX_MA})
+
+#- Standby Current [mA] (30% of max)
+ecmcEpicsEnvSetCalc(MOT_I_STDBY_MA,"${MOT_I_RUN_MA}*0.3","%d")
+
+#- Max Voltage [mV]
+epicsEnvSet(MOT_U_MAX_MV,48000)
+
+#- Motor Voltage at MOT_I_MAX_MA [mV]
+epicsEnvSet(MOT_U_MV,4800)
+
+#- Phase resistance [mOhm]
+epicsEnvSet(MOT_R_COIL_MOHM,2400)
+
+#- Phase inductance [uH]
+epicsEnvSet(MOT_L_COIL_UH,4540)
+
+#- Max Torque [Nmm]
+epicsEnvSet(MOT_TRQ_MAX_NMM,1700)
+
+#- Motor steps []
+epicsEnvSet(MOT_STEPS,200)
+
+#- Component TYPE []
+epicsEnvSet(COMP_TYPE,2PH_STEPPER)
 
 ```
-cd existing_repo
-git remote add origin https://git.psi.ch/epics_ioc_modules/ecmccomp.git
-git branch -M main
-git push -uf origin main
+## BISS_C_ENC
+WIP
+
+# Slave types
+
+## 2PH_STEPPER
+
+```
+#-d /**
+#-d   \brief SDOS for EL7037 drive
+#-d   \details Parametrization of EL7037
+#-d   \author Anders Sanddtröm
+#-d   \file
+#-d   \note Max current= 1.5 A
+#-d   \note Max voltage= 24 V
+#-d */
+
+#- Currents
+epicsEnvSet(DRV_I_MAX_MA,1500)
+
+#- Voltage
+epicsEnvSet(DRV_U_MAX_MV,24000)
+
+#- SDOS script
+epicsEnvSet(SLAVE_SCRIPT,"EL70X7_SDOS")
+
+#- Channel count
+epicsEnvSet(SLAVE_CHANNELS,"1")
+
+#- Drive type
+epicsEnvSet(SLAVE_TYPE,2PH_STEPPER_DRV)
 ```
 
-## Integrate with your tools
+## BISS_C_ENC
+WIP
 
-- [ ] [Set up project integrations](https://git.psi.ch/epics_ioc_modules/ecmccomp/-/settings/integrations)
 
-## Collaborate with your team
+# Add a component to a slave
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+```
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
+```
+The HW_DESC must be of a type similar type as the component
 
-## Test and Deploy
+# Validation
 
-Use the built-in continuous integration in GitLab.
+When a componet is applied to a slave a validation procedure is executed.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+The follwoing validations are made for all components:
+* Check that the CH_ID is supported by the slave drive
 
-***
+##  Validation of 2PH_STEPPER component
+* Check that the defined current is NOT higher than the allowed by both the motor component and the slave drive.
+* Check that the defined voltage is NOT higher than the allowed by both the motor component and the slave drive.
+* Check that the component type matches the slave type (2PH_STEPPER_DRV).
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Note: If defined desired current/voltage is higher than either what is supported by the slave drive or by the motor/component then the setting will be automatically reduced without warning(or stopping the IOC).

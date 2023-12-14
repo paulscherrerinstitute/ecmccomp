@@ -1,11 +1,11 @@
 
 #-d /**
-#-d   \brief SDOS for EL7037 drive
-#-d   \details Parametrization of EL7037
+#-d   \brief SDOS for EL7047 drive
+#-d   \details Parametrization of EL7047
 #-d   \author Anders Sanddtröm
 #-d   \file
-#-d   \note Max current= 1.5 A
-#-d   \note Max voltage= 24 V
+#-d   \note Max current= 5 A
+#-d   \note Max voltage= 48 V
 #-d */
 
 #- Currents
@@ -21,4 +21,4 @@ epicsEnvSet(SLAVE_SCRIPT,"EL70X7_SDOS.cmd")
 epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Drive type
-epicsEnvSet(SLAVE_TYPE,2PH_STEPPER_DRV)
+epicsEnvSet(SLAVE_TYPE,2PH_STEPPER)

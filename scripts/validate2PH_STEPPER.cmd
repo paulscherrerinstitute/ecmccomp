@@ -7,7 +7,7 @@
 
 
 #-===== Validate HW_DESC matches component ===
-ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER_DRV'","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER'","", "#-")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
 #-===== Validate CHANNEL ===
