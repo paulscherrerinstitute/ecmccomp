@@ -5,7 +5,6 @@
 #-d   \author Anders Sandström
 #-d   \file
 
-
 #-===== Validate HW_DESC matches component ===
 ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER'","", "#-")
 ${DIE}ecmcExit Error: Component and slave do not matching
@@ -24,7 +23,7 @@ ecmcEpicsEnvSetCalcTernary(I_RUN_MA,"${I_RUN_MA}>${MOT_I_MAX_MA}",${MOT_I_MAX_MA
 #- Ensure I_RUN_MA <= DRV_I_MAX_MA
 ecmcEpicsEnvSetCalcTernary(I_RUN_MA,"${I_RUN_MA}>${DRV_I_MAX_MA}",${DRV_I_MAX_MA},${I_RUN_MA})
 
-#- Stby current
+#- Stdby current
 epicsEnvSet(I_STDBY_MA, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
 
 #- Ensure I_STDBY_MA <= I_RUN_MA
