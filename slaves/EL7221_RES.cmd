@@ -11,7 +11,7 @@
 < ${ecmccomp_DIR}EL7211_OCT.cmd
 
 #- Drive type
-epicsEnvSet(SLAVE_TYPE,EL72XX_RES_SERVO)
+epicsEnvSet(SLAVE_TYPE,"EL72XX_RES_SERVO")
 
 #- SDOS script
 epicsEnvSet(SLAVE_SCRIPT,"EL72XX_RES_SDOS")

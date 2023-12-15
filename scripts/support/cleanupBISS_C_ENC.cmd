@@ -1,4 +1,4 @@
-##- Cleanup BISS_C_IF
+##- Cleanup BISS_C_ENC
 epicsEnvUnset(ENC_DIS_STAT_BITS)
 epicsEnvUnset(ENC_CRC_INV)
 epicsEnvUnset(ENC_CRC_POLY)

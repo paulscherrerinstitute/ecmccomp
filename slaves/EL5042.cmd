@@ -6,7 +6,7 @@
 #-d */
 
 #- Type
-epicsEnvSet(SLAVE_TYPE,BISS_C_IF)
+epicsEnvSet(SLAVE_TYPE,"BISS_C_ENC,SSI_ENC")
 
 #- SDOS script
 epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")

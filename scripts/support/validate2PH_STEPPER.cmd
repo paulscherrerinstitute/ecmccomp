@@ -6,7 +6,7 @@
 #-d   \file
 
 #-===== Validate HW_DESC matches component ===
-ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER'","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"'2PH_STEPPER' in '${SLAVE_TYPE}'","#-", "")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
 #-===== Validate currents ===

@@ -8,7 +8,7 @@
 #-d */
 
 #- Component TYPE []
-epicsEnvSet(COMP_TYPE,BISS_C_IF)
+epicsEnvSet(COMP_TYPE,BISS_C_ENC)
 
 #- 0x80p8:02: Disable Status Bits (default 0)
 epicsEnvSet(ENC_DIS_STAT_BITS,0)

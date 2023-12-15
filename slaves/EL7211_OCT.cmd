@@ -8,7 +8,7 @@
 #-d */
 
 #- Drive type
-epicsEnvSet(SLAVE_TYPE,EL72XX_OCT_SERVO)
+epicsEnvSet(SLAVE_TYPE,"EL72XX_OCT_SERVO")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,9000)

@@ -15,6 +15,7 @@
 #-d              I_STDBY_MA   : Standby current [mA]
 #-d              U_NOM_MV     : Supply voltage [mV]
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
+#-d
 #-d          EL72XX_RES_SERVO (cfg for EL72XX motor with resolver):
 #-d              I_MAX_MA     : Max current [mA]  (Used to reduce max torque)
 #-d              U_NOM_MV     : Supply voltage [mV] (defaults to Motor or Slave setting)
@@ -24,12 +25,15 @@
 #-d              VELO_TI      : Velocity controller TI (defaults to motor setting)
 #-d              BRK_APP_DLY  : Brake application delay (defaults to motor setting or 0)
 #-d              BRK_REL_DLY  : Brake release delay (defaults to motor setting or 0)
+#-d
 #-d          EL72XX_OCT_SERVO (cfg for EL72XX motor with OCT):
 #-d              Same as EL72XX_RES_SERVO plus:
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              ENC_OFF      : Offset encoder position (defaults to 0)
+#-d
 #-d          BISS_C_IF        :
 #-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d
 #-d   \note Example calls:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"

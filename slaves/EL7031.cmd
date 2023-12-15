@@ -8,7 +8,7 @@
 #-d */
 
 #- Drive type
-epicsEnvSet(SLAVE_TYPE,2PH_STEPPER)
+epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER,INC_ENC")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,1500)
