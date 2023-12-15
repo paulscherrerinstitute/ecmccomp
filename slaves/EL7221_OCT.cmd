@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief SDOS for EL7221 drive OCT
 #-d   \details Parametrization of EL7221 OCT same as EL7211 if no fan
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 9 A
 #-d   \note Max voltage= 48 V

@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief SDOS for EL7047 drive
 #-d   \details Parametrization of EL7047
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 5 A
 #-d   \note Max voltage= 48 V

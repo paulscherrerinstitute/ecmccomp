@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief SDOS for EL7201 drive RES
 #-d   \details Parametrization of EL7201 Resolver version
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 5.7 A
 #-d   \note Max voltage= 48 V

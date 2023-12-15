@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief SDOS for EL7211 drive RES
 #-d   \details Parametrization of EL7211 Resolver version
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 9 A
 #-d   \note Max voltage= 48 V

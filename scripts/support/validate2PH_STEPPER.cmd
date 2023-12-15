@@ -9,10 +9,6 @@
 ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER'","", "#-")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
-#-===== Validate CHANNEL ===
-ecmcEpicsEnvSetCalcTernary(DIE,"${CH_ID=1}>${SLAVE_CHANNELS}","", "#-")
-${DIE}ecmcExit Error: CHANNEL out of range (not supported by the slave). 
-
 #-===== Validate currents ===
 #- Run current
 epicsEnvSet(I_MAX_MA, ${I_MAX_MA=${MOT_I_MAX_MA}})

@@ -28,6 +28,8 @@
 #-d              Same as EL72XX_RES_SERVO plus:
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              ENC_OFF      : Offset encoder position (defaults to 0)
+#-d          BISS_C_IF        :
+#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
 #-d   \note Example calls:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
@@ -46,6 +48,10 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 #- Set variables for slave
 ecmcFileExist(${ecmccomp_DIR}${HW_DESC}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
+
+#- Validation generic
+ecmcFileExist("${ecmccomp_DIR}validateGeneric.cmd",1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}validateGeneric.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
 #- Validate and set the variables that should be used in the configs
 ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)

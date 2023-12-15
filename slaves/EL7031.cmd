@@ -1,7 +1,7 @@
 #-d /**
 #-d   \brief SDOS for EL7031 drive
 #-d   \details Parametrization of EL7031
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 1.5 A
 #-d   \note Max voltage= 24 V
