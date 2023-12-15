@@ -10,7 +10,7 @@ ARCH_FILTER=deb%
 
 SCRIPTS+=$(wildcard ./motors/*.cmd)
 SCRIPTS+=$(wildcard ./scripts/*.cmd)
+SCRIPTS+=$(wildcard ./scripts/support/*.cmd)
 SCRIPTS+=$(wildcard ./slaves/*.cmd)
 SCRIPTS+=$(wildcard ./slaves/hw_sdo_scripts/*.cmd)
 SCRIPTS+=$(wildcard ./encoders/*.cmd)
-

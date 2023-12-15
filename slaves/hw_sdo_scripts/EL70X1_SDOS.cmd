@@ -6,7 +6,7 @@
 #-d */
 
 #- Set max current [mA]
-ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,${I_RUN_MA},2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x1,${I_MAX_MA},2)"
 
 #- Reduced current [mA]
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x2,${I_STDBY_MA},2)"
@@ -29,3 +29,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x6,${MOT_STEPS=200},2
 
 #- Motor EMF  mV/(rad/s)
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x5,${MOT_EMF=0},2)"
+
+#- Invert motor polarity
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8012,0x9,${INV_DIR=0},1)"

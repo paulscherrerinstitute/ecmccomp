@@ -6,7 +6,7 @@
 #-d   \file
 
 #-===== Validate HW_DESC matches component ===
-ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='EL7211_SERVO'","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"'${SLAVE_TYPE}'!='2PH_STEPPER'","", "#-")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
 #-===== Validate CHANNEL ===
@@ -22,6 +22,12 @@ ecmcEpicsEnvSetCalcTernary(I_MAX_MA,"${I_MAX_MA}>${MOT_I_MAX_MA}",${MOT_I_MAX_MA
 
 #- Ensure I_MAX_MA <= DRV_I_MAX_MA
 ecmcEpicsEnvSetCalcTernary(I_MAX_MA,"${I_MAX_MA}>${DRV_I_MAX_MA}",${DRV_I_MAX_MA},${I_MAX_MA})
+
+#- Stdby current
+epicsEnvSet(I_STDBY_MA, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
+
+#- Ensure I_STDBY_MA <= I_MAX_MA
+ecmcEpicsEnvSetCalcTernary(I_STDBY_MA,"${I_STDBY_MA}>${I_MAX_MA}",${I_MAX_MA},${I_STDBY_MA})
 
 #-===== Validate voltage ===
 epicsEnvSet(U_NOM_MV, ${U_NOM_MV=${MOT_U_MAX_MV}})

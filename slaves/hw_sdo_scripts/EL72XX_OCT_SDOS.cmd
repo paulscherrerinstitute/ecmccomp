@@ -1,0 +1,15 @@
+#-d /**
+#-d   \brief SDOS for EX72XX OCT drive
+#-d   \details Parametrization of EX72XX OCT
+#-d   \author Anders Sandström
+#-d   \file
+#-d */
+
+#- Most settings same as EL7201 Resolver version
+< ${ecmccomp_DIR}EL72XX_RES_SDOS.cmd 
+
+#- Invert motor polarity
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x65,${INV_DIR=0},1)"
+
+#- Encoder offset
+ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x17,${ENC_OFF=0},4)"

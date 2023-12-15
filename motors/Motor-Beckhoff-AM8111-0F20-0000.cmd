@@ -1,6 +1,6 @@
 
 ############################################################
-############# Parmetrization of EL72XX-XXXX for motor AM8111-0F20-0000
+############# Parmetrization of EL72XX OCT for motor AM8111-0F20-0000
 #- Motor WITHOUT brake
 #-
 #- Note: For important parameters see TwinCAT CoE startup list for the 
@@ -8,7 +8,7 @@
 
 #- Define specifc type since the drives are taylored. So special variable units, same as drive..
 #- Component TYPE []
-epicsEnvSet(COMP_TYPE,EL7211_SERVO)
+epicsEnvSet(COMP_TYPE,EL72XX_OCT_SERVO)
 
 #- Max Voltage [mV]
 epicsEnvSet(MOT_U_MAX_MV,48000)
