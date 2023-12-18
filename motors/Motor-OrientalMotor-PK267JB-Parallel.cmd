@@ -10,6 +10,7 @@
 #-d */
 
 #- Use Motor-OrientalMotor-PK267JB-Series as base cfg
+ecmcFileExist(${ecmccomp_DIR}Motor-OrientalMotor-PK267JB-Series.cmd,1,1)
 < ${ecmccomp_DIR}Motor-OrientalMotor-PK267JB-Series.cmd
 
 #- Component TYPE []
