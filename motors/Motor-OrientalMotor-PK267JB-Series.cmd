@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for Motor-OrientalMotor-PK267JB-Series
 #-d   \details Parametrization of motor Oriental Motor PK267JB
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
-#-d   \note Max current= 2 A
-#-d   \note Max voltage= 48 V
-#-d   \note Inductance per phase = 3.54mH /  "half" phase  => 7.08mH
-#-d   \note Resistance = 2.4 Ohm / "half" phase => 4.8 Ohm 
+#-d   \note Max current= 2A (series)
+#-d   \note Max voltage= 48V
+#-d   \note Inductance per phase = 3.54mH / "half" phase  => 7.08mH for series
+#-d   \note Resistance = 2.4 Ohm / "half" phase => 4.8 Ohm for series
 #-d */
 
 #- Component TYPE []

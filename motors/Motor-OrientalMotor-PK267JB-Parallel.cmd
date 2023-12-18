@@ -1,12 +1,12 @@
 #-d /**
 #-d   \brief hardware script for Motor-OrientalMotor-PK267JB-Parallel
 #-d   \details Parametrization of motor Oriental Motor PK267JB
-#-d   \author Anders Sanddtröm
+#-d   \author Anders Sandström
 #-d   \file
 #-d   \note Max current= 2A / "half" phase => 4A for Parallel
-#-d   \note Max voltage= 48 V
-#-d   \note Inductance per phase = 3.54mH /  "half" phase => 1.77mH
-#-d   \note Resistance = 2.4 Ohm / "half" phase => 1.2 Ohm
+#-d   \note Max voltage= 48V
+#-d   \note Inductance per phase = 3.54mH / "half" phase => 1.77mH for parallel
+#-d   \note Resistance = 2.4 Ohm / "half" phase => 1.2 Ohm for parallel
 #-d */
 
 #- Use Motor-OrientalMotor-PK267JB-Series as base cfg
