@@ -1,13 +1,13 @@
 #==============================================================================
 # applyComponent.cmd
-#- Arguments: HW_DESC, COMPONENT [SLAVE_ID = 0, CH_ID = 1, MACROS='']
+#- Arguments: COMP [EC_COMP_TYPE, COMP_S_ID = 0, CH_ID = 1, MACROS='']
 #-d /**
 #-d   \brief Script for adding component configuration to a ethercat slave
 #-d   \author Anders Sandström
 #-d   \file
-#-d   \param HW_DESC Hardware descriptor, i.e. EL7037
-#-d   \param COMP  Component name
-#-d   \param SLAVE_ID  (optional) Slave bus position
+#-d   \param COMP Component name
+#-d   \param EC_COMP_TYPE   (optional) Hardware descriptor, i.e. EL7037, defaults to ECMC_EC_COMP_TYPE or ECMC_EC_HWTYPE set in ecmccfg/addSlave.cmd
+#-d   \param S_ID  (optional) Slave bus position, defaults to ECMC_EC_SLAVE_NUM set in ecmccfg/addSlave.cmd
 #-d   \param CH_ID     (optional) Channel of slave default to 1
 #-d   \param MACROS    (optional) Special macros, depending on component/slave type:
 #-d          2PH_STEPPER  (general 2PH stepper cfgs):
@@ -39,7 +39,10 @@
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
 #-d */
 
-#- Remove the below since 
+epicsEnvSet(EC_COMP_TYPE, ${EC_COMP_TYPE=${ECMC_EC_COMP_TYPE=${ECMC_EC_HWTYPE}}})
+epicsEnvSet(COMP_S_ID,${COMP_S_ID=${ECMC_EC_SLAVE_NUM=0}})
+
+#- Remove the below since must be possible to apply more than one cfg to a slave
 #- Ensure same slave and channel is not added twice in a row
 #- ecmcEpicsEnvSetCalcTernary(BLOCK,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","#-", "")
 #- epicsEnvSet(COMP_HW_OLD_SLAVE_ID,${SLAVE_ID})
@@ -50,8 +53,8 @@ ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 
 #- Set variables for slave
-ecmcFileExist(${ecmccomp_DIR}${HW_DESC}.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${HW_DESC}.cmd
+ecmcFileExist(${ecmccomp_DIR}${EC_COMP_TYPE}.cmd,1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}${EC_COMP_TYPE}.cmd
 
 #- Validation generic
 ecmcFileExist("${ecmccomp_DIR}validateGeneric.cmd",1,1)
