@@ -7,20 +7,10 @@
 #-d   \note Max voltage= 48 V
 #-d */
 
-#- Drive type
-epicsEnvSet(SLAVE_TYPE,"EL72XX_OCT_SERVO")
+#- Apply common for EL7201
+ecmcFileExist("${ecmccomp_DIR}EL7201_XXX.cmd",1,1)
+< ${ecmccomp_DIR}EL7201_XXX.cmd.cmd
 
-#- Currents
-epicsEnvSet(DRV_I_MAX_MA,5700)
-
-#- Currents (nominal)
-epicsEnvSet(DRV_I_NOM_MA,2800)
-
-#- Voltage
-epicsEnvSet(DRV_U_MAX_MV,48000)
-
-#- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"EL72XX_OCT_SDOS")
-
-#- Channel count
-epicsEnvSet(SLAVE_CHANNELS,"1")
+#- Apply common for OCT
+ecmcFileExist("${ecmccomp_DIR}EL72XX_OCT.cmd",1,1)
+< ${ecmccomp_DIR}EL72XX_XXX.cmd

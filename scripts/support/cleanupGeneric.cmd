@@ -8,3 +8,5 @@ epicsEnvUnset(SLAVE_CHANNELS)
 epicsEnvUnset(DIE)
 epicsEnvUnset(EC_COMP_TYPE)
 epicsEnvUnset(COMP_S_ID)
+epicsEnvUnset(SUPP_MACROS)
+

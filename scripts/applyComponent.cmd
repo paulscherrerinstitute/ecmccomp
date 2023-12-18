@@ -60,6 +60,10 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}${EC_COMP_TYPE}.cmd
 ecmcFileExist("${ecmccomp_DIR}validateGeneric.cmd",1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}validateGeneric.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
+#- Validate macros
+ecmcFileExist("${ecmccomp_DIR}validateMacros.cmd",1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}validateMacros.cmd "MACROS='${MACROS=}',SUPP_MACROS='${SUPP_MACROS=}'"
+
 #- Validate and set the variables that should be used in the configs
 ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"

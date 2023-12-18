@@ -7,10 +7,11 @@
 #-d   \note Max voltage= 48 V
 #-d */
 
-#- Apply common for EL7221
-ecmcFileExist("${ecmccomp_DIR}EL7221_XXX.cmd",1,1)
-< ${ecmccomp_DIR}EL7221_XXX.cmd.cmd
+#- Currents
+epicsEnvSet(DRV_I_MAX_MA,9000)
 
-#- Apply common for OCT
-ecmcFileExist("${ecmccomp_DIR}EL72XX_OCT.cmd",1,1)
-< ${ecmccomp_DIR}EL72XX_XXX.cmd
+#- Currents (nominal)
+epicsEnvSet(DRV_I_NOM_MA,4500)
+
+#- Voltage
+epicsEnvSet(DRV_U_MAX_MV,48000)

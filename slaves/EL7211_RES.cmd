@@ -7,11 +7,10 @@
 #-d   \note Max voltage= 48 V
 #-d */
 
-#- Same as OCT version except differnrt SDOS script
-< ${ecmccomp_DIR}EL7211_OCT.cmd
+#- Apply common for EL7211
+ecmcFileExist("${ecmccomp_DIR}EL7211_XXX.cmd",1,1)
+< ${ecmccomp_DIR}EL7211_XXX.cmd.cmd
 
-#- Drive type
-epicsEnvSet(SLAVE_TYPE,"EL72XX_RES_SERVO")
-
-#- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"EL72XX_RES_SDOS")
+#- Apply common for RES
+ecmcFileExist("${ecmccomp_DIR}EL72XX_RES.cmd",1,1)
+< ${ecmccomp_DIR}EL72XX_XXX.cmd

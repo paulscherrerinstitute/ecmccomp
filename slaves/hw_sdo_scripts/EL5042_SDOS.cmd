@@ -38,7 +38,9 @@ epicsEnvUnset(ENC_U_SUP_VLT)
 #- 17: 500 kHz
 #- 19: 250 kHz <--
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x13,${CLK_FRQ=${ENC_CLK_FRQ}},1)"
+epicsEnvUnset(CLK_FRQ)
 epicsEnvUnset(ENC_CLK_FRQ)
+
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)

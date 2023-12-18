@@ -10,6 +10,9 @@
 #- Drive type
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER,INC_ENC")
 
+#- Supported macros
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,L_COIL_UH,STEPS,INV_DIR")
+
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,5000)
 

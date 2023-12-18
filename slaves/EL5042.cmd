@@ -13,3 +13,6 @@ epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")
 
 #- Channel count
 epicsEnvSet(SLAVE_CHANNELS,"2")
+
+#- Supported macros
+epicsEnvSet(SUPP_MACROS,"CLK_FRQ")
