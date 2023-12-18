@@ -1,7 +1,7 @@
 #==============================================================================
-# validateEL5042.cmd
+# validateGeneric.cmd
 #-d /**
-#-d   \brief Common script for validation of EL5042
+#-d   \brief Common script for validation
 #-d   \author Anders Sandström
 #-d   \file
 

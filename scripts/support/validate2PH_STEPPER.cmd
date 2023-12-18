@@ -17,18 +17,18 @@ epicsEnvSet(I_MAX_MA, ${I_MAX_MA=${MOT_I_MAX_MA}})
 ecmcEpicsEnvSetCalcTernary(I_MAX_MA,"${I_MAX_MA}>${MOT_I_MAX_MA}",${MOT_I_MAX_MA},${I_MAX_MA})
 
 #- Ensure I_MAX_MA <= DRV_I_MAX_MA
-ecmcEpicsEnvSetCalcTernary(I_MAX_MA,"${I_MAX_MA}>${DRV_I_MAX_MA}",${DRV_I_MAX_MA},${I_MAX_MA})
+ecmcEpicsEnvSetCalcTernary(I_MAX_MA_VALID,"${I_MAX_MA}>${DRV_I_MAX_MA}",${DRV_I_MAX_MA},${I_MAX_MA})
 
 #- Stdby current
-epicsEnvSet(I_STDBY_MA, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
+epicsEnvSet(I_STDBY_MA_VALID, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
 
 #- Ensure I_STDBY_MA <= I_MAX_MA
-ecmcEpicsEnvSetCalcTernary(I_STDBY_MA,"${I_STDBY_MA}>${I_MAX_MA}",${I_MAX_MA},${I_STDBY_MA})
+ecmcEpicsEnvSetCalcTernary(I_STDBY_MA_VALID,"${I_STDBY_MA}>${I_MAX_MA}",${I_MAX_MA},${I_STDBY_MA})
 
 #-===== Validate voltage ===
 epicsEnvSet(U_NOM_MV, ${U_NOM_MV=${MOT_U_MAX_MV}})
 
 #- Ensure U_NOM_MV <= DRV_U_MAX_MV
-ecmcEpicsEnvSetCalcTernary(U_NOM_MV,"${U_NOM_MV}>${DRV_U_MAX_MV}",${DRV_U_MAX_MV},${U_NOM_MV})
+ecmcEpicsEnvSetCalcTernary(U_NOM_MV_VALID,"${U_NOM_MV}>${DRV_U_MAX_MV}",${DRV_U_MAX_MV},${U_NOM_MV})
 
 epicsEnvUnset(DIE)

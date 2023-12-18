@@ -63,7 +63,7 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS
 
 #- Apply configuration
 ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd CH_ID=${CH_ID=1}
+${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
 #- Cleanup component specific
 ecmcFileExist("${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd",1,1)

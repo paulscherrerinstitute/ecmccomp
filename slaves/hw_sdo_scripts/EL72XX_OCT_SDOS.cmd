@@ -10,6 +10,8 @@
 
 #- Invert motor polarity
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8010,0x65,${INV_DIR=0},1)"
+epicsEnvUnset(INV_DIR)
 
 #- Encoder offset
 ecmcConfigOrDie "Cfg.EcAddSdo(${ECMC_EC_SLAVE_NUM},0x8000,0x17,${ENC_OFF=0},4)"
+epicsEnvUnset(ENC_OFF)
