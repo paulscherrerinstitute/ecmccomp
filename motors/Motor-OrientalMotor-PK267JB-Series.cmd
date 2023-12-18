@@ -38,5 +38,3 @@ epicsEnvSet(MOT_EMF,0)
 
 #- Motor steps []
 epicsEnvSet(MOT_STEPS,200)
-
-#- Invert motor polarity 
