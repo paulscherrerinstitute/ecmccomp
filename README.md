@@ -101,6 +101,7 @@ When a componet is applied to a slave a validation procedure is executed.
 
 The follwoing validations are made for all components:
 * Check that the CH_ID is supported by the slave drive
+* Check that the user macros are supported by the slave type
 
 ##  Validation of 2PH_STEPPER component
 * Check that the defined current is NOT higher than the allowed by both the motor component and the slave drive.

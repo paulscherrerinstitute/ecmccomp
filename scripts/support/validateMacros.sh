@@ -19,11 +19,9 @@ do
       found=1
     fi
   done
-  if [[ $found -gt 0 ]]; then
-    echo "Found a  valid macro $mac.."
-  else
-    echo "Found a non valid macro $mac.."
-    echo "ecmcExit Error: Found a non valid macro \"$mac\"" > $CMDFILE
+  if [[ $found -eq 0 ]]; then    
+    #echo "Found a non valid macro $mac.."
+    echo "ecmcExit Error: Non-valid component macro found for EtherCAT slave \${COMP_S_ID} (\"$mac\")" > $CMDFILE
     exit 1
   fi
 done
