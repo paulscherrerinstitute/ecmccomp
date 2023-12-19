@@ -7,10 +7,10 @@
 #-d   \note Max voltage= 48 V
 #-d */
 
-#- Same common for EL7211
+#- Apply common for EL7211
 ecmcFileExist("${ecmccomp_DIR}EL7211_XXX.cmd",1,1)
 < ${ecmccomp_DIR}EL7211_XXX.cmd.cmd
 
-#- Apply generic
+#- Apply common for OCT
 ecmcFileExist("${ecmccomp_DIR}EL72XX_OCT.cmd",1,1)
 < ${ecmccomp_DIR}EL72XX_XXX.cmd
