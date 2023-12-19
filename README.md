@@ -1,12 +1,14 @@
 # ecmccomp: Components library for ecmc
 
 This repo contains component configurations for ecmc. A component can be a motor, encoder or a special configuration.
-Component configurations/paremeters are stored in engineering units in files. Only one file per component is needed.
+Component configurations/parameters are stored in engineering units in files. Only one file per component is needed.
 
 The applyComponent.cmd applies a component to a ethercat slave including:
 * Validation that the slave supports the componenet. For instance a motor component can be applied to a drive-slave but not a encoder-slave.
 * Validates that the custom macros are supported by the slave and component combination
-* Applies the configuration
+* Applies the configuration (including conversion from engineering units to the units needed by the slave)
+
+The same component configuration can therefore be used for differet types of ethercat slaves.
 
 ## Apply a component to a slave
 ```
