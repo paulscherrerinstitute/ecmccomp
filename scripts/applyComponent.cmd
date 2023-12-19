@@ -7,10 +7,10 @@
 #-d   \file
 #-d   \param COMP Component name
 #-d   \param EC_COMP_TYPE   (optional) Hardware descriptor, i.e. EL7037, defaults to ECMC_EC_COMP_TYPE or ECMC_EC_HWTYPE set in ecmccfg/addSlave.cmd
-#-d   \param S_ID  (optional) Slave bus position, defaults to ECMC_EC_SLAVE_NUM set in ecmccfg/addSlave.cmd
-#-d   \param CH_ID     (optional) Channel of slave default to 1
-#-d   \param MACROS    (optional) Special macros, depending on component/slave type:
-#-d          2PH_STEPPER  (general 2PH stepper cfgs):
+#-d   \param COMP_S_ID      (optional) Slave bus position, defaults to ECMC_EC_SLAVE_NUM set in ecmccfg/addSlave.cmd
+#-d   \param CH_ID          (optional) Channel of slave default to 1
+#-d   \param MACROS         (optional) Special macros, depending on component/slave type:
+#-d          2PH_STEPPER    (general 2PH stepper cfgs):
 #-d              I_MAX_MA     : Run current [mA] (Used to reduce max torque)
 #-d              I_STDBY_MA   : Standby current [mA]
 #-d              U_NOM_MV     : Supply voltage [mV]
@@ -36,7 +36,7 @@
 #-d
 #-d   \note Example calls:
 #-d   \code
-#-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "HW_DESC=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
+#-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "EC_COMP_TYPE=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
 #-d */
 
 epicsEnvSet(EC_COMP_TYPE, ${EC_COMP_TYPE=${ECMC_EC_COMP_TYPE=${ECMC_EC_HWTYPE}}})

@@ -1,8 +1,42 @@
-# ecmccomp
+# ecmccomp: Components library for ecmc
 
-Components library for ecmc
+This repo contains component configurations for ecmc. A component can be a motor, encoder or a special configuration.
+Component configurations/paremeters are stored in engineering units in files. Only one file per component is needed.
+
+The applyComponent.cmd applies a component to a ethercat slave including:
+* Validation that the slave supports the componenet. For instance a motor component can be applied to a drive-slave but not a encoder-slave.
+* Validates that the custom macros are supported by the slave and component combination
+* Applies the configuration
+
+## Apply a component to a slave
+```
+#- Execute directly after addSlave.cmd then only COMP macro is needed:
+iocshLoad addSlave.cmd, "HW_DESC=EL7037"
+iocshLoad applyComponent.cmd "COMP=Motor-OrientalMotor-PK267JB-Parallel"
+
+#- Execute for a cutsom slave id then COMP_S_ID is needed:
+iocshLoad applyComponent.cmd "COMP_S_ID=12,EC_COMP_TYPE=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel"
+
+#- CH and custom macros to the cfg can be added
+iocshLoad applyComponent.cmd ",EC_COMP_TYPE=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,CH_ID=1,MACROS='I_MAX_MA=500,I_STDBY_MA=100'"
+```
 
 # Component types
+The components are sorted into types:
+
+Motors:
+* 2PH_STEPPER        : 2 phase stepper motors
+* EL72XX_OCT_SERVO   : Beckhoff motors for use with EL72XX OCT drives
+* EL72XX_RES_SERVO   : Beckhoff motors for use with EL72XX RES drives
+
+Encoders:
+* BISS_C_ENC
+* SSI_ENC
+
+# Slave configurations
+Each type of ethercat slave has:
+* A defintion file defining what is supported. For instance, the EL7037 slave supports the component types "2PH_STEPPER" and "INC_ENC". Also, max current and voltage are listed here.
+* A file containg conversions from the engineering unit parameter in the configuration file to actual values sent to hardware (SDOS)
 
 ## 2PH_STEPPER
 
