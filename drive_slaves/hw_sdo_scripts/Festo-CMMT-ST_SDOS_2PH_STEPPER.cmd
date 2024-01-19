@@ -1,5 +1,5 @@
 #-d /**
-#-d   \brief SDOS for Festo-CMMT-ST drive
+#-d   \brief SDOS for Festo-CMMT-ST drive for 2Ph stepepr
 #-d   \details Parametrization of Festo-CMMT-ST
 #-d   \author Anders Sandström
 #-d   \file

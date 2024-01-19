@@ -15,6 +15,8 @@
 #-d              I_STDBY_MA   : Standby current [mA]
 #-d              U_NOM_MV     : Supply voltage [mV]
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
+#-d              R_COIL_MOHM  : Coil resistance in mOhm
+#-d              L_COIL_UH    : Coil inductance in uH
 #-d
 #-d          EL72XX_RES_SERVO (cfg for EL72XX motor with resolver):
 #-d              I_MAX_MA     : Max current [mA]  (Used to reduce max torque)
@@ -34,8 +36,11 @@
 #-d          BISS_C_IF        :
 #-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
 #-d
-#-d          MCS2:
-#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d          MCS2:                
+#-d              POS_TYPE     : Positioner type
+#-d              HOME_VELO    : Homing velocity
+#-d              HOME_ACC     : Homing Acceleration
+#-d              HOME_METHOD_ID : Homing method id
 #-d
 #-d   \note Example calls:
 #-d   \code
@@ -71,9 +76,9 @@ ${SCRIPTEXEC} ${ecmccomp_DIR}validateMacros.cmd "MACROS='${MACROS=}',SUPP_MACROS
 ecmcFileExist("${ecmccomp_DIR}validate${COMP_TYPE}.cmd",1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}validate${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
-#- Apply configuration
-ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd",1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
+#- Apply SDO configuration
+ecmcFileExist("${ecmccomp_DIR}${SLAVE_SCRIPT}_${COMP_TYPE}.cmd",1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}${SLAVE_SCRIPT}_${COMP_TYPE}.cmd "CH_ID=${CH_ID=1},${MACROS=''}"
 
 #- Cleanup component specific
 ecmcFileExist("${ecmccomp_DIR}cleanup${COMP_TYPE}.cmd",1,1)

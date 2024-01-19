@@ -6,7 +6,7 @@
 #-d */
 
 #- Most settings same as EL7201 Resolver version
-< ${ecmccomp_DIR}EL72XX_RES_SDOS.cmd 
+< ${ecmccomp_DIR}EL72XX_RES_SDOS_EL72XX_RES_SERVO.cmd 
 
 #- Invert motor polarity
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x65,${INV_DIR=0},1)"
