@@ -24,7 +24,7 @@ epicsEnvSet(MOT_I_NOM_MA,2710)
 epicsEnvSet(MOT_POLE_PAIRS,3)
 
 #- Torque Constant [mNm/A]
-epicsEnvSet(MOT_TRQ_CONST,70)
+epicsEnvSet(MOT_TRQ_CONST_MNM_P_A,70)
 
 #- Phase inductance [0.1mH]
 epicsEnvSet(MOT_L_COIL,15)
@@ -51,7 +51,7 @@ epicsEnvSet(MOT_VELO_KP,37)
 epicsEnvSet(MOT_VELO_TI,150)
 
 #- Rotor moment of inertia [gcm^2]
-epicsEnvSet(MOT_ROT_INERTIA,29)
+epicsEnvSet(MOT_ROT_INERTIA_GCM2,29)
 
 #- This motor is NOT equipped with a brake (last digit in "0F20" is != 1) => set barke times to 0
 #- Brake Application delay

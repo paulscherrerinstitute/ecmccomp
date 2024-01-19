@@ -38,3 +38,6 @@ epicsEnvSet(MOT_EMF,0)
 
 #- Motor steps []
 epicsEnvSet(MOT_STEPS,200)
+
+#- Rotor Inertia [gcm²]
+epicsEnvSet(MOT_ROT_INERTIA_GCM2,0)

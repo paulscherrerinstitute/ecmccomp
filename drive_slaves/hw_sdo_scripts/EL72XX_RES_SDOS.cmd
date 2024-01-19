@@ -23,8 +23,8 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x13,${MOT_POLE_PAIRS},1)"
 epicsEnvUnset(MOT_POLE_PAIRS)
 
 #- Torque contstant
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x16,${MOT_TRQ_CONST},4)"
-epicsEnvUnset(MOT_TRQ_CONST)
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x16,${MOT_TRQ_CONST_MNM_P_A},4)"
+epicsEnvUnset(MOT_TRQ_CONST_MNM_P_A)
 
 #- Winding inductance
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x19,${MOT_L_COIL},2)"
@@ -63,8 +63,8 @@ epicsEnvUnset(MOT_VELO_TI)
 epicsEnvUnset(VELO_TI)
 
 #- Rotor moment of inertia ( Differs with brake:)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x18,${MOT_ROT_INERTIA},4)"
-epicsEnvUnset(MOT_ROT_INERTIA)
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x18,${MOT_ROT_INERTIA_GCM2},4)"
+epicsEnvUnset(MOT_ROT_INERTIA_GCM2)
 
 #- Brake Application delay
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8012,0x12,${BRK_APP_DLY=${MOT_BRK_APP_DLY=0}},2)"

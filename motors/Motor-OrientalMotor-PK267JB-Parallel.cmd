@@ -24,3 +24,6 @@ epicsEnvSet(MOT_R_COIL_MOHM,1200)
 
 #- Phase inductance [uH]
 epicsEnvSet(MOT_L_COIL_UH,1770)
+
+#- Rotor Inertia [gcm²]
+epicsEnvSet(MOT_ROT_INERTIA_GCM2,0)
