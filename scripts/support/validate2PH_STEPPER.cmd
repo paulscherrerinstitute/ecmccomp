@@ -14,7 +14,7 @@ ${DIE}ecmcExit Error: Component and slave do not match
 
 #- Override MOT_I_MAX_MA if generic cfg
 ecmcIf("${MOT_I_MAX_MA}=-1")
-${ECMC_IF}epicsEnvSet(MOT_I_MAX_MA,$(I_MAX_MA=-1))
+${IF_TRUE}epicsEnvSet(MOT_I_MAX_MA,$(I_MAX_MA=-1))
 ecmcEndIf()
 
 #- Reduce allowed motor current if drive cannot support the current

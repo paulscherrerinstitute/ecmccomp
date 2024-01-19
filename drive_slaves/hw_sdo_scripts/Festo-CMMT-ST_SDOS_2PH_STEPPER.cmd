@@ -63,19 +63,19 @@ ecmcEpicsEnvSetCalc(FESTO_TEMP_1,"${TRQ_CONST_MNM_P_A=${MOT_TRQ_CONST_MNM_P_A=-1
 ecmcEpicsEnvSetCalc(FESTO_TEMP_2,"(${MOT_TRQ_MAX_NMM=-1}/1000)/(${I_MAX_MA_VALID}/1000)","%lf")
 
 ecmcIf("${FESTO_TEMP_1}>0")
-${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_1=0.0},F32)"
-${ECMC_IF}epicsEnvSet(FESTO_DONE)
+${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_1=0.0},F32)"
+${IF_TRUE}epicsEnvSet(FESTO_DONE)
 ecmcEndIf()
 
 ecmcIf("${FESTO_TEMP_2}>0 and not(${FESTO_DONE=0})")
-${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_2=0.0},F32)"
-${ECMC_IF}# WARNING: Setting motor constant based on MOT_TRQ_MAX_NMM and I_MAX_MA_VALID
-${ECMC_IF}epicsEnvSet(FESTO_DONE)
+${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_2=0.0},F32)"
+${IF_TRUE}# WARNING: Setting motor constant based on MOT_TRQ_MAX_NMM and I_MAX_MA_VALID
+${IF_TRUE}epicsEnvSet(FESTO_DONE)
 ecmcEndIf()
 
 ecmcIf("not(${FESTO_DONE=0})")
-${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,0.0,F32)"
-${ECMC_IF} # WARNING motor torque constant not set
+${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,0.0,F32)"
+${IF_TRUE} # WARNING motor torque constant not set
 ecmcEndIf()
 
 #- Voltage [V]
