@@ -61,8 +61,8 @@ ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 
 #- Set variables for slave
-ecmcFileExist(${ecmccomp_DIR}${EC_COMP_TYPE}.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}${EC_COMP_TYPE}.cmd
+ecmcFileExist(${ecmccomp_DIR}${EC_COMP_TYPE}_${COMP_TYPE}.cmd,1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}${EC_COMP_TYPE}_${COMP_TYPE}.cmd
 
 #- Validation generic
 ecmcFileExist("${ecmccomp_DIR}validateGeneric.cmd",1,1)

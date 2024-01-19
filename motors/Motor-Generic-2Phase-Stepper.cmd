@@ -19,7 +19,7 @@ epicsEnvSet(COMP_TYPE,2PH_STEPPER)
 epicsEnvSet(MOT_I_MAX_MA,-1)
 
 #- Standby Current [mA] (30% of max)
-ecmcEpicsEnvSetCalc(MOT_I_STDBY_MA,"${MOT_I_MAX_MA}*0.3","%d")
+epicsEnvSet(MOT_I_STDBY_MA,-1)
 
 #- Max Voltage [mV]
 epicsEnvSet(MOT_U_MAX_MV,48000)
@@ -28,7 +28,7 @@ epicsEnvSet(MOT_U_MAX_MV,48000)
 epicsEnvSet(MOT_U_MV,-1)
 
 #- Phase resistance [mOhm]
-epicsEnvSet(MOT_R_COIL_MOHM,-1)
+epicsEnvSet(MOT_R_COIL_MOHM,)
 
 #- Phase inductance [uH]
 epicsEnvSet(MOT_L_COIL_UH,-1)

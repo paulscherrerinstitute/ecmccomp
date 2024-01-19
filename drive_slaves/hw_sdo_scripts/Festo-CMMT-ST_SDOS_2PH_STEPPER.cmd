@@ -22,7 +22,6 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x4,${FESTO_TEMP},F32)"
 #-  0x216c:05, rwrwrw, float, 32 bit, "P1.7120.0.0_iMax"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP},F32)"
 epicsEnvUnset(FESTO_TEMP)
-epicsEnvUnset(I_MAX_MA_VALID)
 
 #- Stanby current [A]
 #-  0x216c:14, rwrwrw, float, 32 bit, "P1.71424.0.0_continuousStandstillCurrentRated"
@@ -54,27 +53,27 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x8,${FESTO_TEMP=0.0},F32)"
 ecmcEpicsEnvSetCalc(FESTO_TEMP,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} * 1000","%lf")
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x8,${FESTO_TEMP=0.0},F32)"
 
-# Torque constant [Nm/Arms]
+#- Torque constant [Nm/Arms]
 #-  0x216c:0a, rwrwrw, float, 32 bit, "P1.7135.0.0_km"
 #- First calculate based on MOT_TRQ_CONST_MNM_P_A
 ecmcEpicsEnvSetCalc(FESTO_TEMP_1,"${TRQ_CONST_MNM_P_A=${MOT_TRQ_CONST_MNM_P_A=-1}} / 1000","%lf")
 #- Calculate based on I_MAX_MA_VALID and MOT_TRQ_MAX_NMM
-ecmcEpicsEnvSetCalc(FESTO_TEMP_2,"(${MOT_TRQ_MAX_NMM=-1}/1000)/(${MOT_I_MAX_MA_VALID}/1000)","%lf")
+ecmcEpicsEnvSetCalc(FESTO_TEMP_2,"(${MOT_TRQ_MAX_NMM=-1}/1000)/(${I_MAX_MA_VALID}/1000)","%lf")
 
 ecmcIf("${FESTO_TEMP_1}>0")
 ${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_1=0.0},F32)"
 ${ECMC_IF}epicsEnvSet(FESTO_DONE)
 ecmcEndIf()
 
-ecmcIf("${FESTO_TEMP_2}>0 and not(${FESTO_DONE})")
+ecmcIf("${FESTO_TEMP_2}>0 and not(${FESTO_DONE=0})")
 ${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_2=0.0},F32)"
-${ECMC_IF} WARNING: Setting motor constant based on MOT_TRQ_MAX_NMM and MOT_I_MAX_MA_VALID
+${ECMC_IF}# WARNING: Setting motor constant based on MOT_TRQ_MAX_NMM and I_MAX_MA_VALID
 ${ECMC_IF}epicsEnvSet(FESTO_DONE)
 ecmcEndIf()
 
-ecmcIf("not(${FESTO_DONE})")
+ecmcIf("not(${FESTO_DONE=0})")
 ${ECMC_IF}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,0.0,F32)"
-${ECMC_IF} WARNING motor torque constant not set
+${ECMC_IF} # WARNING motor torque constant not set
 ecmcEndIf()
 
 #- Voltage [V]
@@ -85,6 +84,12 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #- Pole pair denominator set to 1 for stepper
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U32)"
+
+#- Reinit drive (seems it needs to be like this..)
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,1,1)"
+epicsThreadSleep 0.1
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,0,1)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2003,0x1,1,S8)"
 
 epicsEnvUnset(FESTO_TEMP_2)
 epicsEnvUnset(FESTO_TEMP_1)
