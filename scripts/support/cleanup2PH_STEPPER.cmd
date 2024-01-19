@@ -1,4 +1,6 @@
-#- Cleanup 2PH_STEPPER
+#==============================================================================
+# cleanup2PH_STEPPER.cmd
+
 epicsEnvUnset(MOT_I_MAX_MA)
 epicsEnvUnset(MOT_I_STDBY_MA)
 epicsEnvUnset(MOT_U_MAX_MV)

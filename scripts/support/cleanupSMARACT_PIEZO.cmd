@@ -1,4 +1,6 @@
-##- Cleanup SmarACT
+#==============================================================================
+# cleanupSMARACT_PIEZO.cmd
+
 epicsEnvUnset(POS_TYPE)
 epicsEnvUnset(MOT_POS_TYPE)
 epicsEnvUnset(HOME_VELO)

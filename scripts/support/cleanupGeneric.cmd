@@ -1,4 +1,6 @@
-#- Cleanup
+#==============================================================================
+# cleanupGeneric.cmd
+
 epicsEnvUnset(COMP_TYPE)
 epicsEnvUnset(CH_ID)
 epicsEnvUnset(MACROS)

@@ -1,4 +1,6 @@
-##- Cleanup BISS_C_ENC
+#==============================================================================
+# cleanup2PH_STEPPER.cmd
+
 epicsEnvUnset(ENC_DIS_STAT_BITS)
 epicsEnvUnset(ENC_CRC_INV)
 epicsEnvUnset(ENC_CRC_POLY)

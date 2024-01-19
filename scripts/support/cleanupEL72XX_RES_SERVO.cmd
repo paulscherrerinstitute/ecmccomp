@@ -1,4 +1,6 @@
-#- Cleanup for EL72XX_RES_SERVO
+#==============================================================================
+# cleanupEL72XX_OCT_SERVO.cmd
+
 epicsEnvUnset(MOT_U_MAX_MV)
 epicsEnvUnset(MOT_I_MAX_MA)
 epicsEnvUnset(MOT_I_RUN_MA)
