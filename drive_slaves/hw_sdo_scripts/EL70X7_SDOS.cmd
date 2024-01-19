@@ -5,6 +5,14 @@
 #-d   \file
 #-d */
 
+#- =========== Resistance ============
+ecmcEpicsEnvSetCalcTernary(DIE,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} < 0","", "#-")
+${DIE}ecmcExit Error: Coil resistance invalid
+
+#- =========== Inductance ============
+ecmcEpicsEnvSetCalcTernary(DIE,"${L_COIL_UH=${MOT_L_COIL_UH}} < 0","", "#-")
+${DIE}ecmcExit Error: Coil inductance invalid.
+
 #- Set max current [mA]
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x1,${I_MAX_MA_VALID},2)"
 

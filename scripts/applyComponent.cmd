@@ -34,6 +34,9 @@
 #-d          BISS_C_IF        :
 #-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
 #-d
+#-d          MCS2:
+#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d
 #-d   \note Example calls:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "EC_COMP_TYPE=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"

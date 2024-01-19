@@ -5,6 +5,11 @@
 #-d   \file
 #-d */
 
+#- =========== Validate resistance ============
+ecmcEpicsEnvSetCalcTernary(DIE,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} < 0","", "#-")
+${DIE}ecmcExit Error: Coil resistance invalid
+epicsEnvUnset(DIE)
+
 #- Set max current [mA]
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x1,${I_MAX_MA_VALID},2)"
 epicsEnvUnset(I_MAX_MA_VALID)

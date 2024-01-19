@@ -17,7 +17,10 @@ ${DIE}ecmcExit Error: HOME_VELO to high (max 2^32/1000000)
 ecmcEpicsEnvSetCalcTernary(DIE,"${HOME_ACC=${MOT_HOME_ACC}}*1000000>2^32","", "#-")
 ${DIE}ecmcExit Error: HOME_ACC to high (max 2^32/1000000)
 
-
 #- Die HOME_METHOD_ID is to high or low (max 8bit int)
 ecmcEpicsEnvSetCalcTernary(DIE,"${HOME_METHOD_ID=${MOT_HOME_METHOD_ID}}>2^7 or ${HOME_METHOD_ID=${MOT_HOME_METHOD_ID}}<-2^7","", "#-")
 ${DIE}ecmcExit Error: Home method id out of range (allowed 8 bit int: -128..127)
+
+#- Die HOME_METHOD_ID is to high or low (max 8bit int)
+ecmcEpicsEnvSetCalcTernary(DIE,"${POS_TYPE=${MOT_POS_TYPE}} < 0","", "#-")
+${DIE}ecmcExit Error: Positioner type invalid. Use POS_TYPE macro as param to applyComponent.cmd
