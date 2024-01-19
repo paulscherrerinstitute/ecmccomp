@@ -1,3 +1,5 @@
+#==============================================================================
+# EL72XX_RES_SDOS_EL72XX_RES_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EX72XX RES drive
 #-d   \details Parametrization of EX72XX Resolver

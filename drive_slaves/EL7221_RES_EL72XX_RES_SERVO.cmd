@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7221_RES_EL72XX_RES_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7221 drive RES
 #-d   \details Parametrization of EL7221 Resolver version, same as EL7211 if no fan

@@ -1,3 +1,5 @@
+#==============================================================================
+# Festo-CMMT-ST_SDOS_2PH_STEPPER.cmd
 #-d /**
 #-d   \brief SDOS for Festo-CMMT-ST drive for 2Ph stepepr
 #-d   \details Parametrization of Festo-CMMT-ST

@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7201_RES_EL72XX_OCT_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7201 drive OCT
 #-d   \details Parametrization of EL7201

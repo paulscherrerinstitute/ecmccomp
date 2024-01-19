@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7221_RES_EL72XX_OCT_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7221 drive OCT
 #-d   \details Parametrization of EL7221 OCT same as EL7211 if no fan

@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7211_RES_EL72XX_RES_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7211 drive RES
 #-d   \details Parametrization of EL7211 Resolver version

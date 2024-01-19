@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7201_RES_EL72XX_RES_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7201 drive RES
 #-d   \details Parametrization of EL7201 Resolver version

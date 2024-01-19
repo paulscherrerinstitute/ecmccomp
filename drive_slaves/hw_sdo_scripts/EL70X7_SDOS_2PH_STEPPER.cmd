@@ -1,3 +1,5 @@
+#==============================================================================
+# EL70X7_SDOS_2PH_STEPPER.cmd
 #-d /**
 #-d   \brief SDOS for EL70X7 drive
 #-d   \details Parametrization of EL70X7

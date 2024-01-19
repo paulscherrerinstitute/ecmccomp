@@ -1,3 +1,5 @@
+#==============================================================================
+# MCS2_SMARACT_PIEZO.cmd
 #-d /**
 #-d   \brief SDOS for SmaraAct MCS2
 #-d   \details Parametrization of EL7047

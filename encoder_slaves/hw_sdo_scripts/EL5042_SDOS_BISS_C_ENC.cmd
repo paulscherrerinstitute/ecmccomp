@@ -1,5 +1,7 @@
+#==============================================================================
+# EL5042_SDOS_BISS_C_ENC.cmd
 #-d /**
-#-d   \brief SDOS for EL5042 drive
+#-d   \brief SDOS for EL5042 encoder interface 
 #-d   \details Parametrization of EL5042
 #-d   \author Anders Sandström
 #-d   \file

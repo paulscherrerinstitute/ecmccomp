@@ -1,3 +1,5 @@
+#==============================================================================
+# EL7031_2PH_STEPPER.cmd
 #-d /**
 #-d   \brief SDOS for EL7031 drive
 #-d   \details Parametrization of EL7031

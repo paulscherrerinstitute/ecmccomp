@@ -1,3 +1,5 @@
+#==============================================================================
+# MCS2_SDOS_SMARACT_PIEZO.cmd
 #-d /**
 #-d   \brief SDOS for MCS2 drive
 #-d   \details Parametrization of MCS2
