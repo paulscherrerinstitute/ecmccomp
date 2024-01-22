@@ -28,7 +28,7 @@ epicsEnvSet(MOT_U_MAX_MV,48000)
 epicsEnvSet(MOT_U_MV,-1)
 
 #- Phase resistance [mOhm]
-epicsEnvSet(MOT_R_COIL_MOHM,)
+epicsEnvSet(MOT_R_COIL_MOHM,-1)
 
 #- Phase inductance [uH]
 epicsEnvSet(MOT_L_COIL_UH,-1)
