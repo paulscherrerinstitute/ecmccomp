@@ -7,7 +7,7 @@
 #-d   * I_MAX_MA:     max current in mA
 #-d   * I_STDBY_MA:   stdby current in mA
 #-d   * R_COIL_MOHM:  Coil resistance in mOhm
-#-d   * L_COIL_UH:    Coil inductance in uH
+#-d   * L_COIL_UH:    Coil inductance in uH (neded for some drives)
 #-d   optional:
 #-d   *  U_MAX_MV:    Supply voltage in mV (24000 or 48000 normally)
 #-d */

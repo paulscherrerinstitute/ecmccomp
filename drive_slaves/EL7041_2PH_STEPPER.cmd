@@ -5,8 +5,8 @@
 #-d   \details Parametrization of EL7041
 #-d   \author Anders Sandström
 #-d   \file
-#-d   \note Max current= 1.5 A
-#-d   \note Max voltage= 24 V
+#-d   \note Max current= 5 A
+#-d   \note Max voltage= 48 V
 #-d */
 
 #- Drive type
