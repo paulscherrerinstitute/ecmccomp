@@ -35,6 +35,7 @@
 #-d
 #-d          BISS_C_IF        :
 #-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d
 #-d          MCS2:                
 #-d              POS_TYPE     : Positioner type
