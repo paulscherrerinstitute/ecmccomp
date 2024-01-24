@@ -12,6 +12,10 @@ ecmcEpicsEnvSetCalc(CH_ID_M1,"${CH_ID=1}-1")
 epicsEnvSet(SDO_INDEX,"0x80${CH_ID_M1}8")
 epicsEnvUnset(CH_ID_M1)
 
+#- 0x80p8:02: Invert direction (default 0)
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${INV_DIR=0},1)"
+epicsEnvUnset(ENC_DIS_STAT_BITS)
+
 #- 0x80p8:02: Disable Status Bits (default 0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${ENC_DIS_STAT_BITS=0},1)"
 epicsEnvUnset(ENC_DIS_STAT_BITS)

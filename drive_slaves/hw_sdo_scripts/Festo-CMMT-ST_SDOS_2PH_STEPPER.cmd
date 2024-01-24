@@ -87,6 +87,26 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U32)"
 
+#- Set default to open loop
+#- Automatic = 0
+#- Open loop = 1
+#- Closed loop = 2
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,1,U32)"
+
+#- Set diag level following error to info:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
+
+#- Set diag level following error to info:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
+
+#- Set diag level following error velo to info:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,4,U32)"
+
+#- Set diag level for max velo monitoring
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,4,U32)"
+
+
+#- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
 ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,1,1)"
 epicsThreadSleep 0.1

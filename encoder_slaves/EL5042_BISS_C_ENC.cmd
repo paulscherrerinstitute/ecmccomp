@@ -6,13 +6,13 @@
 #-d */
 
 #- Type
-epicsEnvSet(SLAVE_TYPE,"BISS_C_ENC,SSI_ENC")
+epicsEnvSet(SLAVE_TYPE,"BISS_C_ENC")
 
 #- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")
+epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS_BISS_C_ENC")
 
 #- Channel count
 epicsEnvSet(SLAVE_CHANNELS,"2")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"CLK_FRQ")
+epicsEnvSet(SUPP_MACROS,"CLK_FRQ,INV_DIR")
