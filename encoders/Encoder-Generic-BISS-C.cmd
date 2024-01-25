@@ -1,10 +1,8 @@
 #-d /**
-#-d   \brief Script for Encoder-Renishaw-32bit.cmd
+#-d   \brief Script for Encoder-Generic-BISS-C
 #-d   \details
 #-d   \author Anders Sandström
 #-d   \file
-#-d   \note Supply:     5 V
-#-d   \note Resolution: 32 bit TBD
 #-d */
 
 #- Component TYPE []

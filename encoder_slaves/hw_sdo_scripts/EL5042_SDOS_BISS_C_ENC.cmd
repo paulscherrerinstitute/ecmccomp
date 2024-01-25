@@ -17,21 +17,21 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${INV_DIR=0},1)"
 epicsEnvUnset(ENC_DIS_STAT_BITS)
 
 #- 0x80p8:02: Disable Status Bits (default 0)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${ENC_DIS_STAT_BITS=0},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${DIS_STAT_BITS=${ENC_DIS_STAT_BITS=0}},1)"
 epicsEnvUnset(ENC_DIS_STAT_BITS)
 
 #- 0x80p8:03: CRC Invert (default 1 ?)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x3,${ENC_CRC_INV=1},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x3,${CRC_INV=${ENC_CRC_INV=1}},1)"
 epicsEnvUnset(ENC_CRC_INV)
 
 #- 0x80p8:11: CRC Polynom (default 67)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x11,${ENC_CRC_POLY=67},4)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x11,${CRC_POLY=${ENC_CRC_POLY=67}},4)"
 epicsEnvUnset(ENC_CRC_POLY)
 
 #- 0x80p8:12: Supply voltage
 #- 50: 5V (default)
 #- 90: 9V
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${ENC_U_SUP_VLT=50},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${U_SUP_VLT=${ENC_U_SUP_VLT=50}},1)"
 epicsEnvUnset(ENC_U_SUP_VLT)
 
 #- 0x80p8:13: Clock Frequency
@@ -51,21 +51,21 @@ epicsEnvUnset(ENC_CLK_FRQ)
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)
 #- 1: Gray code active
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x14,${ENC_CODEING=0},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x14,${CODEING=${ENC_CODEING=0}},1)"
 
 #- 0x80p8:15: Multiturn [Bit] Number of multiturn bits
 #- default 12
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x15,${ENC_MT_BITS=0},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x15,${MT_BITS=${ENC_MT_BITS=0}},1)"
 epicsEnvUnset(ENC_MT_BITS)
 
 #- 0x80p8:16: Singleturn [Bit] Number of singleturn bits
 #- default 13
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x16,${ENC_ST_BITS=0},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x16,${ST_BITS=${ENC_ST_BITS=0}},1)"
 epicsEnvUnset(ENC_ST_BITS)
 
 #- 0x80p8:17: Offset LSB Bit [Bit] Number of “right aligned” Offset bits
 #- default 0
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x17,${ENC_OFF_BITS=0},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x17,${OFF_BITS=${ENC_OFF_BITS=0}},1)"
 epicsEnvUnset(ENC_OFF_BITS)
 
 #- 0x80p8:18: Mode
