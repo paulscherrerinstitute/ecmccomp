@@ -3,6 +3,9 @@
 #-d   \details Parametrization of EL5042 2CH BISS-C encoder interface
 #-d   \author Anders Sandström
 #-d   \file
+#-d   \param MACROS         (optional) Special macros, depending on component/slave type:
+#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d */
 
 #- Type

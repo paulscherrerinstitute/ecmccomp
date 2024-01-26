@@ -7,6 +7,11 @@
 #-d   \file
 #-d   \note Max current= 5 A
 #-d   \note Max voltage= 48 V
+#-d   \param MACROS         (optional) Special macros, depending on component/slave type:
+#-d              POS_TYPE     : Positioner type
+#-d              HOME_VELO    : Homing velocity
+#-d              HOME_ACC     : Homing Acceleration
+#-d              HOME_METHOD_ID : Homing method id
 #-d */
 
 #- Drive type

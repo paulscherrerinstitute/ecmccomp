@@ -16,19 +16,71 @@ ecmcEpicsEnvSetCalcTernary(DIE,"${L_COIL_UH=${MOT_L_COIL_UH}} < 0","", "#-")
 ${DIE}ecmcExit Error: Coil inductance invalid.
 
 #- Run current [A]
-ecmcEpicsEnvSetCalc(FESTO_TEMP,"${I_MAX_MA_VALID}/1000","%lf")
+ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR,"${I_MAX_MA_VALID}/1000","%lf")
 #- Rated [A]
 #-  0x216c:04, rwrwrw, float, 32 bit, "P1.7117.0.0_iRated"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x4,${FESTO_TEMP},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x4,${FESTO_TEMP_CURR},F32)"
 #- Max [A]
 #-  0x216c:05, rwrwrw, float, 32 bit, "P1.7120.0.0_iMax"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP},F32)"
-epicsEnvUnset(FESTO_TEMP)
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP_CURR},F32)"
 
 #- Stanby current [A]
 #-  0x216c:14, rwrwrw, float, 32 bit, "P1.71424.0.0_continuousStandstillCurrentRated"
-ecmcEpicsEnvSetCalc(FESTO_TEMP,"${I_STDBY_MA_VALID} / 1000","%lf")
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP},F32)"
+ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR_STDBY,"${I_STDBY_MA_VALID} / 1000","%lf")
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR_STDBY},F32)"
+
+#- =========== Open loop settings ============
+#- Open-loop operation objects
+#- Parameter Index.Subindex Name Data type
+#- 270 0x219C.02 Setpoint value reactive current REAL
+#- 662 0x219C.03 Time current increase REAL
+#- 4001 0x219C.04 Activation of open loop operation BOOL
+#- 4004 0x219C.07 Active control structure UDINT
+#- 4005 0x219C.08 Selection of mode of operation open loop/
+#- closed loop
+#- UDINT
+#- 4006 0x219C.09 Selection of mode of operation UDINT
+#- 4007 0x219C.0A Active mode of operation UDINT
+#- 4008 0x219C.0B Velocity switching threshold REAL
+#- 4010 0x219C.0D Current rise time REAL
+#- 4026 0x219C.15 Current reduction activation BOOL
+#- 4027 0x219C.16 Current reduction delay time REA
+
+#- Run current [A]
+#-  0x219c:02, rwrwrw, float, 32 bit, "P1.270.0.1"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x2,${FESTO_TEMP_CURR},F32)"
+
+#- Current reduction scaling factor []
+#-  0x219c:17, rwrwrw, float, 32 bit, "P1.4028.0.0"
+ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR_SCALE,"${FESTO_TEMP_CURR_STDBY}/${FESTO_TEMP_CURR}","%lf")
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x17,${FESTO_TEMP_CURR_SCALE},F32)"
+
+#- Current reduction delay time [s]
+#-  0x216c:01, rwrwrw, uint32, 32 bit, "P1.4027.0.0"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x16,${CURR_RED_DLY_S=0.2},F32)"
+
+#- Set default to open loop
+#- Automatic = 0
+#- Open loop = 1 default
+#- Closed loop = 2
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,${CTRL_MODE=1},U32)"
+
+#- Activation of open loop []
+#- 4001 0x219C.04 Activation of open loop operation BOOL
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,1,U8)"
+
+#- Disable commutation [] Set to off for open loop stepper
+#-P1668.0.0
+#- 0 = Always
+#- 1 = Automatic
+#- 2 = Off
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216B,0x6,2,U32)"
+
+#- =========== Open loop settings end ============
+
+epicsEnvUnset(FESTO_TEMP_CURR)
+epicsEnvUnset(FESTO_TEMP_CURR_STDBY)
+epicsEnvUnset(FESTO_TEMP_CURR_SCALE)
 
 #- Pole pairs []
 #-  0x216c:01, rwrwrw, uint32, 32 bit, "P1.718.0.0_numberPolePairs"
@@ -87,11 +139,11 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U32)"
 
-#- Set default to open loop
+#- Velo thresholshold
 #- Automatic = 0
-#- Open loop = 1
+#- Open loop = 1 default
 #- Closed loop = 2
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,1,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x8,${VELO_THRSHLD=2.0},F32)"
 
 #- Set diag level following error to info:
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"

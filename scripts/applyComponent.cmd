@@ -43,6 +43,8 @@
 #-d              HOME_ACC     : Homing Acceleration
 #-d              HOME_METHOD_ID : Homing method id
 #-d
+#-d   \note Some slaves might support more macros than listed above, see the slave cfg file for more info
+#-d
 #-d   \note Example calls:
 #-d   \code
 #-d     ${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd, "EC_COMP_TYPE=EL7037,COMP=Motor-OrientalMotor-PK267JB-Parallel,MACROS='I_RUN_MA=1000'"
