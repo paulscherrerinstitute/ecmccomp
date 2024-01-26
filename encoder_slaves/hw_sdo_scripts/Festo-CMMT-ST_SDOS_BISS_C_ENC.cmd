@@ -14,8 +14,62 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x226E,0x1,${INV_DIR=0},1)"
 #- 0: Without encoder 
 #- 7: Incremental encoder
 #- 8: BISS-C (choose BISS)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x2130,0x7D,8,S32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,8,S32)"
 
-#- Single turn bits
+#- Singleturn bits
+#- 0x21A2:01: Single turn bits (max 32)
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x1,${ST_BITS=${ENC_ST_BITS=100}},U32)"
+
+#- Multiturn bits
+#- 0x21A2:02: Multi turn bits (max 32), set default to invalid
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x2,${MT_BITS=${ENC_MT_BITS=100}},U32)"
+
+#- Clock rate
+#- 0x21A2:0C: P0.3612.0 clock rate [Hz]
+#- Supported:
+#- 1.5MHz : default
+#- 3MHz   : 
+#- 6MHz   : 
+#- 12MHz  : 
+
+#- Try to find the closest rate:
+epicsEnvSet(TEMP_DONE,"")
+ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>6000")
+${IF_TRUE}epicsEnvSet(TEMP_FREQ,12000000) # Set to 12MHz
+${IF_TRUE} # Setting freq to 12MHz
+${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>3000")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,6000000)
+${TEMP_DONE}${IF_TRUE} # Setting freq to 6MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>1500")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,3000000)
+${TEMP_DONE}${IF_TRUE} # Setting freq to 3MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}epicsEnvSet(TEMP_FREQ,1500000 )
+${TEMP_DONE} # Setting freq to 1.5MHz
+${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${TEMP_FREQ=1500000},U32)"
+epicsEnvUnset(CLK_FRQ_KHZ)
+epicsEnvUnset(ENC_CLK_FRQ)
+epicsEnvUnset(TEMP_FREQ)
+epicsEnvUnset(TEMP_DONE)
+
+#- ########### MUST BE LAST ##############
+#- Reinit drive (seems it needs to be like this..)
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,1,1)"
+epicsThreadSleep 0.1
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,0,1)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2003,0x1,1,S8)"
+
+epicsEnvUnset(FESTO_TEMP_2)
+epicsEnvUnset(FESTO_TEMP_1)
+epicsEnvUnset(FESTO_TEMP)
+epicsEnvUnset(FESTO_DONE)
 
 

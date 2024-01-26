@@ -34,7 +34,7 @@
 #-d              ENC_OFF      : Offset encoder position (defaults to 0)
 #-d
 #-d          BISS_C_IF        :
-#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d              CLK_FRQ_KHZ  : Clock frequency (defaults to setting in encoder file)
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d
 #-d          MCS2:                

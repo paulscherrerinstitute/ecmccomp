@@ -22,16 +22,8 @@ epicsEnvSet(ENC_CRC_POLY,67)
 #- 90: 9V
 epicsEnvSet(ENC_U_SUP_VLT,50)
 
-#- 0x80p8:13: Clock Frequency
-#- 0: 10 MHz (default)
-#- 1: 5 MHz
-#- 2: 3.33 MHz
-#- 3: 2.5 MHz
-#- 4: 2 MHz
-#- 9: 1 MHz (Max for SSI)
-#- 17: 500 kHz
-#- 19: 250 kHz
-epicsEnvSet(ENC_CLK_FRQ,9)
+#- 0x80p8:13: Clock Frequency [Hz]
+epicsEnvSet(ENC_CLK_FRQ_KHZ,1000)
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)

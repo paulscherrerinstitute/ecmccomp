@@ -42,11 +42,54 @@ epicsEnvUnset(ENC_U_SUP_VLT)
 #- 4: 2 MHz
 #- 9: 1 MHz (Max for SSI)
 #- 17: 500 kHz
-#- 19: 250 kHz <--
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x13,${CLK_FRQ=${ENC_CLK_FRQ}},1)"
-epicsEnvUnset(CLK_FRQ)
-epicsEnvUnset(ENC_CLK_FRQ)
+#- 19: 250 kHz
 
+#- Find nearest higher freq:
+epicsEnvSet(TEMP_DONE,"")
+ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>5000")
+${IF_TRUE}epicsEnvSet(TEMP_FREQ,0) # Set to 10MHz
+${IF_TRUE} # Setting freq to 10MHz
+${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>3330")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,1)
+${TEMP_DONE}${IF_TRUE} # Setting freq to 5MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>2500")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,2)
+${TEMP_DONE}${IF_TRUE} # Setting freq to 3.33MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>2000")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,3)
+${TEMP_DONE}${IF_TRUE} # Setting freq to 2.5MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>1000")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,4 )
+${TEMP_DONE}${IF_TRUE} # Setting freq to 2MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>500")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,9 )
+${TEMP_DONE}${IF_TRUE} # Setting freq to 1MHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}ecmcIf("${CLK_FRQ_KHZ=${ENC_CLK_FRQ_KHZ}}>250")
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_FREQ,17 )
+${TEMP_DONE}${IF_TRUE} # Setting freq to 500kHz
+${TEMP_DONE}${IF_TRUE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+${TEMP_DONE}epicsEnvSet(TEMP_FREQ,19 )
+${TEMP_DONE} # Setting freq to 250kHz
+${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
+${TEMP_DONE}ecmcEndIf()
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x13,${TEMP_FREQ=1}},1)"
+epicsEnvUnset(CLK_FRQ_KHZ)
+epicsEnvUnset(ENC_CLK_FRQ)
+epicsEnvUnset(TEMP_FREQ)
+epicsEnvUnset(TEMP_DONE)
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)

@@ -4,8 +4,10 @@
 #-d   \author Anders Sandström
 #-d   \file
 #-d   \param MACROS         (optional) Special macros, depending on component/slave type:
-#-d              CLK_FRQ      : Clock frequency (defaults to setting in encoder file)
+#-d              CLK_FRQ_KHZ  : Clock frequency in KHz (defaults to setting in encoder file), closest possible setting will be set
 #-d              INV_DIR      : Invert encoder direction (0 = not invert (default), 1 = invert dir)
+#-d              MT_BITS      : Multiturn bits
+#-d              ST_BITS      : Singleturn bits
 #-d */
 
 #- Type
@@ -18,4 +20,4 @@ epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"2")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"CLK_FRQ,INV_DIR,U_SUP_VLT,CODEING,MT_BITS,OFF_BITS,CRC_INV,DIS_STAT_BITS,CRC_POLY")
+epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,U_SUP_VLT,CODEING,MT_BITS,OFF_BITS,CRC_INV,DIS_STAT_BITS,CRC_POLY")
