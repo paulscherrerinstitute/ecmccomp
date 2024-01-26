@@ -44,7 +44,9 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR_STDBY
 #- 4008 0x219C.0B Velocity switching threshold REAL
 #- 4010 0x219C.0D Current rise time REAL
 #- 4026 0x219C.15 Current reduction activation BOOL
-#- 4027 0x219C.16 Current reduction delay time REA
+#- 4027 0x219C.16 Current reduction delay time REAL
+#- 4028 0x219C.17 Current reduction scaling factor REAL
+#- 6694 0x219C.14 Factor current setpoint value REAL
 
 #- Run current [A]
 #-  0x219c:02, rwrwrw, float, 32 bit, "P1.270.0.1"
