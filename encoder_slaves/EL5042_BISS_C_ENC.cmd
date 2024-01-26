@@ -12,7 +12,7 @@
 epicsEnvSet(SLAVE_TYPE,"BISS_C_ENC")
 
 #- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"Festo-CMMT-ST_SDOS_BISS_C_ENC")
+epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")
 
 #- Channel count
 epicsEnvSet(SLAVE_CHANNELS,"2")
