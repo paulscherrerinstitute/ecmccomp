@@ -17,3 +17,8 @@ SCRIPTS+=$(wildcard ./drive_slaves/hw_sdo_scripts/*.cmd)
 SCRIPTS+=$(wildcard ./encoder_slaves/*.cmd)
 SCRIPTS+=$(wildcard ./encoder_slaves/hw_sdo_scripts/*.cmd)
 SCRIPTS+=$(wildcard ./encoders/*.cmd)
+
+TEMPLATES+=$(wildcard ./db/*.db)
+TEMPLATES+=$(wildcard ./db/*.template)
+TEMPLATES+=$(wildcard ./db/*.substitutions)
+TEMPLATES+=$(wildcard ./db/*.subs)
