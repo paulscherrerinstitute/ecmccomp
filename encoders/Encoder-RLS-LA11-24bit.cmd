@@ -1,8 +1,10 @@
 #-d /**
-#-d   \brief Script for Encoder-Generic-BISS-C
-#-d   \details
+#-d   \brief Script for Encoder-RLS-LA11-24bit
+#-d   \details RLS Biss-C 24-bit encoder, encoder sends 26-bit with LSB at 2
 #-d   \author Anders Sandström
 #-d   \file
+#-d   \note Supply:     5 V
+#-d   \note Resolution: 24 bit
 #-d */
 
 #- Component TYPE []
@@ -22,8 +24,8 @@ epicsEnvSet(ENC_CRC_POLY,67)
 #- 90: 9V
 epicsEnvSet(ENC_U_SUP_VLT,50)
 
-#- 0x80p8:13: Clock Frequency [Hz]
-epicsEnvSet(ENC_CLK_FRQ_KHZ,1000)
+#- 0x80p8:13: Clock Frequency [kHz]
+epicsEnvSet(ENC_CLK_FRQ_KHZ,2500)
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)
@@ -36,7 +38,7 @@ epicsEnvSet(ENC_MT_BITS,0)
 
 #- 0x80p8:16: Singleturn [Bit] Number of singleturn bits
 #- default 13
-epicsEnvSet(ENC_ST_BITS,32)
+epicsEnvSet(ENC_ST_BITS,26)
 
 #- 0x80p8:17: Offset LSB Bit [Bit] Number of “right aligned” Offset bits
 #- default 0
