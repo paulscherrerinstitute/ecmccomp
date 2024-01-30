@@ -42,4 +42,4 @@ epicsEnvSet(ENC_ST_BITS,32)
 
 #- 0x80p8:17: Offset LSB Bit [Bit] Number of “right aligned” Offset bits
 #- default 0
-epicsEnvSet(ENC_LSB_OFF_BITS,32)
+epicsEnvSet(ENC_LSB_OFF_BITS,0)
