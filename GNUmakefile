@@ -6,8 +6,6 @@ BUILDCLASSES = Linux
 EXCLUDE_VERSIONS = 3 7.0.5
 ARCH_FILTER=deb%
 
-#SCRIPTS+=startup.cmd
-
 SCRIPTS+=$(wildcard ./motors/*.cmd)
 SCRIPTS+=$(wildcard ./scripts/*.cmd)
 SCRIPTS+=$(wildcard ./scripts/support/*.cmd)

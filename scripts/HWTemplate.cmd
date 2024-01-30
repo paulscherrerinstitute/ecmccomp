@@ -19,7 +19,7 @@
 #-d
 
 #- Do not allow call to addSlave.cmd for same slave twice in a row
-ecmcEpicsEnvSetCalcTernary(BLOCKSLAVE,"'${SLAVE_ID=-1}'=='${ECMC_COMP_SUBST_OLD_S_ID}'","# Block call to addSlave.cmd: Not allowed to add same slave twice.", "")
+ecmcEpicsEnvSetCalcTernary(BLOCKSLAVE,"'${SLAVE_ID=-1}'=='${ECMC_COMP_SUBST_OLD_S_ID=-2}'","# Block call to addSlave.cmd: Not allowed to add same slave twice.", "")
 ${BLOCKSLAVE}${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_ID), HW_DESC=${HW_DESC}"
 epicsEnvSet(ECMC_COMP_SUBST_OLD_S_ID,${ECMC_EC_SLAVE_NUM})
 epicsEnvUnset(BLOCKSLAVE)
