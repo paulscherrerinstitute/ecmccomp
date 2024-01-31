@@ -31,8 +31,40 @@ epicsEnvUnset(ENC_CRC_POLY)
 #- 0x80p8:12: Supply voltage
 #- 50: 5V (default)
 #- 90: 9V
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${U_SUP_VLT=${ENC_U_SUP_VLT=50}},1)"
-epicsEnvUnset(ENC_U_SUP_VLT)
+#- SETTINGS 9V is not supported right now because of the below from beckhoff manual (AFFECTS _BOTH_ channels):
+#- Setting the encoder supply voltage
+#-    Condition: To write 0x8008:12 “Supply Voltage”, the value 0x72657375 (ASCII: “user”) must be set in 0xF008 “Code word”.
+#-
+#-    Set the value into index 0x8008:12 “Supply Voltage” (Specification in steps of 0.1 V).
+#-    Only the values 50 (5.0 V) and 90 (9.0 V) are permissible.
+#-    This setting applies to both channels.
+#-    Before switching to 9.0 V make sure that both BiSS encoders support the extended voltage range!
+#-
+#-    The encoder supply voltage is set for both channels in object 0x8008:12!
+#-
+#- BLOCK THIS CODE FOR NOW:
+#- ecmcEpicsEnvSetCalc(U_SUP_VLT_MV_TEMP,"${U_SUP_VLT_MV=${ENC_U_SUP_VLT_MV=5000}} / 100","%d")
+#- ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${U_SUP_VLT_MV_TEMP=50},1)"
+#- epicsEnvUnset(ENC_U_SUP_VLT_MV)
+#- epicsEnvUnset(U_SUP_VLT_MV_TEMP)
+
+#- Issue error if try to change voltage
+ecmcIf("${U_SUP_VLT_MV=${ENC_U_SUP_VLT_MV=5000}}>5000")
+${IF_TRUE}# ERROR: Supply voltage cannot be changed for EL5042 terminal by ecmccomp since the setting applies to _BOTH_ channels.
+${IF_TRUE}#  To change the voltage you need to add "ecmcConfigOrDie Cfg.EcAddSdo(...)" in your startup script according to below Beckhoff documentation:
+${IF_TRUE}#  ----------------------------------------------------------------------------------------------------------------------------
+${IF_TRUE}#     Setting the encoder supply voltage
+${IF_TRUE}#        Condition: To write 0x8008:12 “Supply Voltage”, the value 0x72657375 (ASCII: “user”) must be set in 0xF008 “Code word”.
+${IF_TRUE}#
+${IF_TRUE}#        Set the value into index 0x8008:12 “Supply Voltage” (Specification in steps of 0.1 V).
+${IF_TRUE}#        Only the values 50 (5.0 V) and 90 (9.0 V) are permissible.
+${IF_TRUE}#        This setting applies to both channels.
+${IF_TRUE}#        Before switching to 9.0 V make sure that both BiSS encoders support the extended voltage range!
+${IF_TRUE}#
+${IF_TRUE}#        The encoder supply voltage is set for both channels in object 0x8008:12
+${IF_TRUE}#  ----------------------------------------------------------------------------------------------------------------------------
+${IF_TRUE}ecmcExit
+ecmcEndIf()
 
 #- 0x80p8:13: Clock Frequency
 #- 0: 10 MHz (default)

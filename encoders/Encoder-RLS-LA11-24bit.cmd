@@ -19,10 +19,8 @@ epicsEnvSet(ENC_CRC_INV,1)
 #- 0x80p8:11: CRC Polynom (default 67)
 epicsEnvSet(ENC_CRC_POLY,67)
 
-#- 0x80p8:12: Supply voltage
-#- 50: 5V (default)
-#- 90: 9V
-epicsEnvSet(ENC_U_SUP_VLT,50)
+#- Supply voltage [mV]
+epicsEnvSet(ENC_U_SUP_VLT_MV,5000)
 
 #- 0x80p8:13: Clock Frequency [kHz]
 epicsEnvSet(ENC_CLK_FRQ_KHZ,2500)
