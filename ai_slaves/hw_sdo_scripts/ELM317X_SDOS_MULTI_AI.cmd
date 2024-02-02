@@ -1,8 +1,8 @@
 #==============================================================================
 # ELM360X_SDOS.cmd
 #-d /**
-#-d   \brief SDOS for ELM360X multi analog input
-#-d   \details Parametrization of ELM360X
+#-d   \brief SDOS for ELM317X multi analog input
+#-d   \details Parametrization of EL371X
 #-d   \author Anders Sandström
 #-d   \file
 #-d */  
