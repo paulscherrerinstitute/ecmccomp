@@ -43,6 +43,9 @@
 #-d              HOME_ACC     : Homing Acceleration
 #-d              HOME_METHOD_ID : Homing method id
 #-d
+#-d          MULTI_AI:
+#-d               RANGE       : Measurement range, value depend on slave type, example "RANGE=+-10V"
+#-d
 #-d   \note Some slaves might support more macros than listed above, see the slave cfg file for more info
 #-d
 #-d   \note Example calls:
@@ -52,12 +55,6 @@
 
 epicsEnvSet(EC_COMP_TYPE, ${EC_COMP_TYPE=${ECMC_EC_COMP_TYPE=${ECMC_EC_HWTYPE}}})
 epicsEnvSet(COMP_S_ID,${COMP_S_ID=${ECMC_EC_SLAVE_NUM=0}})
-
-#- Remove the below since must be possible to apply more than one cfg to a slave
-#- Ensure same slave and channel is not added twice in a row
-#- ecmcEpicsEnvSetCalcTernary(BLOCK,"${SLAVE_ID}==${COMP_HW_OLD_SLAVE_ID=-100} and ${COMP_HW_OLD_SLAVE_CH=-100}==${CH_ID}","#-", "")
-#- epicsEnvSet(COMP_HW_OLD_SLAVE_ID,${SLAVE_ID})
-#- epicsEnvSet(COMP_HW_OLD_SLAVE_CH,${CH_ID})
 
 #- Set variables for component
 ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
