@@ -9,6 +9,7 @@
 
 #- 0x226E:01: Invert direction (default 0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x226E,0x1,${INV_DIR=0},1)"
+epicsEnvUnset(INV_DIR)
 
 #- 0x226E:01: Select BISS-C encoder
 #- 0: Without encoder 
@@ -19,10 +20,12 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,8,S32)"
 #- Singleturn bits
 #- 0x21A2:01: Single turn bits (max 32)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x1,${ST_BITS=${ENC_ST_BITS=100}},U32)"
+epicsEnvUnset(ST_BITS)
 
 #- Multiturn bits
 #- 0x21A2:02: Multi turn bits (max 32), set default to invalid
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x2,${MT_BITS=${ENC_MT_BITS=100}},U32)"
+epicsEnvUnset(MT_BITS)
 
 #- Clock rate
 #- 0x21A2:0C: P0.3612.0 clock rate [Hz]
@@ -56,7 +59,7 @@ ${TEMP_DONE}ecmcEndIf()
 
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${TEMP_FREQ=1500000},U32)"
 epicsEnvUnset(CLK_FRQ_KHZ)
-epicsEnvUnset(ENC_CLK_FRQ)
+epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)
 epicsEnvUnset(TEMP_DONE)
 

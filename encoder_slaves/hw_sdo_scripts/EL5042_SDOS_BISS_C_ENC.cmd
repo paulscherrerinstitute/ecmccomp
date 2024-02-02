@@ -14,19 +14,19 @@ epicsEnvUnset(CH_ID_M1)
 
 #- 0x80p8:02: Invert direction (default 0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${INV_DIR=0},1)"
-epicsEnvUnset(ENC_DIS_STAT_BITS)
+epicsEnvUnset(INV_DIR)
 
 #- 0x80p8:02: Disable Status Bits (default 0)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,${DIS_STAT_BITS=${ENC_DIS_STAT_BITS=0}},1)"
-epicsEnvUnset(ENC_DIS_STAT_BITS)
+epicsEnvUnset(DIS_STAT_BITS)
 
 #- 0x80p8:03: CRC Invert (default 1 ?)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x3,${CRC_INV=${ENC_CRC_INV=1}},1)"
-epicsEnvUnset(ENC_CRC_INV)
+epicsEnvUnset(CRC_INV)
 
 #- 0x80p8:11: CRC Polynom (default 67)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x11,${CRC_POLY=${ENC_CRC_POLY=67}},4)"
-epicsEnvUnset(ENC_CRC_POLY)
+epicsEnvUnset(CRC_POLY)
 
 #- 0x80p8:12: Supply voltage
 #- 50: 5V (default)
@@ -119,32 +119,33 @@ ${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
 ${TEMP_DONE}ecmcEndIf()
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x13,${TEMP_FREQ=1},1)"
 epicsEnvUnset(CLK_FRQ_KHZ)
-epicsEnvUnset(ENC_CLK_FRQ)
+epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)
 epicsEnvUnset(TEMP_DONE)
 
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)
 #- 1: Gray code active
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x14,${CODEING=${ENC_CODEING=0}},1)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x14,${CODING=${ENC_CODING=0}},1)"
+epicsEnvUnset(CODING)
 
 #- 0x80p8:15: Multiturn [Bit] Number of multiturn bits
 #- default 12
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x15,${MT_BITS=${ENC_MT_BITS=0}},1)"
-epicsEnvUnset(ENC_MT_BITS)
+epicsEnvUnset(MT_BITS)
 
 #- 0x80p8:16: Singleturn [Bit] Number of singleturn bits
 #- default 13
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x16,${ST_BITS=${ENC_ST_BITS=0}},1)"
-epicsEnvUnset(ENC_ST_BITS)
+epicsEnvUnset(ST_BITS)
 
 #- 0x80p8:17: Offset LSB Bit [Bit] Number of “right aligned” Offset bits
 #- default 0
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x17,${OFF_BITS=${ENC_OFF_BITS=0}},1)"
-epicsEnvUnset(ENC_OFF_BITS)
+epicsEnvUnset(OFF_BITS)
 
 #- 0x80p8:18: Mode
 #- 0: BiSS-C mode (default)
 #- 1: SSI mode
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x18,${ENC_MODE=0},1)"
-epicsEnvUnset(ENC_MODE)
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x18,${MODE=${ENC_MODE=0}},1)"
+epicsEnvUnset(MODE)

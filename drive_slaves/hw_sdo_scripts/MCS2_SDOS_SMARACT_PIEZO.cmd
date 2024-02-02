@@ -17,6 +17,7 @@ ecmcEpicsEnvSetCalc(SDO_ADDRESS,"32+8*(${CH_ID=1}-1)","0x%x")
 
 #- Set Positioner type
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}00,0x0,${POS_TYPE=${MOT_POS_TYPE}},4)"
+epicsEnvUnset(POS_TYPE)
 
 #-############### 0x2xxx
 #- SDO 0x2000, "Positioner Type"

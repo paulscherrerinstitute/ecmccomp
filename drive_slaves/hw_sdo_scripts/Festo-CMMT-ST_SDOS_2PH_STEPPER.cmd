@@ -60,12 +60,14 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x17,${FESTO_TEMP_CURR_SCALE
 #- Current reduction delay time [s]
 #-  0x216c:01, rwrwrw, uint32, 32 bit, "P1.4027.0.0"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x16,${CURR_RED_DLY_S=0.2},F32)"
+epicsEnvUnset(CURR_RED_DLY_S)
 
 #- Set default to open loop
 #- Automatic = 0
 #- Open loop = 1 default
 #- Closed loop = 2
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,${CTRL_MODE=1},U32)"
+epicsEnvUnset(CTRL_MODE)
 
 #- Activation of open loop []
 #- 4001 0x219C.04 Activation of open loop operation BOOL

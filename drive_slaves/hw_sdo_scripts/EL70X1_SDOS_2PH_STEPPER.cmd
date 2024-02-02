@@ -30,16 +30,13 @@ ecmcEpicsEnvSetCalc(R_COIL,"${R_COIL_MOHM}*0.1","%d")
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x4,${R_COIL},2)"
 epicsEnvUnset(R_COIL)
 epicsEnvUnset(R_COIL_MOHM)
-epicsEnvUnset(MOT_R_COIL_MOHM)
 
 #- Motor steps []
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x6,${STEPS=${MOT_STEPS=200}},2)"
-epicsEnvUnset(MOT_STEPS)
 epicsEnvUnset(STEPS)
 
 #- Motor EMF  mV/(rad/s)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8010,0x5,${EMF=${MOT_EMF=0}},2)"
-epicsEnvUnset(MOT_EMF)
 epicsEnvUnset(EMF)
 
 #- Invert motor polarity

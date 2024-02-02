@@ -26,7 +26,7 @@ epicsEnvSet(ENC_CLK_FRQ_KHZ,1000)
 #- 0x80p8:14: Coding
 #- 0: Dual code active (default)
 #- 1: Gray code active
-epicsEnvSet(ENC_CODEING,0)
+epicsEnvSet(ENC_CODING,0)
 
 #- 0x80p8:15: Multiturn [Bit] Number of multiturn bits
 #- default 12
