@@ -7,3 +7,6 @@ epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(ENC_CODING)
 epicsEnvUnset(ENC_FRM_SIZE)
 epicsEnvUnset(ENC_ST_BITS)
+epicsEnvUnset(ENC_OFF_BITS)
+epicsEnvUnset(ENC_INV_DIR)
+

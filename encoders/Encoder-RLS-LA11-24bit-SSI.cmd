@@ -11,7 +11,7 @@
 epicsEnvSet(COMP_TYPE,SSI_ENC)
 
 #- 0x80p8:02: Disable Status Bits (default 0)
-epicsEnvSet(ENC_DIS_STAT_BITS,0)
+epicsEnvSet(ENC_DIS_STAT_BITS,1)
 
 #- 0x80p8:02: Enable power failure Bits (default 0)
 epicsEnvSet(ENC_ENA_POW_STAT_BIT,0)
@@ -22,10 +22,13 @@ epicsEnvSet(ENC_ENA_POW_STAT_BIT,0)
 epicsEnvSet(ENC_CODING,0)
 
 #- 0x80p0:09: Clock Frequency [kHz]
-epicsEnvSet(ENC_CLK_FRQ_KHZ,1000)
+epicsEnvSet(ENC_CLK_FRQ_KHZ,500)
 
 #- 0x80p0:09 SSI frame size [] (data length + stat bits)
 epicsEnvSet(ENC_FRM_SIZE,26)
 
 #- SSI data size []
-epicsEnvSet(ENC_ST_BITS,24)
+epicsEnvSet(ENC_ST_BITS,26)
+
+#- SSI Offset bits []
+epicsEnvSet(ENC_OFF_BITS,0)
