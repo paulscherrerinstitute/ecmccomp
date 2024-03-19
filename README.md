@@ -145,3 +145,9 @@ The follwoing validations are made for all components:
 * Check that the component type matches the slave type (2PH_STEPPER_DRV).
 
 Note: If defined desired current/voltage is higher than either what is supported by the slave drive or by the motor/component then the setting will be automatically reduced without warning(or stopping the IOC).
+
+# Known Issues
+
+## RLS SSI on EL5042
+When configuring RLS 26 bit SSI encoder to run on EL5042, the error led is on and teh ready bit is not set. The value seems to update fine. Reason unkown.
+
