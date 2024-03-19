@@ -107,3 +107,9 @@ epicsEnvUnset(ST_BITS)
 #- default 0
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x17,${OFF_BITS=${ENC_OFF_BITS=0}},1)"
 epicsEnvUnset(OFF_BITS)
+
+#- Disable status bits (always for SSI)
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x2,1,1)"
+
+#- CRC poly 0
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x11,0,4)"
