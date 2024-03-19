@@ -5,6 +5,9 @@
 #-d   \details Parametrization of EL5042
 #-d   \author Anders Sandström
 #-d   \file
+#-d   
+#-d   \note For some reason the error LED on EL5042 is red and ready bit is not set.\n
+#-d         Value seems to update correct.
 #-d */  
 
 #- Calculate SDO adress based on CH (0x8008 for CH1, 0x8018 for CH2)
