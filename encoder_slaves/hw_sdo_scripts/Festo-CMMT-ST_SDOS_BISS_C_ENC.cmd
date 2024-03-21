@@ -57,7 +57,7 @@ ${TEMP_DONE} # Setting freq to 1.5MHz
 ${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
 ${TEMP_DONE}ecmcEndIf()
 
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${TEMP_FREQ=1500000},U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${FORCE_CLK_FRQ_HZ=_${TEMP_FREQ=1500000}},U32)"
 epicsEnvUnset(CLK_FRQ_KHZ)
 epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)

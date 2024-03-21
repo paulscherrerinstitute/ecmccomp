@@ -67,11 +67,15 @@ epicsEnvUnset(CURR_RED_DLY_S)
 #- Open loop = 1 default
 #- Closed loop = 2
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,${CTRL_MODE=1},U32)"
-epicsEnvUnset(CTRL_MODE)
 
 #- Activation of open loop []
 #- 4001 0x219C.04 Activation of open loop operation BOOL
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,1,U8)"
+ecmcIf("${CTRL_MODE=1}==1")
+${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,1,U8)"
+#- else
+${IF_FALSE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,0,U8)"
+ecmcEndIf()
+epicsEnvUnset(CTRL_MODE)
 
 #- Disable commutation [] Set to off for open loop stepper
 #-P1668.0.0
