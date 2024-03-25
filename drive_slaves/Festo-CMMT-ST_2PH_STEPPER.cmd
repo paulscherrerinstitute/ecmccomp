@@ -19,18 +19,22 @@
 #-d           Specific fo this slave:
 #-d              ROT_INERTIA_GCM2 : Rotor inertia in gcm²
 #-d              CTRL_MODE    : Open loop or closed loop or automatic
-#-d                     Auto = 0   :  Open loop for low velos and closed loop on high velos
-#-d                     Open = 1   :  Open loop all the time, default
-#-d                     Closed = 2 :  Closed loop all the time
+#-d                     Auto   = 0   :  Open loop for low velos and closed loop on high velos
+#-d                     Open   = 1   :  Open loop all the time, default
+#-d                     Closed = 2   :  Closed loop all the time
 #-d              VELO_THRSHLD : If control mode is auto the control will switch between open and closed loop at this velo (UNIT deg/s)
 #-d              CURR_RED_DLY_S : Current reduction delay time for open loop (default 0.2s) unit [s]
+#-d              COMMUTATION    : Commutation settings
+#-d                        Always    = 0
+#-d                        Automatic = 1
+#-d                        Off       = 2  (default)
 #-d */
 
 #- Drive type
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,INV_DIR,L_COIL_UH,R_COIL_MOHM,ROT_INERTIA_GCM2,CTRL_MODE,VELO_SWITCH_LIM,CURR_RED_DLY_S")
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,INV_DIR,L_COIL_UH,R_COIL_MOHM,ROT_INERTIA_GCM2,CTRL_MODE,VELO_SWITCH_LIM,CURR_RED_DLY_S,COMMUTATION")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,8000)

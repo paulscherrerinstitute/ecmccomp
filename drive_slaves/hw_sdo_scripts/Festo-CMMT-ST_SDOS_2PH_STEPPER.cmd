@@ -62,6 +62,12 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x17,${FESTO_TEMP_CURR_SCALE
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x16,${CURR_RED_DLY_S=0.2},F32)"
 epicsEnvUnset(CURR_RED_DLY_S)
 
+#- Selection open closed loop P1.4005.0.0
+#- Automatic = 0
+#- Open loop = 1 default
+#- Closed loop = 2
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x8,${CTRL_MODE=1},U32)"
+
 #- Set default to open loop
 #- Automatic = 0
 #- Open loop = 1 default
@@ -82,7 +88,7 @@ epicsEnvUnset(CTRL_MODE)
 #- 0 = Always
 #- 1 = Automatic
 #- 2 = Off
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216B,0x6,2,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216B,0x6,${COMMUTATION=2},U32)"
 
 #- =========== Open loop settings end ============
 
@@ -146,12 +152,6 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #- Pole pair denominator set to 1 for stepper
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U32)"
-
-#- Velo thresholshold
-#- Automatic = 0
-#- Open loop = 1 default
-#- Closed loop = 2
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x8,${VELO_THRSHLD=2.0},F32)"
 
 #- Set diag level following error to info:
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
