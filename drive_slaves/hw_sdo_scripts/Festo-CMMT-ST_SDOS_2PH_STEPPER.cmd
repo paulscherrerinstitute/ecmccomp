@@ -83,6 +83,10 @@ ${IF_FALSE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,0,U8)"
 ecmcEndIf()
 epicsEnvUnset(CTRL_MODE)
 
+#- Velocity threshold (Open loop-> closed loop)
+#-P1.4008.0.0
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x11,${VELO_THRSHLD=0.0},F32)"
+
 #- Disable commutation [] Set to off for open loop stepper
 #-P1668.0.0
 #- 0 = Always
