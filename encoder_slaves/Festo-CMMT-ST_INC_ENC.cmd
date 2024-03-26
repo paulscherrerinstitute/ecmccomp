@@ -18,4 +18,4 @@ epicsEnvSet(SLAVE_SCRIPT,"Festo-CMMT-ST_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"INV_DIR")
+epicsEnvSet(SUPP_MACROS,"INV_DIR,ST_ENC_RES")
