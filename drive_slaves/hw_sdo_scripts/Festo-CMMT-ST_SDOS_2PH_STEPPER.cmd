@@ -117,13 +117,13 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x17,1,U8)"
 
 #- Inductance [H]
 #-  0x216c:08, rwrwrw, float, 32 bit, "P1.7129.0.0_windingInductance"
-ecmcEpicsEnvSetCalc(FESTO_TEMP,"${L_COIL_UH=${MOT_L_COIL_UH}} * 1e6","%lf")
+ecmcEpicsEnvSetCalc(FESTO_TEMP,"${L_COIL_UH=${MOT_L_COIL_UH}} / 1e6","%lf")
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x8,${FESTO_TEMP=0.0},F32)"
 
 #- Resistance [Ohm]
 #-  0x216c:09, rwrwrw, float, 32 bit, "P1.7132.0.0_windingResistance"
-ecmcEpicsEnvSetCalc(FESTO_TEMP,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} * 1000","%lf")
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x8,${FESTO_TEMP=0.0},F32)"
+ecmcEpicsEnvSetCalc(FESTO_TEMP,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} / 1000","%lf")
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x9,${FESTO_TEMP=0.0},F32)"
 
 #- Torque constant [Nm/Arms]
 #-  0x216c:0a, rwrwrw, float, 32 bit, "P1.7135.0.0_km"
@@ -163,12 +163,11 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
 #- Set diag level following error to info:
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
 
-#- Set diag level following error velo to info:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,4,U32)"
+#- Set diag level following error velo to ignore:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U32)"
 
 #- Set diag level for max velo monitoring
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,4,U32)"
-
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
