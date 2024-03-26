@@ -27,6 +27,10 @@ epicsEnvUnset(ST_BITS)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x2,${MT_BITS=${ENC_MT_BITS=100}},U32)"
 epicsEnvUnset(MT_BITS)
 
+# Activation of correction table P0.3613.0.0
+#- 0x21A2:13, Deactivate per default
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0xD,${ACTIVATE_CORR=0},U8)"
+
 #- Clock rate
 #- 0x21A2:0C: P0.3612.0 clock rate [Hz]
 #- Supported:
