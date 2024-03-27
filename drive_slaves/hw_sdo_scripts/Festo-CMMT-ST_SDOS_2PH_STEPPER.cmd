@@ -85,7 +85,8 @@ epicsEnvUnset(CTRL_MODE)
 
 #- Velocity threshold (Open loop-> closed loop)
 #-P1.4008.0.0
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0xB,${VELO_THRSHLD=0.0},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0xB,${VELO_SWITCH_LIM=0.0},F32)"
+epicsEnvUnset(VELO_SWITCH_LIM)
 
 #- Disable commutation [] Set to off for open loop stepper
 #-P1668.0.0
@@ -93,6 +94,7 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0xB,${VELO_THRSHLD=0.0},F32)
 #- 1 = Automatic
 #- 2 = Off
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216B,0x6,${COMMUTATION=2},U32)"
+epicsEnvUnset(COMMUTATION)
 
 #- =========== Open loop settings end ============
 

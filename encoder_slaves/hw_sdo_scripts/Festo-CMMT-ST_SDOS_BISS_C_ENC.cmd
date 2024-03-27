@@ -30,6 +30,13 @@ epicsEnvUnset(MT_BITS)
 # Activation of correction table P0.3613.0.0
 #- 0x21A2:13, Deactivate per default
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0xD,${ACTIVATE_CORR=0},U8)"
+epicsEnvUnset(ACTIVATE_CORR)
+
+
+# Encoder homed P0.2337.0.0
+#- 0x2130:63, Set to homed per default
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x3F,${HOMED=1},U8)"
+epicsEnvUnset(HOMED)
 
 #- Clock rate
 #- 0x21A2:0C: P0.3612.0 clock rate [Hz]
@@ -66,6 +73,7 @@ epicsEnvUnset(CLK_FRQ_KHZ)
 epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)
 epicsEnvUnset(TEMP_DONE)
+epicsEnvUnset(FORCE_CLK_FRQ_HZ)
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
