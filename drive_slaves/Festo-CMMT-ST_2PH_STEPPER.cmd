@@ -28,13 +28,29 @@
 #-d                        Always    = 0
 #-d                        Automatic = 1
 #-d                        Off       = 2  (default)
+#-d              CSX_MODE     : CSP,CSV or CST mode. Defaults to CSV
+#-d              NOM_RPM      : Nominal RPM, defaults to 4000 
+#-d              MAX_RPM      : Nominal RPM, defaults to 4000
+#-d              CIA402_POS   : CiA402 pos unit (see festo manual)
+#-d              CIA402_VEL   : CiA402 vel unit (see festo manual)
+#-d              CIA402_ACC   : CiA402 acc unit (see festo manual)
+#-d              CIA402_JERK  : CiA402 jerk unit (see festo manual)
+#-d              CIA402_UNIT  : CiA402 unit :
+#-d                    0 : Internal increments inc/s ..
+#-d                    1 : Increments inc/s ..
+#-d                    2 : Rev, rev/s
+#-d                    3 : Rev, rev/min
+#-d                    4 : Rad, rad/s
+#-d                    5 : Deg, deg/s (default in ecmccomp)
+#-d                    6 : Metric m m/s
+#-d                    7 : Imperial in in/s
 #-d */
 
 #- Drive type
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,INV_DIR,L_COIL_UH,R_COIL_MOHM,ROT_INERTIA_GCM2,CTRL_MODE,VELO_SWITCH_LIM,CURR_RED_DLY_S,COMMUTATION")
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,INV_DIR,L_COIL_UH,R_COIL_MOHM,ROT_INERTIA_GCM2,CTRL_MODE,VELO_SWITCH_LIM,CURR_RED_DLY_S,COMMUTATION,NOM_RPM,MAX_RPM,CIA402_POS,CIA402_VEL,CIA402_ACC,CIA402_JERK,CIA402_UNIT")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,8000)

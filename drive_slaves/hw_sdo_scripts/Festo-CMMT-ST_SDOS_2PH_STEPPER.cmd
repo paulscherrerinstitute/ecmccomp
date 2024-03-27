@@ -96,6 +96,14 @@ epicsEnvUnset(VELO_SWITCH_LIM)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216B,0x6,${COMMUTATION=2},U32)"
 epicsEnvUnset(COMMUTATION)
 
+#- Max RPM p1.7123.0.0
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x6,${MAX_RPM=4000},F32)"
+epicsEnvUnset(MAX_RPM)
+
+#- Nominal RPM p1.7123.0.0
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x7,${NOM_RPM=4000},F32)"
+epicsEnvUnset(NOM_RPM)
+
 #- =========== Open loop settings end ============
 
 epicsEnvUnset(FESTO_TEMP_CURR)
@@ -105,7 +113,7 @@ epicsEnvUnset(FESTO_TEMP_CURR_SCALE)
 #- Pole pairs []
 #-  0x216c:01, rwrwrw, uint32, 32 bit, "P1.718.0.0_numberPolePairs"
 ecmcEpicsEnvSetCalc(FESTO_TEMP,"${STEPS=${MOT_STEPS=200}} / 4","%d")
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x216C,0x1,${FESTO_TEMP=50},2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x216C,0x1,${FESTO_TEMP=50},4)"
 
 #- Rotor inertia [kgm²]
 #-  0x216c:02, rwrwrw, float, 32 bit, "P1.7111.0.0_rotorInertia"
@@ -167,6 +175,66 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
 
 #- Set diag level for max velo monitoring
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
+
+#- Allow enable over fieldbus/ethercat P1.1023.0.0
+#- 2 = Only fieldbus 
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x218E,0x2,2,U32)"
+
+#- Set startup mode after enable p0.10234.0.0
+#- 4 = velocity  (default)
+#- 5 = position
+#- 7 = torque
+
+ecmcIf("'${CSX_MODE=CSV}'=='CSV'")
+${IF_TRUE}epicsEnvSet(FESTO_TEMP_CSX,4)
+ecmcEndIf()
+ecmcIf("'${CSX_MODE=CSV}'=='CSP'")
+${IF_TRUE}epicsEnvSet(FESTO_TEMP_CSX,5)
+ecmcEndIf()
+ecmcIf("'${CSX_MODE=CSV}'=='CST'")
+${IF_TRUE}epicsEnvSet(FESTO_TEMP_CSX,7)
+ecmcEndIf()
+
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x218E,0x3,${FESTO_TEMP_CSX=4},U32)"
+epicsEnvUnset(CSX_MODE)
+epicsEnvUnset(FESTO_TEMP_CSX)
+
+#- CiA402 Position unit
+#- P1.7851.0.0, 0x216E.1
+#- 16640 = Degree
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x1,${CIA402_POS=16640},U16)"
+epicsEnvUnset(CIA402_POS)
+
+#- CiA402 Velocity unit
+#- P1.7852.0.0, 0x216E.2
+#- 16643 = Degree/s
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x2,${CIA402_VEL=16643},U16)"
+epicsEnvUnset(CIA402_VEL)
+
+#- CiA402 Acceleration unit
+#- P1.7853.0.0, 0x216E.3
+#- 16727 = Degree/s/s
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x3,${CIA402_ACC=16727},U16)"
+epicsEnvUnset(CIA402_VEL)
+
+#- CiA402 Jerk unit
+#- P1.7854.0.0, 0x216E.4
+#- 16800 = Degree/s/s/s
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x4,${CIA402_JERK=16800},U16)"
+epicsEnvUnset(CIA402_JERK)
+
+#- CiA402 Selction of next user units
+#- P1.1151.0.0, 0x217c:2
+#- 0 : Internal increments inc/s ..
+#- 1 : Increments inc/s ..
+#- 2 : Rev, rev/s
+#- 3 : Rev, rev/min
+#- 4 : Rad, rad/s
+#- 5 : Deg, deg/s (default in ecmccomp)
+#- 6 : Metric m m/s
+#- 7 : Imperial in in/s
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217C,0x2,${CIA402_UNIT=5},U32)"
+epicsEnvUnset(CIA402_UNIT)
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
