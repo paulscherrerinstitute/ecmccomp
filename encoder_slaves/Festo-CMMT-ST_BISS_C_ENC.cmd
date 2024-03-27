@@ -9,7 +9,7 @@
 #-d              MT_BITS       : Multiturn bits
 #-d              ST_BITS       : Singleturn bits
 #-d              ACTIVATE_CORR : Activate correction table, default 0
-#-d              HOMED        : Set encoder to be homed, default 1
+#-d              HOMED         : Set encoder to be homed, default 1
 #-d */
 
 #- Type
@@ -22,4 +22,4 @@ epicsEnvSet(SLAVE_SCRIPT,"Festo-CMMT-ST_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,MT_BITS,ST_BITS,FORCE_CLK_FRQ_HZ,ACTIVATE_CORR,HOMED")
+epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,MT_BITS,ST_BITS,ACTIVATE_CORR,HOMED")

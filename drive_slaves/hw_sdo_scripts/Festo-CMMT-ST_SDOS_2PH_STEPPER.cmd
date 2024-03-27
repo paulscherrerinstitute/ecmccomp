@@ -7,6 +7,7 @@
 #-d   \file
 #-d */
 
+
 #- =========== Resistance ============
 ecmcEpicsEnvSetCalcTernary(DIE,"${R_COIL_MOHM=${MOT_R_COIL_MOHM}} < 0","", "#-")
 ${DIE}ecmcExit Error: Coil resistance invalid
@@ -235,6 +236,9 @@ epicsEnvUnset(CIA402_JERK)
 #- 7 : Imperial in in/s
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217C,0x2,${CIA402_UNIT=5},U32)"
 epicsEnvUnset(CIA402_UNIT)
+
+#- Set drive configured bit! P1.1207.0.0, 0x217F:8dec
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)

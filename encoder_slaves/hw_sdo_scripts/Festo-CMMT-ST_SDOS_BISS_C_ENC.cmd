@@ -67,7 +67,7 @@ ${TEMP_DONE} # Setting freq to 1.5MHz
 ${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
 ${TEMP_DONE}ecmcEndIf()
 
-ecmcIf("${FORCE_CLK_FRQ_HZ=${TEMP_FREQ=6000000}}!=6000000")
+ecmcIf("${TEMP_FREQ=6000000}!=6000000")
 ${IF_TRUE}ecmcExit() : Error: Invalid BISS-C clock-rate. Festo CMMT-ST only supports 6MHz BISS-C clock-rate. Use Macro 'CLK_FRQ_KHZ=6000' to override the setting in encoder file.
 ecmcEndIf()
 
@@ -77,6 +77,13 @@ epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)
 epicsEnvUnset(TEMP_DONE)
 epicsEnvUnset(FORCE_CLK_FRQ_HZ)
+
+# Encoder offset P1.8416.0.0 NOT WORKING
+#- 0x2172:17dec, 0x11:  Set encoder offset
+#ecmcEpicsEnvSetCalc(OFFSET_TEMP,"${OFFSET} * 1e6","%lf")
+#ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2172,0x11,${OFFSET_TEMP=0},S64)"
+#epicsEnvUnset(OFFSET_TEMP)
+#epicsEnvUnset(OFFSET)
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
