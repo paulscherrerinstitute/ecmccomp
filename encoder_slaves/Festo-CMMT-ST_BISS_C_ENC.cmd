@@ -8,7 +8,8 @@
 #-d              INV_DIR       : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              MT_BITS       : Multiturn bits
 #-d              ST_BITS       : Singleturn bits
-#-d              ACTIVATE_CORR : Activate correction table
+#-d              ACTIVATE_CORR : Activate correction table, default 0
+#-d              HOMED        : Set encoder to be homed, default 1
 #-d */
 
 #- Type

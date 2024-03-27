@@ -32,7 +32,6 @@ epicsEnvUnset(MT_BITS)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0xD,${ACTIVATE_CORR=0},U8)"
 epicsEnvUnset(ACTIVATE_CORR)
 
-
 # Encoder homed P0.2337.0.0
 #- 0x2130:63, Set to homed per default
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x3F,${HOMED=1},U8)"
@@ -68,7 +67,11 @@ ${TEMP_DONE} # Setting freq to 1.5MHz
 ${TEMP_DONE}epicsEnvSet(TEMP_DONE,"#-")
 ${TEMP_DONE}ecmcEndIf()
 
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${FORCE_CLK_FRQ_HZ=_${TEMP_FREQ=1500000}},U32)"
+ecmcIf("${FORCE_CLK_FRQ_HZ=${TEMP_FREQ=6000000}}!=6000000")
+${IF_TRUE}ecmcExit() : Error: Invalid BISS-C clock-rate. Festo CMMT-ST only supports 6MHz BISS-C clock-rate. Use Macro 'CLK_FRQ_KHZ=6000' to override the setting in encoder file.
+ecmcEndIf()
+
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x0c,${FORCE_CLK_FRQ_HZ=${TEMP_FREQ=6000000}},U32)"
 epicsEnvUnset(CLK_FRQ_KHZ)
 epicsEnvUnset(ENC_CLK_FRQ_KHZ)
 epicsEnvUnset(TEMP_FREQ)
@@ -86,5 +89,3 @@ epicsEnvUnset(FESTO_TEMP_2)
 epicsEnvUnset(FESTO_TEMP_1)
 epicsEnvUnset(FESTO_TEMP)
 epicsEnvUnset(FESTO_DONE)
-
-

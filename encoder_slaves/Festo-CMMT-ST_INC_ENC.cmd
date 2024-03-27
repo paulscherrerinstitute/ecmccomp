@@ -6,6 +6,7 @@
 #-d   \param MACROS         (optional) Special macros, depending on component/slave type:
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              ST_ENC_RES   : Singleturn encoder resolution (default 500 counts per rev)
+#-d              HOMED        : Set encoder to be homed, default 0
 #-d */
 
 #- Type
@@ -18,4 +19,4 @@ epicsEnvSet(SLAVE_SCRIPT,"Festo-CMMT-ST_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"1")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"INV_DIR,ST_ENC_RES")
+epicsEnvSet(SUPP_MACROS,"INV_DIR,ST_ENC_RES,HOMED")

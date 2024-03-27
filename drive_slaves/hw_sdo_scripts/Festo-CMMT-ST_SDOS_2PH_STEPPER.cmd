@@ -157,19 +157,16 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 
 #- Pole pair denominator set to 1 for stepper
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U16)"
 
 #- Set diag level following error to info:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
-
-#- Set diag level following error to info:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,4,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,2,U16)"
 
 #- Set diag level following error velo to ignore:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
 
 #- Set diag level for max velo monitoring
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,4,U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
