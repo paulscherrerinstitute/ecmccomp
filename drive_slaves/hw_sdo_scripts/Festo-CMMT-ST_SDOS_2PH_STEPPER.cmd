@@ -200,29 +200,30 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x218E,0x3,${FESTO_TEMP_CSX=4},U32)
 epicsEnvUnset(CSX_MODE)
 epicsEnvUnset(FESTO_TEMP_CSX)
 
-#- CiA402 Position unit
-#- P1.7851.0.0, 0x216E.1
-#- 16640 = Degree
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x1,${CIA402_POS=16640},U16)"
-epicsEnvUnset(CIA402_POS)
-
-#- CiA402 Velocity unit
-#- P1.7852.0.0, 0x216E.2
-#- 16643 = Degree/s
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x2,${CIA402_VEL=16643},U16)"
-epicsEnvUnset(CIA402_VEL)
-
-#- CiA402 Acceleration unit
-#- P1.7853.0.0, 0x216E.3
-#- 16727 = Degree/s/s
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x3,${CIA402_ACC=16727},U16)"
-epicsEnvUnset(CIA402_VEL)
-
-#- CiA402 Jerk unit
-#- P1.7854.0.0, 0x216E.4
-#- 16800 = Degree/s/s/s
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x4,${CIA402_JERK=16800},U16)"
-epicsEnvUnset(CIA402_JERK)
+#-#- Seems not needed
+#-#- CiA402 Position unit
+#-#- P1.7851.0.0, 0x216E.1
+#-#- 16640 = Degree
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x1,${CIA402_POS=16640},U16)"
+#-epicsEnvUnset(CIA402_POS)
+#-
+#-#- CiA402 Velocity unit
+#-#- P1.7852.0.0, 0x216E.2
+#-#- 16643 = Degree/s
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x2,${CIA402_VEL=16643},U16)"
+#-epicsEnvUnset(CIA402_VEL)
+#-
+#-#- CiA402 Acceleration unit
+#-#- P1.7853.0.0, 0x216E.3
+#-#- 16727 = Degree/s/s
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x3,${CIA402_ACC=16727},U16)"
+#-epicsEnvUnset(CIA402_VEL)
+#-
+#-#- CiA402 Jerk unit
+#-#- P1.7854.0.0, 0x216E.4
+#-#- 16800 = Degree/s/s/s
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x4,${CIA402_JERK=16800},U16)"
+#-epicsEnvUnset(CIA402_JERK)
 
 #- CiA402 Selction of next user units
 #- P1.1151.0.0, 0x217c:2
@@ -239,6 +240,17 @@ epicsEnvUnset(CIA402_UNIT)
 
 #- Set drive configured bit! P1.1207.0.0, 0x217F:8dec
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
+
+#- BO1 Set outputs to useable from EPCIS. P0.11203.0.0
+#- Can be set to 38 different things.. see docs
+#ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x212F,0xC,37,U32)"
+
+#- BO2 Set outputs to useable from EPCIS. P0.11204.0.0
+#- Can be set to 38 different things.. see docs
+#ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x212F,0xD,38,U32)"
+
+#- BO bit mask p1.1128055.0.0
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x60FE,0x2,196609,U32)"
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
