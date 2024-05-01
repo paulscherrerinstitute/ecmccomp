@@ -1,5 +1,5 @@
 #==============================================================================
-# EL7221_RES_EL72XX_OCT_SERVO.cmd
+# EL7221_OCT_EL72XX_OCT_SERVO.cmd
 #-d /**
 #-d   \brief SDOS for EL7221 drive OCT
 #-d   \details Parametrization of EL7221 OCT same as EL7211 if no fan
@@ -22,8 +22,8 @@
 
 #- Apply common for EL7221
 ecmcFileExist("${ecmccomp_DIR}EL7221_XXX.cmd",1,1)
-< ${ecmccomp_DIR}EL7221_XXX.cmd.cmd
+< ${ecmccomp_DIR}EL7221_XXX.cmd
 
 #- Apply common for OCT
-ecmcFileExist("${ecmccomp_DIR}EL72XX_OCT.cmd",1,1)
-< ${ecmccomp_DIR}EL72XX_XXX.cmd
+ecmcFileExist("${ecmccomp_DIR}EL72XX_OCT_EL72XX_OCT_SERVO.cmd",1,1)
+< ${ecmccomp_DIR}EL72XX_OCT_EL72XX_OCT_SERVO.cmd

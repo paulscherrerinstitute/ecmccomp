@@ -20,8 +20,8 @@
 
 #- Apply common for EL7201
 ecmcFileExist("${ecmccomp_DIR}EL7201_XXX.cmd",1,1)
-< ${ecmccomp_DIR}EL7201_XXX.cmd.cmd
+< ${ecmccomp_DIR}EL7201_XXX.cmd
 
 #- Apply common for RES
-ecmcFileExist("${ecmccomp_DIR}EL72XX_RES.cmd",1,1)
-< ${ecmccomp_DIR}EL72XX_XXX.cmd
+ecmcFileExist("${ecmccomp_DIR}EL72XX_RES_EL72XX_RES_SERVO.cmd",1,1)
+< ${ecmccomp_DIR}EL72XX_RES_EL72XX_RES_SERVO.cmd
