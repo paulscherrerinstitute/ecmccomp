@@ -268,9 +268,8 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 #- Can be set to 38 different things.. see docs
 #ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x212F,0xD,38,U32)"
 
-#- BO bit mask p1.1128055.0.0
+#- BO bit mask p1.1128055.0.0 This makes the go into Motion task error state..
 #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x60FE,0x2,196609,U32)"
-
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)
