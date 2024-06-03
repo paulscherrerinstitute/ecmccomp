@@ -30,6 +30,11 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP_CURR},F32)"
 ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR_STDBY,"${I_STDBY_MA_VALID} / 1000","%lf")
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR_STDBY},F32)"
 
+#- P0.1209.0.0 mains voltage float
+ecmcEpicsEnvSetCalc(FESTO_TEMP_NOM_V,"${U_NOM_MV_VALID} / 1000","%lf")
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2288,0x1,${FESTO_TEMP_NOM_V},F32)"
+epicsEnvUnset(FESTO_TEMP_NOM_V)
+
 #- =========== Open loop settings ============
 #- Open-loop operation objects
 #- Parameter Index.Subindex Name Data type
@@ -60,7 +65,7 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x17,${FESTO_TEMP_CURR_SCALE
 
 #- Current reduction delay time [s]
 #-  0x216c:01, rwrwrw, uint32, 32 bit, "P1.4027.0.0"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x16,${CURR_RED_DLY_S=0.2},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x16,${CURR_RED_DLY_S=0.5},F32)"
 epicsEnvUnset(CURR_RED_DLY_S)
 
 #- Selection open closed loop P1.4005.0.0
@@ -69,13 +74,13 @@ epicsEnvUnset(CURR_RED_DLY_S)
 #- Closed loop = 2
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x8,${CTRL_MODE=1},U32)"
 
-#- Set default to open loop
+#- Set default to open loop P1.4006.0.0
 #- Automatic = 0
 #- Open loop = 1 default
 #- Closed loop = 2
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x9,${CTRL_MODE=1},U32)"
 
-#- Activation of open loop []
+#- Activation of open loop [] P1.4001.0.0
 #- 4001 0x219C.04 Activation of open loop operation BOOL
 ecmcIf("${CTRL_MODE=1}==1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0x4,1,U8)"
@@ -89,8 +94,8 @@ epicsEnvUnset(CTRL_MODE)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x219C,0xB,${VELO_SWITCH_LIM=0.0},F32)"
 epicsEnvUnset(VELO_SWITCH_LIM)
 
-#- Disable commutation [] Set to off for open loop stepper
-#-P1668.0.0
+#- Disable commutation [] Set to off for open loop stepper P1.668.0.0
+#-P1.668.0.0
 #- 0 = Always
 #- 1 = Automatic
 #- 2 = Off
@@ -101,9 +106,13 @@ epicsEnvUnset(COMMUTATION)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x6,${MAX_RPM=4000},F32)"
 epicsEnvUnset(MAX_RPM)
 
-#- Nominal RPM p1.7123.0.0
+#- Nominal RPM p1.7126.0.0
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x7,${NOM_RPM=4000},F32)"
 epicsEnvUnset(NOM_RPM)
+
+#- User defined run current
+#-  0x216c:14, rwrwrw, float, 32 bit,
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR},F32)"
 
 #- =========== Open loop settings end ============
 
@@ -168,14 +177,23 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U16)"
 
-#- Set diag level following error to info:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,2,U16)"
-
-#- Set diag level following error velo to ignore:
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
-
-#- Set diag level for max velo monitoring
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
+#-         #- Set diag level following error to info:
+#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,2,U16)"
+#-         
+#-         #- Set diag level following error to info: "P1.4622.0.0"
+#-         #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x23,2,U16)"
+#-         
+#-         #- Set diag level following error velo to ignore:
+#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
+#-         
+#-         #- Set diag level following error velo to ignore:  "P1.4624.0.0"
+#-         #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x25,2,U16)"
+#-         
+#-         #- Set diag level for max velo monitoring
+#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
+#-         
+#-         #- Set diag level for max velo monitoring: "P1.4661.0.0"
+#-         #-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x49,2,U16)"
 
 #- Allow enable over fieldbus/ethercat P1.1023.0.0
 #- 2 = Only fieldbus 
@@ -228,16 +246,17 @@ epicsEnvUnset(FESTO_TEMP_CSX)
 #- CiA402 Selction of next user units
 #- P1.1151.0.0, 0x217c:2
 #- 0 : Internal increments inc/s ..
-#- 1 : Increments inc/s ..
+#- 1 : Increments inc/s ..  (default in ecmccomp)
 #- 2 : Rev, rev/s
 #- 3 : Rev, rev/min
 #- 4 : Rad, rad/s
-#- 5 : Deg, deg/s (default in ecmccomp)
+#- 5 : Deg, deg/s
 #- 6 : Metric m m/s
 #- 7 : Imperial in in/s
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217C,0x2,${CIA402_UNIT=5},U32)"
-epicsEnvUnset(CIA402_UNIT)
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217C,0x2,${CIA402_UNIT=1},U32)"
+epicsEnvUnset(CIA402_UNIT) 
 
+ 
 #- Set drive configured bit! P1.1207.0.0, 0x217F:8dec
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 
@@ -250,7 +269,8 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 #ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x212F,0xD,38,U32)"
 
 #- BO bit mask p1.1128055.0.0
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x60FE,0x2,196609,U32)"
+#- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x60FE,0x2,196609,U32)"
+
 
 #- ########### MUST BE LAST ##############
 #- Reinit drive (seems it needs to be like this..)

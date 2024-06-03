@@ -31,10 +31,10 @@
 #-d              CSX_MODE     : CSP,CSV or CST mode. Defaults to CSV
 #-d              NOM_RPM      : Nominal RPM, defaults to 4000 
 #-d              MAX_RPM      : Nominal RPM, defaults to 4000
-#-d              CIA402_POS   : CiA402 pos unit (see festo manual)
-#-d              CIA402_VEL   : CiA402 vel unit (see festo manual)
-#-d              CIA402_ACC   : CiA402 acc unit (see festo manual)
-#-d              CIA402_JERK  : CiA402 jerk unit (see festo manual)
+#-d              # not used CIA402_POS   : CiA402 pos unit (see festo manual)
+#-d              # not used CIA402_VEL   : CiA402 vel unit (see festo manual)
+#-d              # not used CIA402_ACC   : CiA402 acc unit (see festo manual)
+#-d              # not used CIA402_JERK  : CiA402 jerk unit (see festo manual)
 #-d              CIA402_UNIT  : CiA402 unit :
 #-d                     0 : Internal increments inc/s ..
 #-d                     1 : Increments inc/s ..
