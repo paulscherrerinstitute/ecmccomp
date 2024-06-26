@@ -154,13 +154,13 @@ ecmcEpicsEnvSetCalc(FESTO_TEMP_2,"(${MOT_TRQ_MAX_NMM=-1}/1000)/(${I_MAX_MA_VALID
 
 ecmcIf("${FESTO_TEMP_1}>0")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_1=0.0},F32)"
-${IF_TRUE}epicsEnvSet(FESTO_DONE)
+${IF_TRUE}epicsEnvSet(FESTO_DONE,1)
 ecmcEndIf()
 
 ecmcIf("${FESTO_TEMP_2}>0 and not(${FESTO_DONE=0})")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x0a,${FESTO_TEMP_2=0.0},F32)"
 ${IF_TRUE}# WARNING: Setting motor constant based on MOT_TRQ_MAX_NMM and I_MAX_MA_VALID
-${IF_TRUE}epicsEnvSet(FESTO_DONE)
+${IF_TRUE}epicsEnvSet(FESTO_DONE,1)
 ecmcEndIf()
 
 ecmcIf("not(${FESTO_DONE=0})")
@@ -271,12 +271,17 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 #- BO bit mask p1.1128055.0.0 This makes the go into Motion task error state..
 #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x60FE,0x2,196609,U32)"
 
-#- ########### MUST BE LAST ##############
-#- Reinit drive (seems it needs to be like this..)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,1,1)"
-epicsThreadSleep 0.1
-ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,0,1)"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2003,0x1,1,S8)"
+#- No encoder as default. P0.11616.0.0
+#-  4:  Incremental encoder
+#-  7:  Without encoder
+#-  8:  BISS-C
+#- Write directlly for reinit to work
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2130,0x7D,7,4)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,7,U32)"
+
+#- Reinit
+ecmcFileExist(${ecmccomp_DIR}Festo-CMMT-ST_ReInit.cmd,1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}Festo-CMMT-ST_ReInit.cmd
 
 epicsEnvUnset(FESTO_TEMP_2)
 epicsEnvUnset(FESTO_TEMP_1)

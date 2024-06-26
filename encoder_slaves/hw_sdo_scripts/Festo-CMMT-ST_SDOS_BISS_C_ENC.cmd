@@ -15,6 +15,8 @@ epicsEnvUnset(INV_DIR)
 #- 4: Incremental encoder
 #- 7: Without encoder
 #- 8: BISS-C (choose BISS)
+#- Write directlly for reinit to work
+ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2130,0x7D,8,4)"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,8,S32)"
 
 #- Singleturn bits
@@ -85,14 +87,11 @@ epicsEnvUnset(FORCE_CLK_FRQ_HZ)
 #epicsEnvUnset(OFFSET_TEMP)
 #epicsEnvUnset(OFFSET)
 
-#- ########### MUST BE LAST ##############
-#- Reinit drive (seems it needs to be like this..)
-ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,1,1)"
-epicsThreadSleep 0.1
-ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2003,0x1,0,1)"
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2003,0x1,1,S8)"
-
 epicsEnvUnset(FESTO_TEMP_2)
 epicsEnvUnset(FESTO_TEMP_1)
 epicsEnvUnset(FESTO_TEMP)
 epicsEnvUnset(FESTO_DONE)
+
+#- Reinit
+ecmcFileExist(${ecmccomp_DIR}Festo-CMMT-ST_ReInit.cmd,1,1)
+${SCRIPTEXEC} ${ecmccomp_DIR}Festo-CMMT-ST_ReInit.cmd
