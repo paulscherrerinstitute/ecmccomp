@@ -19,35 +19,64 @@ ecmcEpicsEnvSetCalc(SDO_ADDRESS,"32+8*(${CH_ID=1}-1)","0x%x")
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}00,0x0,${POS_TYPE=${MOT_POS_TYPE}},4)"
 epicsEnvUnset(POS_TYPE)
 
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}0c,0x0,${POS_TYPE=${SAFE_DIR=0}},1)"
+epicsEnvUnset(SAFE_DIR)
+
+#- Referencing Options 
+#- bit 0: Start direction (0 = forward)
+#- bit 1: Reverse direction, only valid for positioners with multi ref-marks, will reverse search dir as sson the first mark is found (0 = not reverse)
+#- bit 2: Auto zero, teh current position is set to zero when finding teh ref pos (this seems to work like this without setting this bit)
+#- bit 3: Abort on endstop
+#- bit 4: Continue motion on reffound (will not stop, must stop manually).. Strange option
+#- bit 5: Stop motion immediately when finding the ref
+#- bit 24: Invalidate home flag
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}0b,0x0,${POS_TYPE=${REF_OPTS=0}},1)"
+epicsEnvUnset(REF_OPTS)
+
 #-############### 0x2xxx
-#- SDO 0x2000, "Positioner Type"
-#-   0x2000:00, rwr-r-, uint32, 32 bit, "Positioner Type"
-#- SDO 0x2001, "Max Closed Loop Frequency"
-#-   0x2001:00, rwrwrw, uint32, 32 bit, "Max Closed Loop Frequency"
-#- SDO 0x2002, "Safe Direction"
-#-   0x2002:00, rwrwrw, uint32, 32 bit, "Safe Direction"
-#- SDO 0x2003, "Movement Type"
-#-   0x2003:00, r-r-r-, uint32, 32 bit, "Movement Type"
-#- SDO 0x2004, "Stripe Size"
-#-   0x2004:00, r-r-r-, uint32, 32 bit, "Stripe Size"
-#- SDO 0x2005, "Base Unit"
-#-   0x2005:00, r-r-r-, uint32, 32 bit, "Base Unit"
-#- SDO 0x2006, "Base Resolution"
-#-   0x2006:00, r-r-r-, uint32, 32 bit, "Base Resolution"
-#- SDO 0x2007, "Sensor Voltage"
-#-   0x2007:00, r-r-r-, uint32, 32 bit, "Sensor Voltage"
-#- SDO 0x2008, "Sensor Type"
-#-   0x2008:00, r-r-r-, uint32, 32 bit, "Sensor Type"
-#- SDO 0x2009, "Referencing Type"
-#-   0x2009:00, r-r-r-, uint32, 32 bit, "Referencing Type"
-#- SDO 0x2010, "Distance Code Type"
-#-   0x2010:00, r-r-r-, uint32, 32 bit, "Distance Code Type"
-#- SDO 0x2064, "Position Actual Value"
-#-   0x2064:00, r-r-r-, int64, 64 bit, "Position Actual Value"
-#- SDO 0x207a, "Target Position"
-#-   0x207a:00, rwrwrw, int64, 64 bit, "Target Position"
-#- SDO 0x20a8, "Position Unit"
-#-   0x20a8:00, r-r-r-, uint32, 32 bit, "Position Unit"
+SDO 0x2000, "Positioner Type"
+  0x2000:00, rwr-r-, uint32, 32 bit, "Positioner Type"
+SDO 0x2001, "Max Closed Loop Frequency"
+  0x2001:00, rwrwrw, uint32, 32 bit, "Max Closed Loop Frequency"
+SDO 0x2003, "Movement Type"
+  0x2003:00, r-r-r-, uint32, 32 bit, "Movement Type"
+SDO 0x2004, "Calibration Options"
+  0x2004:00, rwrwrw, type 002f, 32 bit, "Calibration Options"
+SDO 0x2005, "Base Unit"
+  0x2005:00, r-r-r-, uint32, 32 bit, "Base Unit"
+SDO 0x2006, "Base Resolution"
+  0x2006:00, r-r-r-, int32, 32 bit, "Base Resolution"
+SDO 0x2007, "Sensor Power Mode"
+  0x2007:00, rwrwrw, uint32, 32 bit, "Sensor Power Mode"
+SDO 0x2008, "Logical Scale Offset"
+  0x2008:00, rwrwrw, int64, 64 bit, "Logical Scale Offset"
+SDO 0x2009, "Logical Scale Inversion"
+  0x2009:00, rwr-r-, bool, 1 bit, "Logical Scale Inversion"
+SDO 0x200a, "Reference Type"
+  0x200a:00, r-r-r-, uint32, 32 bit, "Reference Type"
+SDO 0x200b, "Referencing Options"
+  0x200b:00, rwrwrw, type 002f, 32 bit, "Referencing Options"
+SDO 0x200c, "Safe Direction"
+  0x200c:00, rwr-r-, bool, 1 bit, "Safe Direction"
+SDO 0x200d, "Motor Load"
+  0x200d:00, r-r-r-, uint8, 8 bit, "Motor Load"
+SDO 0x200e, "Software Range Limits"
+  0x200e:00, r-r-r-, uint8, 8 bit, "SubIndex 000"
+  0x200e:01, rwrwrw, int64, 64 bit, "SubIndex 001"
+  0x200e:02, rwrwrw, int64, 64 bit, "SubIndex 002"
+SDO 0x200f, "Channel Type"
+  0x200f:00, r-r-r-, uint32, 32 bit, "Channel Type"
+SDO 0x2020, "Open Loop Scan Target"
+  0x2020:00, rwrwrw, int32, 32 bit, "Open Loop Scan Target"
+SDO 0x2021, "Open Loop Scan Velocity"
+  0x2021:00, rwrwrw, uint64, 64 bit, "Open Loop Scan Velocity"
+SDO 0x2022, "Open Loop Step Count"
+  0x2022:00, rwrwrw, int32, 32 bit, "Open Loop Step Count"
+SDO 0x2023, "Open Loop Step Amplitude"
+  0x2023:00, rwrwrw, uint16, 16 bit, "Open Loop Step Amplitude"
+SDO 0x2024, "Open Loop Step Frequency"
+  0x2024:00, rwrwrw, uint16, 16 bit, "Open Loop Step Frequency"
+
 
 #-#################################################################
 #- Second SDO range (0x6xxx,0x68xx,0x7000)
@@ -56,8 +85,10 @@ ecmcEpicsEnvSetCalc(SDO_ADDRESS,"96+8*(${CH_ID=1}-1)","0x%x")
 
 #- Must be below 4 294 967 295
 #- Home velo (same to both sub index?) SEEMS THIS IS ACC?????
-ecmcEpicsEnvSetCalc(MCS2_VELO,"1000000*${HOME_VELO=${MOT_HOME_VELO}}","%d")
+ecmcEpicsEnvSetCalc(MCS2_VELO,"1000*${HOME_VELO=${MOT_HOME_VELO}}","%d")
+#- Slow
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}99,0x1,${MCS2_VELO},4)"
+#- Fast
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS}99,0x2,${MCS2_VELO},4)"
 
 #- Must be below 4 294 967 295

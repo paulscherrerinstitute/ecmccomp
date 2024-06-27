@@ -18,7 +18,7 @@ epicsEnvSet(MOT_HOME_VELO,1000)
 epicsEnvSet(MOT_HOME_ACC,1000)
 
 #- Homing method id []
-epicsEnvSet(MOT_HOME_METHOD_ID,-128)
+epicsEnvSet(MOT_HOME_METHOD_ID,-1)
 
 #- Supported homing
 #- sandst_a@c6025a:~$ ethercat upload --type int8 -m1 -p0 0x60e3 1  
