@@ -10,7 +10,7 @@ ecmcEpicsEnvSetCalcTernary(DIE,"'MCS2_DRIVE' in '${SLAVE_TYPE}'","#-", "")
 ${DIE}ecmcExit Error: Component and slave do not matching
 
 #- Die HOME_VELO is to high (max 32 bit uint)
-ecmcEpicsEnvSetCalcTernary(DIE,"${HOME_VELO=${MOT_HOME_VELO}}*1000000>2^32","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"${HOME_VELO=${MOT_HOME_VELO}}*1000>2^32","", "#-")
 ${DIE}ecmcExit Error: HOME_VELO to high (max 2^32/1000000)
 
 #- Die HOME_ACC is to high (max 32 bit uint)
