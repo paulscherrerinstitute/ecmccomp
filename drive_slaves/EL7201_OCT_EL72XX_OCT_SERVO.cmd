@@ -17,7 +17,6 @@
 #-d              BRK_APP_DLY  : Brake application delay (defaults to motor setting or 0)
 #-d              BRK_REL_DLY  : Brake release delay (defaults to motor setting or 0)
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
-#-d              ENC_OFF      : Offset encoder position (defaults to 0)
 #-d */
 
 #- Apply common for EL7201
