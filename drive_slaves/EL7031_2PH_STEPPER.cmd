@@ -14,6 +14,7 @@
 #-d              U_NOM_MV     : Supply voltage [mV]
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              R_COIL_MOHM  : Coil resistance in mOhm
+#-d              SPEED_RANGE  : Speed range (see beckhoff manual)
 #-d   \param Not supported MACROS from 2PH_STEPPPER:
 #-d              L_COIL_UH    : Coil inductance in uH NOT SUPPORTED 
 #-d */
@@ -22,7 +23,7 @@
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,EMF,INV_DIR")
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,STEPS,EMF,INV_DIR,SPEED_RANGE")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,1500)

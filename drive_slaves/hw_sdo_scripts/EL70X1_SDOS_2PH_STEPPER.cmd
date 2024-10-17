@@ -42,3 +42,7 @@ epicsEnvUnset(EMF)
 #- Invert motor polarity
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8012,0x9,${INV_DIR=0},1)"
 epicsEnvUnset(INV_DIR)
+
+#- Speed Range
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8012,0x5,${SPEED_RANGE=1},1)"
+epicsEnvUnset(SPEED_RANGE)
