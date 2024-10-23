@@ -21,7 +21,7 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,4,S32)"
 
 #- Singleturn resolution
 #- 0x2138:01: Single turn resolution 
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2138,0x1,${ST_ENC_RES=${ENC_ST_ENC_RES=500}},U32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2138,0x1,${ST_ENC_RES=${ENC_ST_RES=500}},U32)"
 epicsEnvUnset(ST_ENC_RES)
 
 # Encoder homed P0.2337.0.0
