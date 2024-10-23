@@ -112,7 +112,7 @@ epicsEnvUnset(NOM_RPM)
 
 #- User defined run current
 #-  0x216c:14, rwrwrw, float, 32 bit,
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR},F32)"
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR},F32)"
 
 #- =========== Open loop settings end ============
 
