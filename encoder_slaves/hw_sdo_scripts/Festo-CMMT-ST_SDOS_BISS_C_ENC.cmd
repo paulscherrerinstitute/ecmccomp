@@ -34,6 +34,11 @@ epicsEnvUnset(MT_BITS)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0xD,${ACTIVATE_CORR=0},U8)"
 epicsEnvUnset(ACTIVATE_CORR)
 
+# Activation of auto detection of protocol bits
+#- 0x21A2:13, Deactivate per default
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A2,0x19,0,U8)"
+epicsEnvUnset(ACTIVATE_CORR)
+
 # Encoder homed P0.2337.0.0
 #- 0x2130:63, Set to homed per default
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x3F,${HOMED=1},U8)"

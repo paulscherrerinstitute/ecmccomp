@@ -16,11 +16,21 @@ ${DIE}ecmcExit Error: Coil resistance invalid
 ecmcEpicsEnvSetCalcTernary(DIE,"${L_COIL_UH=${MOT_L_COIL_UH}} < 0","", "#-")
 ${DIE}ecmcExit Error: Coil inductance invalid.
 
+#- P1.80.0.0 Current controller amplification gain reactive current
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x1,${I_CTRL_GAIN_REACT_CURR=50.0},F32)"
+#- P1.81.0.0 Current controller integration constant reactive current
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x2,${I_CTRL_INT_REACT_CURR=10000.0},F32)"
+#- P1.82.0.0 Current controller amplification gain active current
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x3,${I_CTRL_GAIN_ACT_CURR=50.00},F32)"
+#- P1.83.0.0 Current controller integration constant active current
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x4,${I_CTRL_INT_ACT_CURR=10000.0},F32)"
+
 #- Run current [A]
 ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR,"${I_MAX_MA_VALID}/1000","%lf")
 #- Rated [A]
 #-  0x216c:04, rwrwrw, float, 32 bit, "P1.7117.0.0_iRated"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x4,${FESTO_TEMP_CURR},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2162,0x5,${FESTO_TEMP_CURR},F32)"
 #- Max [A]
 #-  0x216c:05, rwrwrw, float, 32 bit, "P1.7120.0.0_iMax"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP_CURR},F32)"
@@ -177,23 +187,20 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x13,${FESTO_TEMP=0.0},F32)"
 #-  0x216c:18, rwrwrw, uint32, 32 bit, "P1.7185.0.0_numberPolePairsDenom"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x18,1,U16)"
 
-#-         #- Set diag level following error to info:
-#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,2,U16)"
-#-         
-#-         #- Set diag level following error to info: "P1.4622.0.0"
-#-         #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x23,2,U16)"
-#-         
-#-         #- Set diag level following error velo to ignore:
-#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
-#-         
-#-         #- Set diag level following error velo to ignore:  "P1.4624.0.0"
-#-         #- ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x25,2,U16)"
-#-         
-#-         #- Set diag level for max velo monitoring
-#-         ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
-#-         
-#-         #- Set diag level for max velo monitoring: "P1.4661.0.0"
-#-         #-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x49,2,U16)"
+#- Set diag level following error to info:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x17,2,U16)"
+
+#- Set diag level following error velo to ignore:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x19,2,U16)"
+
+#- Set diag level following error acc to ignore:
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x61,2,U16)"
+
+#- Set diag level for max velo monitoring
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x31,2,U16)"
+
+#- Set diag level for max velo monitoring: "P1.4661.0.0"
+#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2166,0x49,2,U16)"
 
 #- Allow enable over fieldbus/ethercat P1.1023.0.0
 #- 2 = Only fieldbus 
@@ -218,31 +225,6 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x218E,0x3,${FESTO_TEMP_CSX=4},U32)
 epicsEnvUnset(CSX_MODE)
 epicsEnvUnset(FESTO_TEMP_CSX)
 
-#-#- Seems not needed
-#-#- CiA402 Position unit
-#-#- P1.7851.0.0, 0x216E.1
-#-#- 16640 = Degree
-#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x1,${CIA402_POS=16640},U16)"
-#-epicsEnvUnset(CIA402_POS)
-#-
-#-#- CiA402 Velocity unit
-#-#- P1.7852.0.0, 0x216E.2
-#-#- 16643 = Degree/s
-#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x2,${CIA402_VEL=16643},U16)"
-#-epicsEnvUnset(CIA402_VEL)
-#-
-#-#- CiA402 Acceleration unit
-#-#- P1.7853.0.0, 0x216E.3
-#-#- 16727 = Degree/s/s
-#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x3,${CIA402_ACC=16727},U16)"
-#-epicsEnvUnset(CIA402_VEL)
-#-
-#-#- CiA402 Jerk unit
-#-#- P1.7854.0.0, 0x216E.4
-#-#- 16800 = Degree/s/s/s
-#-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216E,0x4,${CIA402_JERK=16800},U16)"
-#-epicsEnvUnset(CIA402_JERK)
-
 #- CiA402 Selction of next user units
 #- P1.1151.0.0, 0x217c:2
 #- 0 : Internal increments inc/s ..
@@ -256,6 +238,14 @@ epicsEnvUnset(FESTO_TEMP_CSX)
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217C,0x2,${CIA402_UNIT=1},U32)"
 epicsEnvUnset(CIA402_UNIT) 
 
+#- Factor group pos
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2194,0x1,0,S8)"
+#- Factor group vel
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2194,0x2,0,S8)"
+#- Factor group acc
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2194,0x3,0,S8)"
+#- Factor group jerk
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2194,0x4,0,S8)"
  
 #- Set drive configured bit! P1.1207.0.0, 0x217F:8dec
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
@@ -278,6 +268,9 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x217F,0x8,1,U8)"
 #- Write directlly for reinit to work
 ecmcConfigOrDie "Cfg.EcWriteSdo(${COMP_S_ID},0x2130,0x7D,7,4)"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2130,0x7D,7,U32)"
+
+# Ignore i2t
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x21A5,0x8,2,U16)"
 
 #- Reinit
 ecmcFileExist(${ecmccomp_DIR}Festo-CMMT-ST_ReInit.cmd,1,1)
