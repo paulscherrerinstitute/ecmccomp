@@ -31,10 +31,10 @@
 #-d              CSX_MODE                : CSP,CSV or CST mode. Defaults to CSV
 #-d              NOM_RPM                 : Nominal RPM, defaults to 4000 
 #-d              MAX_RPM                 : Nominal RPM, defaults to 4000
-#-d              I_CTRL_GAIN_REACT_CURR  : P1.80.0.0 Current controller amplification gain reactive current (50.0)
-#-d              I_CTRL_INT_REACT_CURR   : P1.81.0.0 Current controller integartion constant reactive current (10000.0)
-#-d              I_CTRL_GAIN_ACT_CURR    : P1.82.0.0 Current controller amplification gain active current (50.0)
-#-d              I_CTRL_INT_ACT_CURR     : P1.83.0.0 Current controller integartion constant active current (10000.0)
+#-d              I_CTRL_GAIN_REACT_CURR  : P1.80.0.0 Current controller amplification gain reactive current (20.0)
+#-d              I_CTRL_INT_REACT_CURR   : P1.81.0.0 Current controller integartion constant reactive current (20000.0)
+#-d              I_CTRL_GAIN_ACT_CURR    : P1.82.0.0 Current controller amplification gain active current (20.0)
+#-d              I_CTRL_INT_ACT_CURR     : P1.83.0.0 Current controller integartion constant active current (20000.0)
 #-d */
 
 #- Drive type

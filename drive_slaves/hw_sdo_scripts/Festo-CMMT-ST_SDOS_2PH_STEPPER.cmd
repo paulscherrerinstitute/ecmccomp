@@ -17,13 +17,13 @@ ecmcEpicsEnvSetCalcTernary(DIE,"${L_COIL_UH=${MOT_L_COIL_UH}} < 0","", "#-")
 ${DIE}ecmcExit Error: Coil inductance invalid.
 
 #- P1.80.0.0 Current controller amplification gain reactive current
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x1,${I_CTRL_GAIN_REACT_CURR=50.0},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x1,${I_CTRL_GAIN_REACT_CURR=20.0},F32)"
 #- P1.81.0.0 Current controller integration constant reactive current
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x2,${I_CTRL_INT_REACT_CURR=10000.0},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x2,${I_CTRL_INT_REACT_CURR=20000.0},F32)"
 #- P1.82.0.0 Current controller amplification gain active current
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x3,${I_CTRL_GAIN_ACT_CURR=50.00},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x3,${I_CTRL_GAIN_ACT_CURR=20.00},F32)"
 #- P1.83.0.0 Current controller integration constant active current
-ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x4,${I_CTRL_INT_ACT_CURR=10000.0},F32)"
+ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x4,${I_CTRL_INT_ACT_CURR=20000.0},F32)"
 
 #- Run current [A]
 ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR,"${I_MAX_MA_VALID}/1000","%lf")
