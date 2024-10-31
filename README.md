@@ -10,6 +10,29 @@ The applyComponent.cmd applies a component to a ethercat slave including:
 
 The same component configuration can therefore be used for differet types of ethercat slaves.
 
+## Examples
+Some examples:
+```
+...
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=14,HW_DESC=EL5042"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C, CH_ID=1"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Encoder-RLS-LA11-26bit-BISS-C, CH_ID=2"
+...
+...
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "SLAVE_ID=13,HW_DESC=EL7041-0052"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Motor-Generic-2Phase-Stepper,  MACROS='I_MAX_MA=1500, I_STDBY_MA=1000, U_NOM_MV=48000, R_COIL_MOHM=1230'"
+...
+...
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL7211-9014_ALL_INPUTS"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd  "COMP=Motor-Beckhoff-AM8111-XFX0,   MACROS='I_MAX_MA=1355'"
+...
+...
+${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd,       "HW_DESC=EL9227-5500"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Over-Curr-Prot, CH_ID=1,       MACROS='I_MAX_MA=4000'"
+${SCRIPTEXEC} ${ecmccomp_DIR}applyComponent.cmd "COMP=Over-Curr-Prot, CH_ID=2,       MACROS='I_MAX_MA=2000'"
+...
+```
+
 ## Apply a component to a slave
 ```
 #- Execute directly after addSlave.cmd then only COMP macro is needed:
@@ -34,6 +57,9 @@ Motors:
 Encoders:
 * BISS_C_ENC
 * SSI_ENC
+
+Misc:
+* OVER_CURR_PROT     : Over current protection (EL9227-5500)
 
 # Slave configurations
 Each type of ethercat slave has:
@@ -148,6 +174,4 @@ Note: If defined desired current/voltage is higher than either what is supported
 
 # Known Issues
 
-## RLS SSI on EL5042
-When configuring RLS 26 bit SSI encoder to run on EL5042, the error led is on and teh ready bit is not set. The value seems to update fine. Reason unkown.
 
