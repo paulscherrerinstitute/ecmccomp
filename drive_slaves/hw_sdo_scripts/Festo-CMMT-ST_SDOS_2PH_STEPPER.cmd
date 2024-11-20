@@ -25,8 +25,9 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x3,${I_CTRL_GAIN_ACT_CURR=2
 #- P1.83.0.0 Current controller integration constant active current
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x2153,0x4,${I_CTRL_INT_ACT_CURR=20000.0},F32)"
 
-#- Run current [A]
-ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR,"${I_MAX_MA_VALID}/1000","%lf")
+#- Run current [A] 
+#- This is RMS setting in the drive so divide with 1.4 to get same as other drives
+ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR,"${I_MAX_MA_VALID}/1000/1.4","%lf")
 #- Rated [A]
 #-  0x216c:04, rwrwrw, float, 32 bit, "P1.7117.0.0_iRated"
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x4,${FESTO_TEMP_CURR},F32)"
@@ -37,7 +38,8 @@ ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x5,${FESTO_TEMP_CURR},F32)"
 
 #- Stanby current [A]
 #-  0x216c:14, rwrwrw, float, 32 bit, "P1.71424.0.0_continuousStandstillCurrentRated"
-ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR_STDBY,"${I_STDBY_MA_VALID} / 1000","%lf")
+#- This is RMS setting in the drive so divide with 1.4 to get same as other drives
+ecmcEpicsEnvSetCalc(FESTO_TEMP_CURR_STDBY,"${I_STDBY_MA_VALID} / 1000 / 1.4","%lf")
 ecmcConfigOrDie "Cfg.EcAddSdoDT(${COMP_S_ID},0x216C,0x14,${FESTO_TEMP_CURR_STDBY},F32)"
 
 #- P0.1209.0.0 mains voltage float
