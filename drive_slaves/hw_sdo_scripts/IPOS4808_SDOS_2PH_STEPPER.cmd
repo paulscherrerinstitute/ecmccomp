@@ -57,7 +57,7 @@ epicsEnvSet("ECMC_TECHNOSOFT_CFG_HEX"          "0084")
 #-epicsEnvShow(ECMC_SFTKPI_HEX)
 
 ecmcFileExist(${ecmccomp_DIR}IPOSXXXX_recalc_data_log_format.cmd,1,1)
-${SCRIPTEXEC} ${ecmccomp_DIR}IPOSXXXX_recalc_data_log_format.cmd "IN_VAL=${I_CTRL_GAIN}"
+${SCRIPTEXEC} ${ecmccomp_DIR}IPOSXXXX_recalc_data_log_format.cmd "IN_VAL=${CURR_KP}"
 
 #-  Write data KPI in hex
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0271")
@@ -72,7 +72,7 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 #-  KII at technosoft address 0x0273 range 0..32737 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?KII
 #-  SFTKII at technosoft address 0x0274 range 0..14 (int). TML Command in Technosoft EasyMotionStudio "Command Interpreter": ?SFTKII
 #-  Formula Ki=KII/32767*2^SFTKII
-${SCRIPTEXEC} ${ecmccomp_DIR}IPOSXXXX_recalc_data_log_format.cmd "IN_VAL=${I_CTRL_INT}"
+${SCRIPTEXEC} ${ecmccomp_DIR}IPOSXXXX_recalc_data_log_format.cmd "IN_VAL=${CURR_TI}"
 
 #-  Write data KII=216b (8555)
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0273")

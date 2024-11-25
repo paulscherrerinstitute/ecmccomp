@@ -13,15 +13,15 @@
 #-d              I_MAX_MA                : Run current [mA] (Used to reduce max torque)
 #-d              I_STDBY_MA              : Standby current [mA]
 #-d          Specific to this slave:
-#-d              I_CTRL_GAIN    : MANDATORY!! Current controller amplification gain
-#-d              I_CTRL_INT     : MANDATORY!! Current controller integration gain
+#-d              CURR_KP    : MANDATORY!! Current controller amplification gain
+#-d              CURR_TI    : MANDATORY!! Current controller integration gain
 #-d */
 
 #- Drive type
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,I_CTRL_GAIN,I_CTRL_INT")
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,CURR_KP,CURR_TI")
 
 #- Currents
 epicsEnvSet(DRV_I_MAX_MA,8000)
