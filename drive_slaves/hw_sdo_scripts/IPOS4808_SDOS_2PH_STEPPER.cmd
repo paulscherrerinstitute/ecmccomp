@@ -11,11 +11,11 @@
 
 # Check mandatory macros:
 #- I_CTRL_GAIN:
-ecmcEpicsEnvSetCalcTernary(DIE,"'${I_CTRL_GAIN=NAN}'=='NAN'","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"'${CURR_KP=NAN}'=='NAN'","", "#-")
 ${DIE}ecmcExit Error: I_CTRL_GAIN is a mandatory macro for iPOS4808
 
 #-I_CTRL_INT:
-ecmcEpicsEnvSetCalcTernary(DIE,"'${I_CTRL_INT=NAN}'=='NAN'","", "#-")
+ecmcEpicsEnvSetCalcTernary(DIE,"'${CURR_TI=NAN}'=='NAN'","", "#-")
 ${DIE}ecmcExit Error: I_CTRL_INT is a mandatory macro for iPOS4808
 epicsEnvUnset(DIE)
 
