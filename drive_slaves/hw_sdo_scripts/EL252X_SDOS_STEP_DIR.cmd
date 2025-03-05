@@ -1,8 +1,8 @@
 #==============================================================================
 # EL252X_SDOS_STEP_DIR.cmd
 #-d /**
-#-d   \brief SDOS for EL25XX  step direction drive
-#-d   \details Parametrization of EL25XX
+#-d   \brief SDOS for Common settings for EL252X step direction drives
+#-d   \details Parametrization of EL252X
 #-d   \author Anders Sandström
 #-d   \file
 #-d 
@@ -19,7 +19,8 @@
 #- high. Consequently, a change of state occurs on both
 #- channels!
 #- Setting 0
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x1,0,1)"
+#- EL2521 does not have this setting (like EL2522)... 
+#- ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x1,0,1)"
 
 #- Emergency ramp active (if the watchdog timer responds):
 #- 0 = Disabled ramp (default)
@@ -91,6 +92,11 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x10,0,1)"
 #- Setting 0 (default)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x11,0,2)"
 
+#- Ensure that setting are resonable
+ecmcIf("${MAX_FREQ=10000}/${FREQ_RES=1}>2^15")
+${IF_TRUE}ecmcExit Error: MAX_FREQ/FREQ_RES must be less than 32768 (the setpoint is +-15bit)
+ecmcEndIf()
+
 #- Base frequency 1
 #- Setting 50000 (default)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x12,${MAX_FREQ=10000},4)"
@@ -113,10 +119,13 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x15,0,2)"
 #- Frequency factor (Digitx 10mHz)
 #- Frequency factor (direct input, digit x 10mHz)
 #- Defualt setting 100
-ecmcEpicsEnvSetCalc(FREQ_SCALE_TEMP,"${FREQ_SCALE=1}*100","%d")
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x16,${FREQ_SCALE_TEMP=100},2)"
-epicsEnvUnset FREQ_SCALE
-epicsEnvUnset FREQ_SCALE_TEMP
+ecmcIf("${FREQ_RES=1}<0.01")
+${IF_TRUE}ecmcExit Error: FREQ_RES minimum value is 0.01
+ecmcEndIf()
+ecmcEpicsEnvSetCalc(FREQ_RES_TEMP,"${FREQ_RES=1}*100","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x16,${FREQ_RES_TEMP=100},2)"
+epicsEnvUnset FREQ_RES
+epicsEnvUnset FREQ_RES_TEMP
 
 #- Slowing down frequency
 #- Defualt setting 50
@@ -127,3 +136,4 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x17,00,2)"
 #- switch-on value is driven to (object 8pp0:11)
 #- Defualt setting 1000
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x18,0,2)"
+
