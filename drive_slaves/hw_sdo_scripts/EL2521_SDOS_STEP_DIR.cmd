@@ -26,4 +26,5 @@ epicsEnvSet(SDO_ADDRESS,"0x8010")
 #- ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x1,0,1)"
 
 #- Call genric cfg
+ecmcFileExist("${ecmccomp_DIR}EL252X_SDOS_STEP_DIR.cmd",1,1)
 < ${ecmccomp_DIR}EL252X_SDOS_STEP_DIR.cmd
