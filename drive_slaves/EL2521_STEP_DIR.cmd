@@ -17,7 +17,7 @@ epicsEnvSet(SLAVE_TYPE,"STEP_DIR")
 epicsEnvSet(SUPP_MACROS,"")
 
 #- SDOS script
-epicsEnvSet(SLAVE_SCRIPT,"EL252X_SDOS")
+epicsEnvSet(SLAVE_SCRIPT,"EL2521_SDOS")
 
 #- Channel count
 epicsEnvSet(SLAVE_CHANNELS,"1")

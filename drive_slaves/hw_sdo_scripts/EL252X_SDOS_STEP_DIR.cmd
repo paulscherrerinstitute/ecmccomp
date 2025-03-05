@@ -1,16 +1,12 @@
 #==============================================================================
-# EL25XX_SDOS_STEP_DIR.cmd
+# EL252X_SDOS_STEP_DIR.cmd
 #-d /**
 #-d   \brief SDOS for EL25XX  step direction drive
 #-d   \details Parametrization of EL25XX
 #-d   \author Anders Sandström
 #-d   \file
 #-d 
-#-d   CH1=0x8000 (32768dec)
-#-d   CH2=0x8010 (32768+16 dec)
 #-d */
-
-ecmcEpicsEnvSetCalc(SDO_ADDRESS,"32768+(${CH_ID=1}-1)*16","0x%x")
 
 #- Adapt A/B on position set:
 #- If the counter value is set to "0", the C-track goes into
@@ -97,31 +93,37 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x11,0,2)"
 
 #- Base frequency 1
 #- Setting 50000 (default)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x12,50000,4)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x12,${MAX_FREQ=10000},4)"
 
 #- Base frequency 2
 #- Setting 100000 (default)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x13,100000,4)"
+ecmcEpicsEnvSetCalc(FREQ_2,"${MAX_FREQ=10000}*2")
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x13,${FREQ_2},4)"
+epicsEnvUnset FREQ_2
+epicsEnvUnset MAX_FREQ
 
 #- Ramp time constant (rising)
 #- Setting 1000 (default)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x14,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x14,0,2)"
 
 #- Ramp time constant (falling)
 #- Setting 1000 (default)
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x15,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x15,0,2)"
 
 #- Frequency factor (Digitx 10mHz)
 #- Frequency factor (direct input, digit x 10mHz)
 #- Defualt setting 100
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x16,100,2)"
+ecmcEpicsEnvSetCalc(FREQ_SCALE_TEMP,"${FREQ_SCALE=1}*100","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x16,${FREQ_SCALE_TEMP=100},2)"
+epicsEnvUnset FREQ_SCALE
+epicsEnvUnset FREQ_SCALE_TEMP
 
 #- Slowing down frequency
 #- Defualt setting 50
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x17,50,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x17,00,2)"
 
 #- Ramp time constant emergency
 #- Ramp time constant for controlled switch-off; user's
 #- switch-on value is driven to (object 8pp0:11)
 #- Defualt setting 1000
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x18,1000,2)"
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_ADDRESS},0x18,0,2)"
