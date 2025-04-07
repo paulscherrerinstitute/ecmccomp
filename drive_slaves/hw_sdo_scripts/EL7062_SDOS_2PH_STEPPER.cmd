@@ -39,8 +39,9 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x33,${STEPS=${MOT_STEPS
 epicsEnvUnset(STEPS)
 
 #- Coil inductance [0.01mH]
-epicsEnvSet(L_COIL_UH,${L_COIL_UH=${MOT_L_COIL_UH}})
-ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x19,${L_COIL_UH},2)"
+ecmcEpicsEnvSetCalc(L_COIL_SET,"${L_COIL_UH=${MOT_L_COIL_UH}}/10","%d")
+ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x19,${L_COIL_SET},2)"
+epicsEnvUnset(L_COIL_SET)
 epicsEnvUnset(L_COIL_UH)
 
 #-####################################
