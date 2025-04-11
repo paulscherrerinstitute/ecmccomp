@@ -14,7 +14,7 @@
 #-d              U_NOM_MV     : Supply voltage [mV]
 #-d              INV_DIR      : Invert motor direction (0 = not invert (default), 1 = invert dir)
 #-d              R_COIL_MOHM  : Coil resistance in mOhm
-#-d              L_COIL_UH    : Coil inductance in uH NOT SUPPORTED 
+#-d              L_COIL_UH    : Coil inductance in uH
 #-d */
 
 #- Drive type
