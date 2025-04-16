@@ -36,32 +36,32 @@ ecmcEndIf()
 
 epicsEnvSet(SDO_INDEX,"0x8${CH_ID_X}10")
 
-#- Current loop Ti default 50, only set if not 50
-ecmcIf("${I_TI=50}!=50")
+#- Current loop Ti default 50
+ecmcIf("${I_TI=-1}>-1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${I_TI=50},2)"
 ${IF_TRUE}epicsEnvUnset(I_TI)
 ecmcEndIf()
 
-#- Current loop Kp default 50, only set if not 50
-ecmcIf("${I_KP=50}!=50")
+#- Current loop Kp default 50
+ecmcIf("${I_KP=-1}>-1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x13,${I_KP=50},2)"
 ${IF_TRUE}epicsEnvUnset(I_KP)
 ecmcEndIf()
 
-#- Velocity loop Ti default 30, only set if not 30
-ecmcIf("${V_TI=30}!=30")
+#- Velocity loop Ti default 30
+ecmcIf("${V_TI=-1}>-1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x14,${V_TI=30},4)"
 ${IF_TRUE}epicsEnvUnset(V_TI)
 ecmcEndIf()
 
-#- Velocity loop Kp default 150, only set if not 150
-ecmcIf("${V_KP=150}!=150")
+#- Velocity loop Kp default 150
+ecmcIf("${V_KP=-1}>-1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x15,${V_KP=150},4)"
 ${IF_TRUE}epicsEnvUnset(V_KP)
 ecmcEndIf()
 
 #- Position loop Kp default 10, only set if not 10
-ecmcIf("${P_KP=10}!=10")
+ecmcIf("${P_KP=-1}>-1")
 ${IF_TRUE}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x17,${P_KP=10},4)"
 ${IF_TRUE}epicsEnvUnset(P_KP)
 ecmcEndIf()
