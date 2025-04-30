@@ -18,11 +18,17 @@
 #-d  * ${SCRIPTEXEC} ${ecmccfg_DIR}loadSubstConfig.cmd, "FILE=./complete.subst"
 #-d
 
+ecmcIf("'${SLAVE_MACROS=-1}'!='-1'")
+${IF_TRUE}epicsEnvSet(SLAVE_MACROS_TEMP,${SLAVE_MACROS})
+#- else
+${IF_FALSE}epicsEnvSet(SLAVE_MACROS_TEMP,"")
+ecmcEndIf()
 #- Do not allow call to addSlave.cmd for same slave twice in a row
 ecmcEpicsEnvSetCalcTernary(BLOCKSLAVE,"'${SLAVE_ID=-1}'=='${ECMC_COMP_SUBST_OLD_S_ID}'","# Block call to addSlave.cmd: Not allowed to add same slave twice.", "")
-${BLOCKSLAVE}${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_ID), HW_DESC=${HW_DESC},MACROS='${SLAVE_MACROS=}'"
+${BLOCKSLAVE}${SCRIPTEXEC} ${ecmccfg_DIR}addSlave.cmd, "SLAVE_ID=$(SLAVE_ID), HW_DESC=${HW_DESC},MACROS='${SLAVE_MACROS_TEMP}'"
 epicsEnvSet(ECMC_COMP_SUBST_OLD_S_ID,${ECMC_EC_SLAVE_NUM})
 epicsEnvUnset(BLOCKSLAVE)
+epicsEnvUnset(SLAVE_MACROS_TEMP)
 
 #- Check if invalid COMP or COMP_CH then block
 ecmcEpicsEnvSetCalcTernary(BLOCKCOMP,"'${COMP=-1}'=='-1' or ${COMP_CH=-1}==-1","# Block call to applyComponent.cmd: No Valid component or channel.", "")
