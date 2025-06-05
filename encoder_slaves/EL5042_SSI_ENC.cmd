@@ -20,6 +20,6 @@ epicsEnvSet(SLAVE_SCRIPT,"EL5042_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"2")
 
 #- Supported macros
-#- epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,U_SUP_VLT,CODING,MT_BITS,OFF_BITS,")
+#- epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,U_SUP_VLT,CODING,MT_BITS,ST_BITS,OFF_BITS,")
 #- Remove U_SUP_VLT for now.. see SDO file for comments (EL5042 setting applies to both channels, hard to manage here in a safe way)
-epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,CODING,MT_BITS,OFF_BITS")
+epicsEnvSet(SUPP_MACROS,"CLK_FRQ_KHZ,INV_DIR,CODING,MT_BITS,ST_BITS,OFF_BITS")
