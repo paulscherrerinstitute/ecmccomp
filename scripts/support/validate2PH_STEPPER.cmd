@@ -33,6 +33,9 @@ ${DIE}ecmcExit Error: Current setting too high for drive
 #- Ensure I_MAX_MA <= MOT_I_MAX_MA
 ecmcEpicsEnvSetCalcTernary(I_MAX_MA_VALID,"${I_MAX_MA_VALID}>${MOT_I_MAX_MA}",${MOT_I_MAX_MA},${I_MAX_MA_VALID})
 
+ecmcIf("${I_MAX_MA_VALID}<0")
+${IF_TRUE} ecmcExit I_MAX_MA_VALID not valid, please specify a correct current
+ecmcEndIf()
 
 #- =========== Stdby current ============
 epicsEnvSet(I_STDBY_MA_VALID, ${I_STDBY_MA=${MOT_I_STDBY_MA}})
@@ -51,6 +54,10 @@ ${DIE}ecmcExit Error: Standby Current setting higher than run current
 
 #- Ensure I_STDBY_MA <= I_MAX_MA
 ecmcEpicsEnvSetCalcTernary(I_STDBY_MA_VALID,"${I_STDBY_MA_VALID}>${I_MAX_MA_VALID}",${I_MAX_MA_VALID},${I_STDBY_MA_VALID})
+
+ecmcIf("${I_STDBY_MA_VALID}<0")
+${IF_TRUE} ecmcExit I_STDBY_MA_VALID not valid, please specify a correct standby current
+ecmcEndIf()
 
 #- =========== Voltage ============
 
