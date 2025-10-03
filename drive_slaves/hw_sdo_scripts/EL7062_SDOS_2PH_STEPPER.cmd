@@ -60,3 +60,7 @@ epicsEnvUnset(STDBY_CURR_PPK)
 
 #- Cleanup
 epicsEnvUnset(CH_ID_X)
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},${CH_ID=1},1)"
+

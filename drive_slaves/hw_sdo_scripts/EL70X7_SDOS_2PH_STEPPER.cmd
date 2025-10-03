@@ -50,3 +50,6 @@ epicsEnvUnset(INV_DIR)
 #- Speed Range
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8012,0x5,${SPEED_RANGE=1},1)"
 epicsEnvUnset(SPEED_RANGE)
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"

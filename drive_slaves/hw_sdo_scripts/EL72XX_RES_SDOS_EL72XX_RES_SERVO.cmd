@@ -77,3 +77,6 @@ epicsEnvUnset(MOT_BRK_APP_DLY)
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8012,0x11,${BRK_REL_DLY=${MOT_BRK_REL_DLY=0}},2)"
 epicsEnvUnset(BRK_REL_DLY)
 epicsEnvUnset(MOT_BRK_REL_DLY)
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"

@@ -57,3 +57,6 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x30,${MOT_R_COIL_MOHM},4)"
 
 #- Motor thermal time constant = 3.96 s for WINDING!!
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x8011,0x2d,${MOT_THERM_CONST},2)"
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"

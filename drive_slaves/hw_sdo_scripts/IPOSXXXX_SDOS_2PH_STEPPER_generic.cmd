@@ -71,3 +71,6 @@ ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
 epicsEnvSet("ECMC_TECHNOSOFT_ADR_HEX"          "0282")
 epicsEnvSet("ECMC_TECHNOSOFT_DATA_HEX"         "C800")
 ${SCRIPTEXEC} ${ecmccfg_DIR}technosoftWriteGenericCfg.cmd
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"

@@ -60,6 +60,14 @@ epicsEnvSet(COMP_S_ID,${COMP_S_ID=${ECMC_EC_SLAVE_NUM=0}})
 ecmcFileExist(${ecmccomp_DIR}${COMP}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${COMP}.cmd
 
+#- For some scripts do not continue
+ecmcIf("${ECMC_COMP_EXIT_EARLY=0}>0")
+${IF_TRUE} epicsEnvUnset(ECMC_COMP_EXIT_EARLY)
+${IF_TRUE} ecmcFileExist("${ecmccomp_DIR}cleanupGeneric.cmd",1,1)
+${IF_TRUE} ${SCRIPTEXEC} ${ecmccomp_DIR}cleanupGeneric.cmd
+${IF_TRUE} exit
+ecmcEndIf()
+
 #- Set variables for slave
 ecmcFileExist(${ecmccomp_DIR}${EC_COMP_TYPE}_${COMP_TYPE}.cmd,1,1)
 ${SCRIPTEXEC} ${ecmccomp_DIR}${EC_COMP_TYPE}_${COMP_TYPE}.cmd

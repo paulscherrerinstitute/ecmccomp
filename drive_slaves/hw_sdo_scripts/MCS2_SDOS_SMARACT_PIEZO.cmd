@@ -183,3 +183,6 @@ epicsEnvUnset(SDO_ADDRESS)
 #- SDO 0x67ff, "Device type"
 #-   0x67ff:00, r-r-r-, uint32, 32 bit, "Device type"
 #- 
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"

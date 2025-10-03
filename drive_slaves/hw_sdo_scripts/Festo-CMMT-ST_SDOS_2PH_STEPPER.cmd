@@ -308,3 +308,6 @@ epicsEnvUnset(FESTO_DONE)
 #-  0x216c:15, rwrwrw, float, 32 bit, "P1.71430.0.0_qAxisInductance" X Not used (0 for stepper)
 #-  0x216c:16, rwrwrw, float, 32 bit, "P1.71431.0.0_dAxisInductance" X Not used (0 for stepper)
 #-  0x216c:17, rwrwrw, uint8, 8 bit, "P1.71432.0.0_motorType" X
+
+#- Settings done
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"
