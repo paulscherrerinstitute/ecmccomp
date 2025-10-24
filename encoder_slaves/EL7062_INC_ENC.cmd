@@ -12,6 +12,18 @@
 #-d                               2: TTL single ended
 #-d                               6: TTL single ended, filters disabled 
 #-d                               7: Open collector
+#-d             TP1_POS_SRC       : Touchprobe 1 source
+#-d                               PRIM: primary encoder (open loop counter)
+#-d                               SEC: secondary encoder (incremental encoder)
+#-d             TP2_POS_SRC       : Touchprobe 2 source
+#-d                               PRIM: primary encoder (open loop counter)
+#-d                               SEC: secondary encoder (incremental encoder)
+#-d             TP1_TRG       : Touchprobe 1 trigger
+#-d                               TPBI: touch probe input 1
+#-d                               INDEX: encoder index pulse
+#-d             TP2_TRG       : Touchprobe 2 trigger
+#-d                               TPBI: touch probe input 2
+#-d                               INDEX: encoder index pulse
 #-d */
 
 #- Type
@@ -24,4 +36,4 @@ epicsEnvSet(SLAVE_SCRIPT,"EL7062_SDOS")
 epicsEnvSet(SLAVE_CHANNELS,"2")
 
 #- Supported macros
-epicsEnvSet(SUPP_MACROS,"INV_DIR,ST_ENC_RES,TYPE")
+epicsEnvSet(SUPP_MACROS,"INV_DIR,ST_ENC_RES,TYPE,TP1_POS_SRC,TP2_POS_SRC,TP1_TRG,TP2_TRG")
