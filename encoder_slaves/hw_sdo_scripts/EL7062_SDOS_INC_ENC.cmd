@@ -67,6 +67,6 @@ epicsEnvUnset(TP_VALUE)
 
 ecmcEpicsEnvSetCalcTernary(EXE_TP,"'TPBI' in '${TP2_TRG=0}' or 'INDEX' in '${TP2_TRG=0}'","", "#-")
 ${EXE_TP}ecmcEpicsEnvSetCalcTernary(TP_VALUE,"'INDEX' in '${TP2_TRG=0}'","5", "2")
-${EXE_TP}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x11,${TP_VALUE=0},2)"
+${EXE_TP}ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},${SDO_INDEX},0x12,${TP_VALUE=0},2)"
 epicsEnvUnset(EXE_TP)
 epicsEnvUnset(TP_VALUE)
