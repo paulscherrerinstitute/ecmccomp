@@ -19,7 +19,7 @@
 #-d
 
 ecmcIf("'${SLAVE_MACROS=-1}'!='-1'")
-${IF_TRUE}epicsEnvSet(SLAVE_MACROS_TEMP,${SLAVE_MACROS})
+${IF_TRUE}epicsEnvSet(SLAVE_MACROS_TEMP,${SLAVE_MACROS=-1})
 #- else
 ${IF_FALSE}epicsEnvSet(SLAVE_MACROS_TEMP,"")
 ecmcEndIf()
