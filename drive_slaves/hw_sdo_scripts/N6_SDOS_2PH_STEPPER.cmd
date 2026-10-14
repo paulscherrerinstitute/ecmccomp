@@ -54,7 +54,7 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x60A9,0x00,${N6_VEL_UNIT=0x00B50300}
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x323A,0x01,${N6_IO_24V=1},1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x323A,0x02,${N6_INPUT_PULLUP=0},1)"
 
-ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},${CH_ID=1},1)"
+ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"
 
 epicsEnvUnset(STEPS)
 epicsEnvUnset(I2T_MAX_MS)
