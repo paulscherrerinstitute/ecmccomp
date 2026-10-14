@@ -17,10 +17,12 @@
 #-d   \param CURR_RED_DLY_MS Delay before standby-current reduction [ms]
 #-d   \param N6_POS_UNIT     0x60A8 position-unit code, default 0x00B50000
 #-d   \param N6_VEL_UNIT     0x60A9 velocity-unit code, default 0x00B50300
+#-d   \param N6_IO_24V       1=24 V inputs/+UB outputs, 0=5 V, default 1
+#-d   \param N6_INPUT_PULLUP 1=pull-up inputs, 0=pull-down, default 0
 #-d */
 
 epicsEnvSet(SLAVE_TYPE,"2PH_STEPPER")
-epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,L_COIL_UH,STEPS,INV_DIR,I2T_MAX_MS,CURR_RED_DLY_MS,N6_POS_UNIT,N6_VEL_UNIT")
+epicsEnvSet(SUPP_MACROS,"I_MAX_MA,I_STDBY_MA,U_NOM_MV,R_COIL_MOHM,L_COIL_UH,STEPS,INV_DIR,I2T_MAX_MS,CURR_RED_DLY_MS,N6_POS_UNIT,N6_VEL_UNIT,N6_IO_24V,N6_INPUT_PULLUP")
 
 epicsEnvSet(DRV_I_MAX_MA,6000)
 epicsEnvSet(DRV_U_MAX_MV,57600)
