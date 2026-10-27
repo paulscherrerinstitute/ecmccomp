@@ -11,6 +11,20 @@ ecmcEpicsEnvSetCalcTernary(DIE,"${CH_ID=1}=1","#-","")
 ${DIE}ecmcExit Error: N6 only supports CH_ID=1
 epicsEnvUnset(DIE)
 
+#- PositionOutput must follow the motor; otherwise this motor's units would
+#- silently change the interval of an already configured output.
+ecmcEpicsEnvSetCalcTernary(DIE,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_POS_UNIT=}'!=''","","#-")
+${DIE}ecmcExit Error: Apply the N6 motor before the PositionOutput component
+epicsEnvUnset(DIE)
+
+#- Electrical selectors are booleans, independent of the motor-current validation.
+#- Reject invalid settings before queuing any SDOs.
+ecmcEpicsEnvSetCalcTernary(N6_MOTOR_BAD_IO,"'${N6_IO_24V=1}'!='0' and '${N6_IO_24V=1}'!='1'","","#-")
+${N6_MOTOR_BAD_IO}ecmcExit Error: N6_IO_24V must be 0 (5 V) or 1 (24 V/+UB_Logic)
+ecmcEpicsEnvSetCalcTernary(N6_MOTOR_BAD_IO,"'${N6_INPUT_PULLUP=0}'!='0' and '${N6_INPUT_PULLUP=0}'!='1'","","#-")
+${N6_MOTOR_BAD_IO}ecmcExit Error: N6_INPUT_PULLUP must be 0 (pull-down) or 1 (pull-up)
+epicsEnvUnset(N6_MOTOR_BAD_IO)
+
 #- Open-loop stepper: 0x3202 bit 6=0 selects stepper, bit 0=0 selects OL.
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x3202,0x00,0,4)"
 
@@ -55,6 +69,12 @@ ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x323A,0x01,${N6_IO_24V=1},1)"
 ecmcConfigOrDie "Cfg.EcAddSdo(${COMP_S_ID},0x323A,0x02,${N6_INPUT_PULLUP=0},1)"
 
 ecmcConfig "Cfg.EcSetSlaveSDOSettingsDone(${COMP_S_ID},${CH_ID=1},1)"
+
+#- Per-master/slave capabilities for the optional position-output component.
+epicsEnvSet(ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_MOTOR_APPLIED,1)
+epicsEnvSet(ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_INV_DIR,${INV_DIR=0})
+epicsEnvSet(ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_IO_24V,${N6_IO_24V=1})
+epicsEnvSet(ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_INPUT_PULLUP,${N6_INPUT_PULLUP=0})
 
 epicsEnvUnset(STEPS)
 epicsEnvUnset(I2T_MAX_MS)

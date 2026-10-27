@@ -180,3 +180,10 @@ Note: If defined desired current/voltage is higher than either what is supported
 # Known Issues
 
 
+
+## Periodic drive-side position outputs
+
+`Drive-Generic-PositionOutput` configures the commissioned N6 position-divider
+output after the motor component. It requires ecmccfg N6_OPT with raw position
+mapped. See [N6 position output](docs/N6_position_output.md) for parameters,
+startup order, supported intervals and the firmware-specific feedback behavior.
