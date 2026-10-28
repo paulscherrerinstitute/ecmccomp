@@ -16,6 +16,10 @@ ${N6_PO_BAD}ecmcExit Error: Apply the N6 motor component before PositionOutput
 ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_INV_DIR=0}'!='0'","","#-")
 ${N6_PO_BAD}ecmcExit Error: N6 raw-counter PositionOutput currently requires motor INV_DIR=0
 
+epicsEnvSet(N6_PO_BAD,"")
+ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_OUT${OUTPUT=1}_MODE=}'=='PWM'","","#-")
+${N6_PO_BAD}ecmcExit Error: This N6 output is already assigned to PWMOutput
+
 #- The first output defaults to 5 V, independently of the motor component.
 #- Later outputs inherit the selected shared voltage. Input bias inherits the
 #- motor selection. Resolve settings before any SDO or gate write.
@@ -25,7 +29,7 @@ ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"'${N6_PO_IO_24V}'!='0' and '${N6_PO_IO_24V
 ${N6_PO_BAD}ecmcExit Error: N6_IO_24V must be 0 (5 V) or 1 (24 V/+UB_Logic)
 ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"'${N6_PO_PULLUP}'!='0' and '${N6_PO_PULLUP}'!='1'","","#-")
 ${N6_PO_BAD}ecmcExit Error: N6_INPUT_PULLUP must be 0 (pull-down) or 1 (pull-up)
-ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_POS_UNIT=}'!='' and ('${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_IO_24V=0}'!='${N6_PO_IO_24V}' or '${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_INPUT_PULLUP=0}'!='${N6_PO_PULLUP}')","","#-")
+ecmcEpicsEnvSetCalcTernary(N6_PO_BAD,"('${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_POS_UNIT=}'!='' or '${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_PWM_APPLIED=0}'=='1') and ('${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_IO_24V=0}'!='${N6_PO_IO_24V}' or '${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_INPUT_PULLUP=0}'!='${N6_PO_PULLUP}')","","#-")
 ${N6_PO_BAD}ecmcExit Error: N6 I/O voltage and input pull-up are shared; configured outputs must agree
 
 #- Canonical step unit and divider. Different outputs share the position unit.

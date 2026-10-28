@@ -1,6 +1,6 @@
 #-d /**
 #-d   \brief Drive-side periodic position output (currently Nanotec N6).
-#-d   \param FULL_STEPS Pulse interval in full steps, default 100.
+#-d   \param FULL_STEPS Position interval in full steps, default 100.
 #-d   \param OUTPUT Physical output 1..3, default 1.
 #-d   \param ARM Initial output gate, 0/1, default 0.
 #-d   \param N6_IO_24V Shared I/O level: 0=5 V, 1=24 V/+UB_Logic.

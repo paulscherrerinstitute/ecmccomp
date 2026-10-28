@@ -18,7 +18,9 @@ PVs are `Enc01-PosAct` for feedback and `Enc01-PosScaled` for scaled position. T
 200-full-step motor uses 3,276,800 raw counts/revolution; other motor step
 counts require their corresponding axis scaling. This is generated open-loop
 position, not measured rotor position. Motor `INV_DIR=0` is required by this
-configuration; the component rejects an inverted motor setting.
+configuration; the component rejects an inverted motor setting. Full-step
+engineering units use numerator 200 and denominator 3276800 on both drive
+and encoder; degrees use numerator 360 instead.
 
 | Macro | Default | Meaning |
 | --- | --- | --- |
@@ -55,6 +57,19 @@ when their canonical unit exponent agrees. This prevents later configuration
 of one output from silently changing the others' periods. Apply all motor
 settings first; reapplying the motor after PositionOutput is rejected.
 
+Examples of the existing interval selection:
+
+| `FULL_STEPS` | `60A8` position unit | Divider | Output-1 route |
+| --- | --- | --- | --- |
+| 1 | `0x00AC0000` | 1 | `0x0910` |
+| 10 | `0x01AC0000` | 1 | `0x0910` |
+| 40 | `0x01AC0000` | 4 | `0x0B10` |
+| 100 | `0x02AC0000` | 1 | `0x0910` |
+
+These choices need no new ecmccomp implementation. If combining outputs,
+remember that the shared-unit rule still applies: 10 and 40 can coexist;
+1 and 40 cannot use their canonical units together on the same drive.
+
 The component checks per-master/slave metadata published by N6_OPT and the
 N6 motor component. It disables the sensorless interface (`60E6:01=0`) and
 does not use `3203` or `205C`. Enabling nominal sensorless resolution caused
@@ -76,3 +91,57 @@ The N6 manual warns that raw 6063 is invalid with zero interface resolution.
 Bench measurements and an operating axis demonstrated the open-loop counter
 in this firmware despite that warning. Do not infer support for other modes
 or firmware without commissioning them.
+
+## Hardware options and axis homing
+
+The additional N6 PDOs belong to **ecmccfg**, not the component macro list:
+
+```text
+HW_DESC=N6-1-1-1-S_OPT,OPT='RAW_POS=1,HOMING=1,CAPTURE=1,ANALOG_IN=1'
+```
+
+| Hardware option | Purpose |
+| --- | --- |
+| `RAW_POS` | Fine `6063` feedback as `positionActual01`; required by this component |
+| `HOMING` | Method/offset, drive homing speeds/acceleration and a dedicated bit-4 trigger alias |
+| `CAPTURE` | `3241:01–0C` capture readbacks; arming remains an SDO operation |
+| `ANALOG_IN` | Both `3320:01–02` analog values in drive-defined units |
+
+Pass these in `addSlave`'s `OPT`, not in `applyComponent`'s `MACROS`.
+Their records, panels and PDO allocation are supplied by ecmccfg; the
+component continues to use the same N6 type and per-slave raw-mapping flag.
+No new capture/analog/homing motor SDO component is required.
+
+The ecmccfg axis example uses sequence 26 (drive-triggered homing), with
+`autoMode` set to normal mode 9 / home mode 6. It links the trigger to
+`driveCmdExe01.0` and ready to `driveStatus01.12`. The dedicated B1 alias
+prevents the DS402 axis's whole-word writes from clearing the trigger.
+Drive method 35 references scaled `6064`; sequence 26 separately references
+the ecmc encoder object. Raw `6063` remains unchanged. The post-home stage
+uses a target equal to the home position to acknowledge CSV restoration
+without an extra move. Start through the normal axis Home command; this is
+not automatic IOC-startup homing.
+
+Keep the output gate disarmed during referencing and re-arm after verifying
+the result; the component does not coordinate that gate with homing.
+On the tested 100-step setup, the first edge was reported at 100 full steps
+after a fresh start, then at 50 steps after method-35 homing, followed by
+100-step edge spacing (50, 150, 250, ...). This was repeatable. Here an edge
+is a state transition, not a full high/low cycle. Homing after startup is a
+proposed way to establish a consistent first edge; other conditions and
+homing completion/error handling still require commissioning.
+
+The separate 2 kHz software-PWM trial is also in ecmccfg. It is time-based,
+not counter-synchronous, and does not change this component's documented
+500 Hz position-output limit. PWM frequency/duty remain SDO-only.
+
+See the ecmccfg Hugo N6 OPT guide and
+`examples/PSI/lab_setup/N6/README_position_output_100_steps.md` for the
+current complete configuration and commissioning notes.
+
+## Coexistence with software PWM
+
+`Drive-Generic-PWMOutput` can configure other physical outputs on the same
+drive. The components reject competing claims on the same output and
+conflicting shared I/O voltage/input-bias settings. Apply all motor settings
+first. See [N6 software PWM output](N6_pwm_output.md).

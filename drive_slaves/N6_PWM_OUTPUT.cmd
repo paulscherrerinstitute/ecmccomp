@@ -1,0 +1,5 @@
+#- N6 software PWM. Requires N6_OPT and the motor component first.
+epicsEnvSet(SLAVE_TYPE,PWM_OUTPUT)
+epicsEnvSet(SUPP_MACROS,"FREQUENCY_HZ,DUTY_PERCENT,OUTPUT,PWM_ID,ARM,N6_IO_24V,N6_INPUT_PULLUP")
+epicsEnvSet(SLAVE_SCRIPT,N6_SDOS)
+epicsEnvSet(SLAVE_CHANNELS,1)

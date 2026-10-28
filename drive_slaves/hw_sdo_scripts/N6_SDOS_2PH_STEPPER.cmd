@@ -13,8 +13,8 @@ epicsEnvUnset(DIE)
 
 #- PositionOutput must follow the motor; otherwise this motor's units would
 #- silently change the interval of an already configured output.
-ecmcEpicsEnvSetCalcTernary(DIE,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_POS_UNIT=}'!=''","","#-")
-${DIE}ecmcExit Error: Apply the N6 motor before the PositionOutput component
+ecmcEpicsEnvSetCalcTernary(DIE,"'${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_POS_UNIT=}'!='' or '${ECMC_N6_M${ECMC_EC_MASTER_ID=0}_S${COMP_S_ID}_PWM_APPLIED=0}'=='1'","","#-")
+${DIE}ecmcExit Error: Apply the N6 motor before output components
 epicsEnvUnset(DIE)
 
 #- Electrical selectors are booleans, independent of the motor-current validation.

@@ -187,3 +187,6 @@ Note: If defined desired current/voltage is higher than either what is supported
 output after the motor component. It requires ecmccfg N6_OPT with raw position
 mapped. See [N6 position output](docs/N6_position_output.md) for parameters,
 startup order, supported intervals and the firmware-specific feedback behavior.
+
+`Drive-Generic-PWMOutput` configures the N6 fixed-frequency software PWM
+after the motor component. See [N6 PWM output](docs/N6_pwm_output.md).
